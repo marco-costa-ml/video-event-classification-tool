@@ -1,0 +1,8 @@
+node_modules/
+dist/
+wasm/build/
+*.wasm
+!public/wasm/README.txt
+.DS_Store
+data/
+*.mp4
