@@ -1,4 +1,4 @@
-# Temporal Event Classification Tool (prototype)
+# Video Event Classification Tool (prototype)
 
 Browser-based tool for defining, debugging, labeling, and evaluating sparse OCR + object-detection events over long videos. Core requirements: **indexed sparse timelines**, **generic predicates**, **manual labels**, **evaluation**, and a **C++/WebAssembly** performance path (with a full **TypeScript** implementation for correctness and tests).
 
