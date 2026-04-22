@@ -1,0 +1,70 @@
+{
+  "version": 1,
+  "video": {
+    "video_id": "sample_001",
+    "fps": 30,
+    "frame_count": 300,
+    "width": 1280,
+    "height": 720
+  },
+  "parquet": {
+    "ocr": {
+      "frame": "frame",
+      "ocr_label": "label",
+      "ocr_text": "text",
+      "ocr_x": "x",
+      "ocr_y": "y",
+      "ocr_w": "w",
+      "ocr_h": "h",
+      "ocr_confidence": "confidence"
+    },
+    "objects": {
+      "frame": "frame",
+      "object_id": "object_id",
+      "object_class": "class",
+      "object_score": "score",
+      "bbox_x": "x",
+      "bbox_y": "y",
+      "bbox_w": "w",
+      "bbox_h": "h"
+    }
+  },
+  "ocr_label_placements": [{ "label": "title", "anchor": "top_left", "offset_x": 0, "offset_y": 0 }],
+  "zones": [
+    {
+      "id": "z_roi",
+      "name": "ROI",
+      "priority": 10,
+      "geometry": { "type": "rectangle", "x": 100, "y": 80, "width": 900, "height": 520 },
+      "parent_classes": [],
+      "object_classes": ["person", "vehicle"]
+    }
+  ],
+  "pages": [
+    {
+      "id": "p_home",
+      "name": "Home",
+      "priority": 10,
+      "match": {
+        "kind": "comparison",
+        "left": { "kind": "field", "path": ["class_counts", "person"] },
+        "op": ">=",
+        "right": { "kind": "literal", "value": 0 }
+      }
+    }
+  ],
+  "events": [
+    {
+      "id": "ev_person_roi",
+      "name": "person_in_roi",
+      "priority": 10,
+      "predicate": {
+        "kind": "comparison",
+        "left": { "kind": "field", "path": ["zones", "z_roi", "occupancy"] },
+        "op": ">",
+        "right": { "kind": "literal", "value": 0 }
+      },
+      "dedupe": { "merge_adjacent_frames": 3, "strategy": "leading_edge" }
+    }
+  ]
+}

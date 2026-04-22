@@ -4,5 +4,5 @@ wasm/build/
 *.wasm
 !public/wasm/README.txt
 .DS_Store
-data/
+.gitignore
 *.mp4
