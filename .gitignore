@@ -1,9 +1,0 @@
-node_modules/
-dist/
-wasm/build/
-*.wasm
-!public/wasm/README.txt
-.DS_Store
-.gitignore
-*.mp4
-.cursor/
