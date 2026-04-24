@@ -1,0 +1,828 @@
+[
+  {
+    "id": "gt_1776980768573",
+    "kind": "point",
+    "event_name": "SelectBlind",
+    "start_frame": 525,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776980788365",
+    "kind": "point",
+    "event_name": "DiscardHand",
+    "start_frame": 693,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776980797028",
+    "kind": "point",
+    "event_name": "DiscardHand",
+    "start_frame": 791,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776980807785",
+    "kind": "point",
+    "event_name": "PlayHand",
+    "start_frame": 875,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776980826828",
+    "kind": "point",
+    "event_name": "PlayHand",
+    "start_frame": 1135,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776980848120",
+    "kind": "point",
+    "event_name": "CashOut",
+    "start_frame": 1318,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776980962276",
+    "kind": "point",
+    "event_name": "BuyAndOpenPack",
+    "start_frame": 1492,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981005428",
+    "kind": "point",
+    "event_name": "SelectPackItem",
+    "start_frame": 1608,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981034941",
+    "kind": "point",
+    "event_name": "SellItem",
+    "start_frame": 1635,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981054514",
+    "kind": "point",
+    "event_name": "BuyShopItem",
+    "start_frame": 1669,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981084312",
+    "kind": "point",
+    "event_name": "LeaveShop",
+    "start_frame": 1678,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981100260",
+    "kind": "point",
+    "event_name": "SelectBlind",
+    "start_frame": 1702,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981119565",
+    "kind": "point",
+    "event_name": "DiscardHand",
+    "start_frame": 1848,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981137916",
+    "kind": "point",
+    "event_name": "UseConsumable",
+    "start_frame": 1923,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981153751",
+    "kind": "point",
+    "event_name": "PlayHand",
+    "start_frame": 2002,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981245706",
+    "kind": "point",
+    "event_name": "CashOut",
+    "start_frame": 3672,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981262431",
+    "kind": "point",
+    "event_name": "BuyShopItem",
+    "start_frame": 3789,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981273093",
+    "kind": "point",
+    "event_name": "SellItem",
+    "start_frame": 3820,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981285568",
+    "kind": "point",
+    "event_name": "LeaveShop",
+    "start_frame": 3864,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981300879",
+    "kind": "point",
+    "event_name": "SelectBlind",
+    "start_frame": 3888,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981318117",
+    "kind": "point",
+    "event_name": "DiscardHand",
+    "start_frame": 4105,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981332840",
+    "kind": "point",
+    "event_name": "PlayHand",
+    "start_frame": 4188,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981353179",
+    "kind": "point",
+    "event_name": "CashOut",
+    "start_frame": 4437,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981366273",
+    "kind": "point",
+    "event_name": "BuyShopItem",
+    "start_frame": 4518,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981382724",
+    "kind": "point",
+    "event_name": "LeaveShop",
+    "start_frame": 4536,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981392766",
+    "kind": "point",
+    "event_name": "SelectBlind",
+    "start_frame": 4572,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981408610",
+    "kind": "point",
+    "event_name": "DiscardHand",
+    "start_frame": 4749,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981420053",
+    "kind": "point",
+    "event_name": "DiscardHand",
+    "start_frame": 4839,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981432746",
+    "kind": "point",
+    "event_name": "PlayHand",
+    "start_frame": 4971,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981446959",
+    "kind": "point",
+    "event_name": "PlayHand",
+    "start_frame": 5148,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981471305",
+    "kind": "point",
+    "event_name": "CashOut",
+    "start_frame": 5383,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981501046",
+    "kind": "point",
+    "event_name": "BuyAndUseConsumable",
+    "start_frame": 5508,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981518646",
+    "kind": "point",
+    "event_name": "LeaveShop",
+    "start_frame": 5673,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981532385",
+    "kind": "point",
+    "event_name": "SelectBlind",
+    "start_frame": 5695,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981546286",
+    "kind": "point",
+    "event_name": "PlayHand",
+    "start_frame": 5811,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981563395",
+    "kind": "point",
+    "event_name": "DiscardHand",
+    "start_frame": 6015,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981575676",
+    "kind": "point",
+    "event_name": "PlayHand",
+    "start_frame": 6093,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981599036",
+    "kind": "point",
+    "event_name": "CashOut",
+    "start_frame": 6363,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981625917",
+    "kind": "point",
+    "event_name": "RedeemVoucher",
+    "start_frame": 6453,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981684103",
+    "kind": "point",
+    "event_name": "BuyAndOpenPack",
+    "start_frame": 6787,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981729407",
+    "kind": "point",
+    "event_name": "SelectPackItem",
+    "start_frame": 6869,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981743862",
+    "kind": "point",
+    "event_name": "LeaveShop",
+    "start_frame": 6954,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981752810",
+    "kind": "point",
+    "event_name": "SelectBlind",
+    "start_frame": 6978,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981772110",
+    "kind": "point",
+    "event_name": "DiscardHand",
+    "start_frame": 7140,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981790348",
+    "kind": "point",
+    "event_name": "DiscardHand",
+    "start_frame": 7302,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981810947",
+    "kind": "point",
+    "event_name": "PlayHand",
+    "start_frame": 7468,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981840437",
+    "kind": "point",
+    "event_name": "PlayHand",
+    "start_frame": 7683,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981855686",
+    "kind": "point",
+    "event_name": "DiscardHand",
+    "start_frame": 7878,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981867598",
+    "kind": "point",
+    "event_name": "PlayHand",
+    "start_frame": 7977,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981896404",
+    "kind": "point",
+    "event_name": "CashOut",
+    "start_frame": 8293,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981929181",
+    "kind": "point",
+    "event_name": "BuyAndOpenPack",
+    "start_frame": 8382,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981950575",
+    "kind": "point",
+    "event_name": "SelectPackItem",
+    "start_frame": 8607,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981958479",
+    "kind": "point",
+    "event_name": "SelectPackItem",
+    "start_frame": 8626,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981974554",
+    "kind": "point",
+    "event_name": "LeaveShop",
+    "start_frame": 8739,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776981984351",
+    "kind": "point",
+    "event_name": "SelectBlind",
+    "start_frame": 8763,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776982000511",
+    "kind": "point",
+    "event_name": "DiscardHand",
+    "start_frame": 8884,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776982014379",
+    "kind": "point",
+    "event_name": "PlayHand",
+    "start_frame": 9015,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776982039111",
+    "kind": "point",
+    "event_name": "CashOut",
+    "start_frame": 9328,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776982075610",
+    "kind": "point",
+    "event_name": "BuyShopItem",
+    "start_frame": 9492,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776982101334",
+    "kind": "point",
+    "event_name": "BuyAndOpenPack",
+    "start_frame": 9636,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776982116242",
+    "kind": "point",
+    "event_name": "SelectPackItem",
+    "start_frame": 9744,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776982132645",
+    "kind": "point",
+    "event_name": "LeaveShop",
+    "start_frame": 9870,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776982140025",
+    "kind": "point",
+    "event_name": "SelectBlind",
+    "start_frame": 9890,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776982161130",
+    "kind": "point",
+    "event_name": "PlayHand",
+    "start_frame": 10080,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776982182534",
+    "kind": "point",
+    "event_name": "DiscardHand",
+    "start_frame": 10354,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776982194557",
+    "kind": "point",
+    "event_name": "DiscardHand",
+    "start_frame": 10495,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776982217568",
+    "kind": "point",
+    "event_name": "PlayHand",
+    "start_frame": 10788,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776982241845",
+    "kind": "point",
+    "event_name": "CashOut",
+    "start_frame": 11101,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776982255701",
+    "kind": "point",
+    "event_name": "BuyAndOpenPack",
+    "start_frame": 11206,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776982272704",
+    "kind": "point",
+    "event_name": "SelectPackItem",
+    "start_frame": 11388,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776982307291",
+    "kind": "point",
+    "event_name": "SellItem",
+    "start_frame": 11812,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776982317524",
+    "kind": "point",
+    "event_name": "BuyItem",
+    "start_frame": 11839,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776982329334",
+    "kind": "point",
+    "event_name": "LeaveShop",
+    "start_frame": 11880,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776982342071",
+    "kind": "point",
+    "event_name": "SelectBlind",
+    "start_frame": 11904,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776982366926",
+    "kind": "point",
+    "event_name": "PlayHand",
+    "start_frame": 12168,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776982405316",
+    "kind": "point",
+    "event_name": "BuyAndOpenPack",
+    "start_frame": 12712,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776982486812",
+    "kind": "point",
+    "event_name": "UsePackPlanetCard",
+    "start_frame": 12808,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776982509200",
+    "kind": "point",
+    "event_name": "BuyAndOpenPack",
+    "start_frame": 12882,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776982534901",
+    "kind": "point",
+    "event_name": "UsePackPlanetCard",
+    "start_frame": 13009,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776982542324",
+    "kind": "point",
+    "event_name": "UsePackPlanetCard",
+    "start_frame": 13084,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776982562559",
+    "kind": "point",
+    "event_name": "BuyShopItem",
+    "start_frame": 13161,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776982578357",
+    "kind": "point",
+    "event_name": "LeaveShop",
+    "start_frame": 13182,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776982585726",
+    "kind": "point",
+    "event_name": "SelectBlind",
+    "start_frame": 13209,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776982602120",
+    "kind": "point",
+    "event_name": "DiscardHand",
+    "start_frame": 13392,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776982623274",
+    "kind": "point",
+    "event_name": "SellItem",
+    "start_frame": 13590,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776982633084",
+    "kind": "point",
+    "event_name": "DiscardHand",
+    "start_frame": 13632,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776982659327",
+    "kind": "point",
+    "event_name": "UseConsumable",
+    "start_frame": 13716,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776982674144",
+    "kind": "point",
+    "event_name": "PlayHand",
+    "start_frame": 13843,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776982698294",
+    "kind": "point",
+    "event_name": "PlayHand",
+    "start_frame": 14221,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776982721523",
+    "kind": "point",
+    "event_name": "CashOut",
+    "start_frame": 14574,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776982809270",
+    "kind": "point",
+    "event_name": "BuyAndOpenPack",
+    "start_frame": 14641,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776982843816",
+    "kind": "point",
+    "event_name": "UsePackConsumable",
+    "start_frame": 14724,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776982866947",
+    "kind": "point",
+    "event_name": "BuyAndOpenPack",
+    "start_frame": 14788,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776982889063",
+    "kind": "point",
+    "event_name": "SelectPackItem",
+    "start_frame": 14988,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776982905713",
+    "kind": "point",
+    "event_name": "BuyAndUseConsumable",
+    "start_frame": 15046,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776982972016",
+    "kind": "point",
+    "event_name": "RerollShop",
+    "start_frame": 15168,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776982989995",
+    "kind": "point",
+    "event_name": "RerollShop",
+    "start_frame": 15220,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776983007447",
+    "kind": "point",
+    "event_name": "LeaveShop",
+    "start_frame": 15300,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776983016863",
+    "kind": "point",
+    "event_name": "SelectBlind",
+    "start_frame": 15324,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776983033419",
+    "kind": "point",
+    "event_name": "PlayHand",
+    "start_frame": 15477,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776983065129",
+    "kind": "point",
+    "event_name": "CashOut",
+    "start_frame": 15863,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776983085058",
+    "kind": "point",
+    "event_name": "SellItem",
+    "start_frame": 15960,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776983097539",
+    "kind": "point",
+    "event_name": "BuyShopItem",
+    "start_frame": 15996,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776983107299",
+    "kind": "point",
+    "event_name": "BuyAndOpenPack",
+    "start_frame": 16025,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776983119068",
+    "kind": "point",
+    "event_name": "SelectPackItem",
+    "start_frame": 16103,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776983124720",
+    "kind": "point",
+    "event_name": "SelectPackItem",
+    "start_frame": 16129,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776983141488",
+    "kind": "point",
+    "event_name": "BuyAndOpenPack",
+    "start_frame": 16176,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776983163386",
+    "kind": "point",
+    "event_name": "UsePackPlanetCard",
+    "start_frame": 16266,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776983178245",
+    "kind": "point",
+    "event_name": "LeaveShop",
+    "start_frame": 16431,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776983187553",
+    "kind": "point",
+    "event_name": "SelectBlind",
+    "start_frame": 16453,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776983209212",
+    "kind": "point",
+    "event_name": "PlayHand",
+    "start_frame": 16765,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776983236442",
+    "kind": "point",
+    "event_name": "PlayHand",
+    "start_frame": 17212,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776983261160",
+    "kind": "point",
+    "event_name": "UseConsumable",
+    "start_frame": 17529,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776983273671",
+    "kind": "point",
+    "event_name": "CashOut",
+    "start_frame": 17599,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776983287912",
+    "kind": "point",
+    "event_name": "RedeemVoucher",
+    "start_frame": 17679,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776983307214",
+    "kind": "point",
+    "event_name": "BuyAndOpenPack",
+    "start_frame": 17802,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776983321278",
+    "kind": "point",
+    "event_name": "SellItem",
+    "start_frame": 17931,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1776983337142",
+    "kind": "point",
+    "event_name": "UsePackConsumable",
+    "start_frame": 17976,
+    "source": "manual"
+  }
+]

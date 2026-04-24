@@ -7,8 +7,8 @@ const rawConfig = {
     video_id: "sample_001",
     fps: 30,
     frame_count: 300,
-    width: 1280,
-    height: 720,
+    width: 640,
+    height: 360,
   },
   parquet: {
     ocr: {

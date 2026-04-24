@@ -45,6 +45,14 @@ export const ocrLabelPlacementSchema = z.object({
   offset_y: z.number().default(0),
 });
 
+/** Forward-fill: OCR carries last label values for ocr_ttl_frames; objects carry for object_ttl_frames. */
+export const reconstructionConfigSchema = z.object({
+  /** Frames to carry object tracks after last observation (default: 2 — objects sampled every other frame). */
+  object_ttl_frames: z.number().int().min(0).default(2),
+  /** Frames to forward-fill OCR labels after last observation (default: 5 — OCR sampled every 5th frame). */
+  ocr_ttl_frames: z.number().int().min(0).default(5),
+});
+
 export const classificationConfigSchema = z.object({
   version: z.literal(1),
   video: videoMetadataSchema,
@@ -53,6 +61,8 @@ export const classificationConfigSchema = z.object({
     objects: parquetColumnMapSchema.optional(),
   }),
   ocr_label_placements: z.array(ocrLabelPlacementSchema).default([]),
+  /** Sparse timeline reconstruction (default applied when missing from JSON) */
+  reconstruction: reconstructionConfigSchema.default({ object_ttl_frames: 2, ocr_ttl_frames: 5 }),
   zones: z.array(zoneDefinitionSchema).default([]),
   pages: z.array(pageDefinitionSchema).default([]),
   events: z.array(eventDefinitionSchema).default([]),

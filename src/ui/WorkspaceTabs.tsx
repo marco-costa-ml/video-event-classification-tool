@@ -1,19 +1,33 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useProject } from "@/context/ProjectContext";
 import { classificationConfigSchema } from "@/schemas";
+import { timelineEventSchema } from "@/schemas/labels";
 import {
   exportClassificationJson,
   exportEvaluationReport,
   exportTimelineJson,
   exportEventsAsJsonlForParquetPipeline,
+  exportEnrichedJson,
 } from "@/services/exportService";
 import { tryLoadWasmEngine } from "@/services/engineBridge";
+import { ZonesPagesEditor } from "@/ui/ZonesPagesEditor";
+import { EventBuilderEditor } from "@/ui/EventBuilderEditor";
 
-type Tab = "import" | "config" | "zones" | "label" | "eval";
+type Tab = "import" | "config" | "zones" | "events" | "label" | "eval";
 
 export function WorkspaceTabs() {
-  const { state, dispatch, loadSample, loadConfigFile, loadOcrParquet, loadObjectsParquet, loadVideoFile } =
-    useProject();
+  const {
+    state,
+    dispatch,
+    loadConfigFile,
+    loadOcrParquet,
+    loadObjectsParquet,
+    loadVideoFile,
+    loadOcrLayoutFile,
+    loadBuiltinOcrLayout,
+    stateAt,
+  } = useProject();
+  const importLabelsRef = useRef<HTMLInputElement>(null);
   const [tab, setTab] = useState<Tab>("import");
   const [cfgText, setCfgText] = useState(() => JSON.stringify(state.config, null, 2));
   const [labelName, setLabelName] = useState("person_in_roi");
@@ -47,7 +61,8 @@ export function WorkspaceTabs() {
           [
             ["import", "Import / Export"],
             ["config", "Event config (JSON)"],
-            ["zones", "Zones / Pages (JSON)"],
+            ["zones", "Zones / Pages"],
+            ["events", "Event Builder"],
             ["label", "Manual labeling"],
             ["eval", "Evaluation"],
           ] as const
@@ -63,10 +78,86 @@ export function WorkspaceTabs() {
 
         {tab === "import" ? (
           <div className="row" style={{ flexDirection: "column", alignItems: "stretch", gap: 12 }}>
+            <div className="muted">
+              Large uploads are automatically clipped to the first 10 minutes to keep interaction responsive.
+            </div>
+            <div className="row" style={{ alignItems: "center", gap: 16 }}>
+              <strong style={{ fontSize: 13 }}>Reconstruction</strong>
+              <label style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 13 }}>
+                Object carry TTL (frames)
+                <input
+                  type="number"
+                  min={0}
+                  style={{ width: 64 }}
+                  value={state.config.reconstruction?.object_ttl_frames ?? 2}
+                  onChange={(e) => {
+                    const val = Math.max(0, Math.floor(Number(e.target.value)));
+                    dispatch({
+                      type: "update_config",
+                      config: {
+                        ...state.config,
+                        reconstruction: { ...state.config.reconstruction, object_ttl_frames: val },
+                      },
+                    });
+                  }}
+                />
+              </label>
+              <label style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 13 }}>
+                OCR forward-fill TTL (frames)
+                <input
+                  type="number"
+                  min={0}
+                  style={{ width: 64 }}
+                  value={state.config.reconstruction?.ocr_ttl_frames ?? 5}
+                  onChange={(e) => {
+                    const val = Math.max(0, Math.floor(Number(e.target.value)));
+                    dispatch({
+                      type: "update_config",
+                      config: {
+                        ...state.config,
+                        reconstruction: { ...state.config.reconstruction, ocr_ttl_frames: val },
+                      },
+                    });
+                  }}
+                />
+              </label>
+            </div>
             <div className="row">
-              <button type="button" onClick={loadSample}>
-                Load built-in sample
+              <button
+                type="button"
+                onClick={() => importLabelsRef.current?.click()}
+              >
+                Import manual labels
               </button>
+              <input
+                ref={importLabelsRef}
+                type="file"
+                accept="application/json,.json"
+                style={{ display: "none" }}
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (!file) return;
+                  e.target.value = "";
+                  file.text().then((text) => {
+                    try {
+                      const raw = JSON.parse(text) as unknown;
+                      // Accept plain array OR { events: [...] } wrapper
+                      const arr = Array.isArray(raw) ? raw : Array.isArray((raw as { events?: unknown }).events) ? (raw as { events: unknown[] }).events : null;
+                      if (!arr) { dispatch({ type: "set_error", message: "Import failed: expected an array or { events: [...] }" }); return; }
+                      let imported = 0;
+                      for (const item of arr) {
+                        const parsed = timelineEventSchema.safeParse(item);
+                        if (!parsed.success) continue;
+                        dispatch({ type: "add_manual_label", label: { ...parsed.data, source: "manual" } });
+                        imported++;
+                      }
+                      if (imported === 0) dispatch({ type: "set_error", message: "Import: no valid label entries found in file." });
+                    } catch {
+                      dispatch({ type: "set_error", message: "Import failed: file is not valid JSON." });
+                    }
+                  }).catch(() => dispatch({ type: "set_error", message: "Import failed: could not read file." }));
+                }}
+              />
               <button type="button" onClick={() => dispatch({ type: "run_detection" })}>
                 Re-run detection
               </button>
@@ -90,6 +181,31 @@ export function WorkspaceTabs() {
               Optional video
               <input type="file" accept="video/*" onChange={(e) => e.target.files?.[0] && loadVideoFile(e.target.files[0])} />
             </label>
+            <div className="row" style={{ alignItems: "center", gap: 8 }}>
+              <span style={{ fontSize: 13 }}>OCR layout</span>
+              <button type="button" onClick={loadBuiltinOcrLayout}>
+                Load built-in layout
+              </button>
+              <label className="row" style={{ cursor: "pointer" }}>
+                Import layout JSON
+                <input
+                  type="file"
+                  accept="application/json,.json"
+                  style={{ display: "none" }}
+                  onChange={(e) => e.target.files?.[0] && void loadOcrLayoutFile(e.target.files[0])}
+                />
+              </label>
+              {state.ocrLayout ? (
+                <span className="muted">{Object.keys(state.ocrLayout).length} labels loaded</span>
+              ) : (
+                <span className="muted">none loaded</span>
+              )}
+              {state.ocrLayout ? (
+                <button type="button" onClick={() => dispatch({ type: "set_ocr_layout", layout: null })}>
+                  Clear layout
+                </button>
+              ) : null}
+            </div>
             <div className="row">
               <button type="button" onClick={() => exportClassificationJson(state.config)}>
                 Export classification JSON
@@ -108,6 +224,38 @@ export function WorkspaceTabs() {
                   Export evaluation JSON
                 </button>
               ) : null}
+            </div>
+            <div className="row">
+              <button
+                type="button"
+                onClick={() =>
+                  exportEnrichedJson(
+                    state.predicted,
+                    state.config,
+                    stateAt,
+                    `${state.config.video.video_id}_enriched.json`,
+                  )
+                }
+                disabled={!state.predicted.length}
+                title="Export predicted events enriched with zone objects and OCR values at each event frame"
+              >
+                Export enriched events JSON
+              </button>
+              <button
+                type="button"
+                onClick={() =>
+                  exportEnrichedJson(
+                    state.manualLabels,
+                    state.config,
+                    stateAt,
+                    `${state.config.video.video_id}_enriched_gt.json`,
+                  )
+                }
+                disabled={!state.manualLabels.length}
+                title="Export manual labels enriched with zone objects and OCR values at each label frame"
+              >
+                Export enriched ground-truth JSON
+              </button>
             </div>
           </div>
         ) : null}
@@ -133,13 +281,8 @@ export function WorkspaceTabs() {
           </div>
         ) : null}
 
-        {tab === "zones" ? (
-          <div className="muted">
-            Zones and pages live inside the classification JSON for this prototype. Use the Event config tab to edit{" "}
-            <code>zones</code> and <code>pages</code> arrays. Overlapping zones resolve by highest priority for object
-            center assignment (see <code>assignObjectsToZones</code>).
-          </div>
-        ) : null}
+        {tab === "zones" ? <ZonesPagesEditor /> : null}
+        {tab === "events" ? <EventBuilderEditor /> : null}
 
         {tab === "label" ? (
           <div style={{ display: "flex", flexDirection: "column", gap: 10, maxWidth: 720 }}>

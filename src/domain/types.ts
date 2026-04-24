@@ -1,3 +1,5 @@
+export type Provenance = "observed" | "carried";
+
 export type OcrBox = {
   label: string;
   text: string;
@@ -6,6 +8,8 @@ export type OcrBox = {
   w: number;
   h: number;
   confidence: number | null;
+  /** Present after forward-reconstruction: observed at this frame vs carried from prior */
+  provenance?: Provenance;
 };
 
 export type ObjectBox = {
@@ -17,6 +21,7 @@ export type ObjectBox = {
   w: number;
   h: number;
   metadata: Record<string, unknown>;
+  provenance?: Provenance;
 };
 
 export type ZoneHitInfo = {
@@ -32,6 +37,13 @@ export type FrameState = {
     ocr: boolean;
     objects: boolean;
   };
+  /** Counts of forward-filled / TTL-filtered data at this frame */
+  reconstruction_stats: {
+    ocr: { observed: number; carried: number };
+    objects: { observed: number; carried: number; dropped_ttl: number };
+  };
+  /** True when this exact frame is a key in the loaded sparse OCR / objects parquets */
+  sparse_observation: { ocr: boolean; objects: boolean };
   active_page: { id: string; name: string } | null;
   /** Per zone id: objects whose center falls in zone; deterministic highest-priority zone per object */
   zone_summary: Record<

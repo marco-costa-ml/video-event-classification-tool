@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import "./app.css";
 import { ProjectProvider, useProject } from "@/context/ProjectContext";
 import { InfoPanel } from "@/ui/InfoPanel";

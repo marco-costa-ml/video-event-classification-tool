@@ -56,6 +56,13 @@ export function Visualizer() {
   }, [frameState.frame, state.config.video.fps, state.videoUrl]);
 
   useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    canvas.width = Math.max(1, vw);
+    canvas.height = Math.max(1, vh);
+  }, [vw, vh]);
+
+  useEffect(() => {
     if (!playing) return;
     const maxF = Math.max(0, state.config.video.frame_count - 1);
     const id = window.setInterval(() => {
@@ -68,22 +75,6 @@ export function Visualizer() {
     }, 1000 / state.config.video.fps);
     return () => window.clearInterval(id);
   }, [playing, state.config.video.fps, state.config.video.frame_count, dispatch]);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const wrap = wrapRef.current;
-    if (!canvas || !wrap) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    const ro = new ResizeObserver(() => {
-      const r = wrap.getBoundingClientRect();
-      canvas.width = Math.max(1, Math.floor(r.width));
-      canvas.height = Math.max(1, Math.floor(r.height));
-    });
-    ro.observe(wrap);
-    return () => ro.disconnect();
-  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -109,10 +100,34 @@ export function Visualizer() {
       }
     }
     if (state.layers.ocr) {
-      ctx.font = `${Math.max(12, 14 * sx)}px sans-serif`;
-      for (const b of frameState.ocr_boxes) {
-        ctx.fillStyle = "rgba(79,110,247,0.9)";
-        ctx.fillText(`${b.label}: ${b.text}`, b.x * sx, b.y * sy);
+      ctx.font = "11px monospace";
+      if (state.ocrLayout && Object.keys(state.ocrLayout).length > 0) {
+        for (const [label, layoutBox] of Object.entries(state.ocrLayout)) {
+          const boxes = frameState.ocr_by_label[label];
+          const text = boxes?.map((b) => b.text).join(" ") ?? "";
+          const prov = boxes?.[0]?.provenance;
+          const lx = layoutBox.x * sx;
+          const ly = layoutBox.y * sy;
+          const lw = layoutBox.w * sx;
+          const lh = layoutBox.h * sy;
+          ctx.strokeStyle = prov === "carried" ? "rgba(79,110,247,0.45)" : "rgba(79,110,247,0.9)";
+          ctx.lineWidth = 1;
+          ctx.strokeRect(lx, ly, lw, lh);
+          ctx.fillStyle = "rgba(8,12,28,0.6)";
+          ctx.fillRect(lx, ly, lw, lh);
+          ctx.fillStyle = prov === "carried" ? "rgba(150,165,247,0.85)" : "#e8eaed";
+          ctx.fillText(text || "—", lx + 2, ly + lh - 3);
+        }
+      } else {
+        for (const b of frameState.ocr_boxes) {
+          if (b.x > 0 || b.y > 0) {
+            ctx.strokeStyle = "rgba(79,110,247,0.7)";
+            ctx.lineWidth = 1;
+            ctx.strokeRect(b.x * sx, b.y * sy, b.w * sx, b.h * sy);
+          }
+          ctx.fillStyle = "rgba(79,110,247,0.95)";
+          ctx.fillText(`${b.label}: ${b.text}`, b.x * sx, (b.y > 0 ? b.y - 2 : 14) * sy);
+        }
       }
     }
     if (state.layers.predictions) {
@@ -139,13 +154,45 @@ export function Visualizer() {
 
   const maxF = Math.max(0, state.config.video.frame_count - 1);
 
+  const onVideoMetadata = (e: React.SyntheticEvent<HTMLVideoElement>) => {
+    const v = e.currentTarget;
+    if (!v.videoWidth || !v.videoHeight) return;
+    dispatch({
+      type: "sync_video_intrinsics",
+      intrinsics: {
+        width: v.videoWidth,
+        height: v.videoHeight,
+        durationSec: Number.isFinite(v.duration) ? v.duration : 0,
+      },
+    });
+  };
+
   return (
     <div className="visualizer">
-      <div ref={wrapRef} className="canvas-wrap">
+      <div
+        ref={wrapRef}
+        className="canvas-wrap canvas-wrap-native"
+        style={{ width: vw, height: vh }}
+      >
         {state.videoUrl ? (
-          <video ref={videoRef} src={state.videoUrl} controls={false} muted playsInline />
+          <video
+            ref={videoRef}
+            src={state.videoUrl}
+            controls={false}
+            muted
+            playsInline
+            width={vw}
+            height={vh}
+            style={{ zIndex: 0 }}
+            onLoadedMetadata={onVideoMetadata}
+          />
         ) : null}
-        <canvas ref={canvasRef} />
+        <canvas
+          ref={canvasRef}
+          width={vw}
+          height={vh}
+          style={{ width: vw, height: vh, zIndex: 1, pointerEvents: "none" }}
+        />
       </div>
       <div className="controls">
         <button type="button" onClick={() => setPlaying((p) => !p)}>
@@ -188,7 +235,7 @@ export function Visualizer() {
           />
         </label>
         <span className="muted">
-          {state.currentFrame}/{maxF}
+          {state.currentFrame}/{maxF} · {vw}×{vh}
         </span>
         <div className="row" style={{ marginLeft: "auto" }}>
           {(

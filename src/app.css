@@ -53,13 +53,22 @@ textarea {
   min-height: 0;
 }
 
-.canvas-wrap video,
-.canvas-wrap canvas {
+/** Native pixel coordinate space: width/height match config.video (or loaded video intrinsics). */
+.canvas-wrap-native {
+  flex: 0 0 auto;
+  position: relative;
+  background: #fff;
+  overflow: auto;
+  max-width: 100%;
+}
+
+.canvas-wrap-native video,
+.canvas-wrap-native canvas {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+  left: 0;
+  top: 0;
+  display: block;
+  object-fit: fill;
 }
 
 .controls {

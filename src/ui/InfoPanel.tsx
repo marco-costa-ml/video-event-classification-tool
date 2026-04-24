@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { useProject } from "@/context/ProjectContext";
 
 export function InfoPanel() {
@@ -24,9 +24,23 @@ export function InfoPanel() {
       <div>
         Time: <strong>{(frameState.timestamp_ms / 1000).toFixed(3)}s</strong>
       </div>
-      <div className="muted">Missing data flags</div>
-      <div>OCR sparse gap: {frameState.missing.ocr ? "no rows" : "rows present"}</div>
-      <div>Objects sparse gap: {frameState.missing.objects ? "no rows" : "rows present"}</div>
+      <div className="muted">Missing data flags (no file loaded)</div>
+      <div>OCR file: {frameState.missing.ocr ? "none" : "loaded"}</div>
+      <div>Objects file: {frameState.missing.objects ? "none" : "loaded"}</div>
+      <h3 style={{ marginTop: 12 }}>Forward-filled state</h3>
+      <div className="muted">Sparse key at this frame (exact Parquet row)</div>
+      <div>OCR: {frameState.sparse_observation.ocr ? "yes" : "no"}</div>
+      <div>Objects: {frameState.sparse_observation.objects ? "yes" : "no"}</div>
+      <div className="muted">Counts at this frame</div>
+      <div>
+        OCR boxes — observed: {frameState.reconstruction_stats.ocr.observed}, carried:{" "}
+        {frameState.reconstruction_stats.ocr.carried}
+      </div>
+      <div>
+        Objects — observed: {frameState.reconstruction_stats.objects.observed}, carried:{" "}
+        {frameState.reconstruction_stats.objects.carried}, dropped (TTL):{" "}
+        {frameState.reconstruction_stats.objects.dropped_ttl}
+      </div>
 
       <h3>Active page</h3>
       <div>{frameState.active_page ? `${frameState.active_page.name} (${frameState.active_page.id})` : "None"}</div>
@@ -44,7 +58,9 @@ export function InfoPanel() {
       <ul style={{ paddingLeft: 16 }}>
         {frameState.objects.map((o) => (
           <li key={`${o.id}-${frameState.frame}`}>
-            {o.className} ({o.id}) score {o.score ?? "n/a"} zone{" "}
+            ({o.id}){o.className ? ` class_ID: [${o.className}]` : ""}{" "}
+            {o.provenance ? `[${o.provenance}]` : ""} score{" "}
+            {o.score != null ? o.score.toFixed(2) : "n/a"} zone{" "}
             {frameState.object_primary_zone[o.id]?.zoneName ?? "—"}
           </li>
         ))}
@@ -52,11 +68,14 @@ export function InfoPanel() {
 
       <h3>OCR summary</h3>
       <ul style={{ paddingLeft: 16 }}>
-        {Object.entries(frameState.ocr_by_label).map(([label, boxes]) => (
-          <li key={label}>
-            {label}: {boxes.map((b) => b.text).join(", ")}
-          </li>
-        ))}
+        {Object.entries(frameState.ocr_by_label).map(([label, boxes]) => {
+          const prov = boxes[0]?.provenance;
+          return (
+            <li key={label}>
+              {label} {prov ? `(${prov})` : ""}: {boxes.map((b) => b.text).join(", ")}
+            </li>
+          );
+        })}
       </ul>
 
       <h3>Predicates (events)</h3>

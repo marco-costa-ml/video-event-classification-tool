@@ -4,8 +4,8 @@
     "video_id": "sample_001",
     "fps": 30,
     "frame_count": 300,
-    "width": 1280,
-    "height": 720
+    "width": 640,
+    "height": 360
   },
   "parquet": {
     "ocr": {
@@ -30,6 +30,7 @@
     }
   },
   "ocr_label_placements": [{ "label": "title", "anchor": "top_left", "offset_x": 0, "offset_y": 0 }],
+  "reconstruction": { "object_ttl_frames": 90 },
   "zones": [
     {
       "id": "z_roi",
@@ -37,7 +38,8 @@
       "priority": 10,
       "geometry": { "type": "rectangle", "x": 100, "y": 80, "width": 900, "height": 520 },
       "parent_classes": [],
-      "object_classes": ["person", "vehicle"]
+      "object_classes": ["person", "vehicle"],
+      "object_class_ranges": []
     }
   ],
   "pages": [

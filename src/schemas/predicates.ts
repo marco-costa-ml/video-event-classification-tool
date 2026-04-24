@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { fieldPathSchema } from "./fieldPath";
+import { z, type ZodType } from "zod";
+import { fieldPathSchema, type FieldPath } from "./fieldPath";
 
 export const comparisonOpSchema = z.enum([
   "==",
@@ -60,7 +60,45 @@ export const valueExprSchema = z.lazy(() =>
 
 export type ValueExpr = z.infer<typeof valueExprSchema>;
 
-export const predicateNodeSchema = z.lazy(() =>
+type ComparisonOp = z.infer<typeof comparisonOpSchema>;
+type ChangeOp = z.infer<typeof changeOpSchema>;
+type TransitionKind = z.infer<typeof transitionKindSchema>;
+type AggregateOp = z.infer<typeof aggregateOpSchema>;
+
+/** Recursive predicate tree; explicit type so the lazy Zod schema is well-typed. */
+export type PredicateNode =
+  | { kind: "logical"; op: "and" | "or" | "not"; children: PredicateNode[] }
+  | { kind: "comparison"; left: ValueExpr; op: ComparisonOp; right: ValueExpr }
+  | { kind: "exists"; path: FieldPath }
+  | { kind: "not_exists"; path: FieldPath }
+  | { kind: "change"; path: FieldPath; op: ChangeOp; threshold?: number; window_frames: number }
+  | {
+      kind: "transition";
+      transition: TransitionKind;
+      from?: ValueExpr;
+      to?: ValueExpr;
+      object_id_field?: FieldPath;
+      zone_from?: string;
+      zone_to?: string;
+      window_frames: number;
+    }
+  | {
+      kind: "aggregate";
+      op: AggregateOp;
+      path: FieldPath;
+      filter?: PredicateNode;
+      compare?: { op: ComparisonOp; right: ValueExpr };
+    }
+  | {
+      kind: "temporal";
+      anchor: "eval_frame" | "last_match";
+      offset_frames: number;
+      window_before: number;
+      window_after: number;
+      child: PredicateNode;
+    };
+
+export const predicateNodeSchema: ZodType<PredicateNode> = z.lazy((): ZodType<PredicateNode> =>
   z.union([
     z.object({
       kind: z.literal("logical"),
@@ -118,7 +156,5 @@ export const predicateNodeSchema = z.lazy(() =>
       window_after: z.number().int().min(0).default(0),
       child: predicateNodeSchema,
     }),
-  ]),
+  ]) as ZodType<PredicateNode>,
 );
-
-export type PredicateNode = z.infer<typeof predicateNodeSchema>;

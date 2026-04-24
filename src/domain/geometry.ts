@@ -36,3 +36,17 @@ export function pointInZone(px: number, py: number, zone: ZoneDefinition): boole
 export function objectCenter(o: { x: number; y: number; w: number; h: number }): { x: number; y: number } {
   return { x: o.x + o.w / 2, y: o.y + o.h / 2 };
 }
+
+/** Returns true only when every corner of the bounding box lies inside the zone. */
+export function allCornersInZone(
+  o: { x: number; y: number; w: number; h: number },
+  zone: ZoneDefinition,
+): boolean {
+  const corners: [number, number][] = [
+    [o.x,        o.y],
+    [o.x + o.w,  o.y],
+    [o.x,        o.y + o.h],
+    [o.x + o.w,  o.y + o.h],
+  ];
+  return corners.every(([px, py]) => pointInZone(px, py, zone));
+}

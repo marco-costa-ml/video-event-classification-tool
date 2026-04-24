@@ -3,7 +3,22 @@ import type { FrameState } from "@/domain/types";
 import { evaluatePredicate, evalComparisonOp } from "@/domain/predicateEval";
 import type { PredicateNode } from "@/schemas";
 
-function buildValueRoot(st: Pick<FrameState, "frame" | "timestamp_ms" | "active_page" | "zone_summary" | "object_primary_zone" | "ocr_boxes" | "ocr_by_label" | "objects" | "class_counts">): Record<string, unknown> {
+function buildValueRoot(
+  st: Pick<
+    FrameState,
+    | "frame"
+    | "timestamp_ms"
+    | "active_page"
+    | "zone_summary"
+    | "object_primary_zone"
+    | "ocr_boxes"
+    | "ocr_by_label"
+    | "objects"
+    | "class_counts"
+    | "reconstruction_stats"
+    | "sparse_observation"
+  >,
+): Record<string, unknown> {
   return {
     frame: st.frame,
     timestamp_ms: st.timestamp_ms,
@@ -13,6 +28,8 @@ function buildValueRoot(st: Pick<FrameState, "frame" | "timestamp_ms" | "active_
     ocr: { by_label: st.ocr_by_label, boxes: st.ocr_boxes },
     objects: st.objects,
     class_counts: st.class_counts,
+    reconstruction: st.reconstruction_stats,
+    sparse_observation: st.sparse_observation,
   };
 }
 
@@ -30,6 +47,11 @@ function baseState(overrides: Partial<FrameState> = {}): FrameState {
     ocr_by_label: {},
     objects: [],
     class_counts: { person: 2 },
+    reconstruction_stats: {
+      ocr: { observed: 0, carried: 0 },
+      objects: { observed: 0, carried: 0, dropped_ttl: 0 },
+    },
+    sparse_observation: { ocr: false, objects: false },
     value_root: {},
     ...overrides,
   };

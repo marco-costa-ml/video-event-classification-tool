@@ -54,7 +54,9 @@ data/samples/         # Example JSON configs for import
 
 ## Architecture summary
 
-- **Sparse ingestion**: Parquet rows are read with `hyparquet`, sorted and **merged per frame** into `LoadedParquetSlice` (`frames[]` + `rows[][]`). No full densification across the whole timeline.
+- **Sparse ingestion**: Parquet rows are read with `hyparquet`, sorted and **merged per frame** into `LoadedParquetSlice` (`frames[]` + `rows[][]`). No full densification across the whole timeline. Column names are **auto-inferred** when they do not match the JSON map (common for exports like `composed_state.parquet` / `rec_stable.parquet`): alternate frame keys (`frame_idx`, …), corner boxes (`x1,y1,x2,y2`), nested `bbox` objects, and `BigInt` frame indices.
+- **Timeline length & resolution**: After OCR/objects parquet loads or video metadata loads, `frame_count` is set to `max(config, parquet_max_frame+1, ceil(duration*fps))`. Video `loadedmetadata` updates **native width/height** used for drawing (defaults in sample configs are **640×360** when no video is loaded).
+- **Visualizer**: The canvas and `<video>` use the same pixel dimensions as `config.video` (native / config space) so zone and bbox coordinates align with the top-left of the frame.
 - **Indexing**: `SparseIndex` maps a frame to a contiguous row span for OCR/objects (`FrameRowRangeIndex`).
 - **State reconstruction**: `createFrameStateCache` materializes `FrameState` for a frame with LRU caching and **prefetch** around the playhead. Pages resolve with a deterministic **priority sort**; predicates evaluated during page matching must not depend on the resolved `page` field (it is `null` during matching).
 - **Zones**: Objects are assigned to **at most one zone** by **highest priority** zone whose geometry contains the object center (`assignObjectsToZones`).

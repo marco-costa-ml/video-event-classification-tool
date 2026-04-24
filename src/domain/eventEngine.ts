@@ -1,6 +1,5 @@
 import type { ClassificationConfig, EventDefinition } from "@/schemas";
 import type { TimelineEvent } from "@/schemas/labels";
-import type { FrameState } from "./types";
 import { evaluatePredicate, type EvalContext } from "./predicateEval";
 import type { FrameStateCache } from "./frameReconstruction";
 import { collapsePredictedEvents } from "./eventDedupe";
@@ -40,6 +39,9 @@ export function runEventDetection(
   cache: FrameStateCache,
   maxFrame: number,
 ): { firedByFrame: Map<number, FiredEvent[]>; timeline: TimelineEvent[] } {
+  if (!config.events.length) {
+    return { firedByFrame: new Map(), timeline: [] };
+  }
   const firedByFrame = new Map<number, FiredEvent[]>();
   const lastMatch: Record<string, number | null> = {};
   const rawPoints: TimelineEvent[] = [];

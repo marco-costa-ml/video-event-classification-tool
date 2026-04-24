@@ -77,8 +77,9 @@ export function evaluatePredicate(node: PredicateNode, st: FrameState, frame: nu
         const ch = node.children[0];
         return ch ? !evaluatePredicate(ch, st, frame, baseCtx) : true;
       }
-      if (node.op === "and") return node.children.every((c) => evaluatePredicate(c, st, frame, baseCtx));
-      return node.children.some((c) => evaluatePredicate(c, st, frame, baseCtx));
+      if (node.op === "and")
+        return node.children.every((c: PredicateNode) => evaluatePredicate(c, st, frame, baseCtx));
+      return node.children.some((c: PredicateNode) => evaluatePredicate(c, st, frame, baseCtx));
     }
     case "comparison": {
       const l = evalValue(node.left, st, baseCtx);

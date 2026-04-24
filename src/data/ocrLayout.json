@@ -1,0 +1,19 @@
+{
+  "boxes": [
+    { "label": "round_score",        "bbox": [68,  130, 166, 155] },
+    { "label": "hand_and_level",     "bbox": [31,  163, 158, 188] },
+    { "label": "hands_left",         "bbox": [86,  246, 111, 265] },
+    { "label": "discards_left",      "bbox": [130, 246, 156, 265] },
+    { "label": "dollars",            "bbox": [87,  278, 155, 300] },
+    { "label": "ante",               "bbox": [83,  321, 121, 341] },
+    { "label": "round",              "bbox": [128, 318, 162, 343] },
+    { "label": "joker_values",       "bbox": [173, 89,  196, 101] },
+    { "label": "consumable_values",  "bbox": [560, 90,  592, 102] },
+    { "label": "hand_values",        "bbox": [340, 340, 356, 350] },
+    { "label": "deck_values",        "bbox": [551, 337, 582, 350] },
+    { "label": "pack_type",          "bbox": [290, 312, 407, 332] },
+    { "label": "pack_choose",        "bbox": [319, 335, 376, 346] },
+    { "label": "cash_out",           "bbox": [256, 132, 441, 167] },
+    { "label": "reroll_price",       "bbox": [211, 192, 258, 210] }
+  ]
+}
