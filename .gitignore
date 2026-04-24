@@ -6,3 +6,4 @@ wasm/build/
 .DS_Store
 .gitignore
 *.mp4
+.cursor/
