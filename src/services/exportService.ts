@@ -72,6 +72,7 @@ type EnrichedObject = {
   bbox: [number, number, number, number];
   score: number | null;
   provenance: string;
+  position_in_zone: number;
   children: EnrichedChildren;
 };
 
@@ -80,11 +81,10 @@ type EnrichedStateSnapshot = {
   ocr: Record<string, string | number | null>;
 };
 
-type EnrichedAction = { type: string; event_id: string };
+type EnrichedAction = { type: string };
 
 type EnrichedEventRecord = {
   frame_idx: number;
-  page_id: string | null;
   page_name: string | null;
   state: EnrichedStateSnapshot;
   actions: EnrichedAction[];
@@ -97,7 +97,7 @@ export type EnrichedExport = {
   events: EnrichedEventRecord[];
 };
 
-function toEnrichedObject(obj: ObjectBox): EnrichedObject {
+function toEnrichedObject(obj: ObjectBox, position_in_zone: number): EnrichedObject {
   const children: EnrichedChildren = {};
   for (const [k, v] of Object.entries(obj.metadata)) {
     if (k === "page_hint") continue;
@@ -112,6 +112,7 @@ function toEnrichedObject(obj: ObjectBox): EnrichedObject {
     bbox: [obj.x, obj.y, obj.x + obj.w, obj.y + obj.h],
     score: obj.score,
     provenance: obj.provenance ?? "observed",
+    position_in_zone,
     children,
   };
 }
@@ -166,17 +167,26 @@ export function buildEnrichedExport(
       for (const z of config.zones) zoneIds.add(z.id);
     }
 
-    // Build zone state
+    // Map zone id → zone name for output keying
+    const zoneIdToName = new Map(config.zones.map((z) => [z.id, z.name]));
+
+    // Build zone state (keyed by zone name, with position_in_zone by left-to-right order)
     const objById = new Map<string, ObjectBox>(st.objects.map((o) => [o.id, o]));
     const zonesState: Record<string, EnrichedObject[]> = {};
     for (const zoneId of zoneIds) {
+      const zoneName = zoneIdToName.get(zoneId) ?? zoneId;
       const summary = st.zone_summary[zoneId];
-      zonesState[zoneId] = summary
-        ? summary.object_ids
-            .map((id) => objById.get(id))
-            .filter((o): o is ObjectBox => o !== undefined)
-            .map(toEnrichedObject)
-        : [];
+      if (!summary) {
+        zonesState[zoneName] = [];
+        continue;
+      }
+      const objs = summary.object_ids
+        .map((id) => objById.get(id))
+        .filter((o): o is ObjectBox => o !== undefined);
+      // Assign position_in_zone by ascending x (leftmost = 0)
+      const sortedByX = [...objs].sort((a, b) => a.x - b.x);
+      const positionOf = new Map(sortedByX.map((o, i) => [o.id, i]));
+      zonesState[zoneName] = objs.map((o) => toEnrichedObject(o, positionOf.get(o.id) ?? 0));
     }
 
     // Build OCR state
@@ -187,10 +197,9 @@ export function buildEnrichedExport(
 
     records.push({
       frame_idx: frame,
-      page_id: st.active_page?.id ?? null,
       page_name: st.active_page?.name ?? null,
       state: { zones: zonesState, ocr: ocrState },
-      actions: eventsAtFrame.map((ev) => ({ type: ev.event_name, event_id: ev.id })),
+      actions: eventsAtFrame.map((ev) => ({ type: ev.event_name })),
     });
   }
 
