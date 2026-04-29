@@ -25,7 +25,7 @@ type RuleKind =
   | "page_transition";
 
 type CompOp = ">" | ">=" | "==" | "!=" | "<" | "<=";
-type ChangeOpDraft = "changed" | "unchanged" | "increase" | "decrease" | "delta_gt" | "delta_lt";
+type ChangeOpDraft = "changed" | "unchanged" | "increase" | "decrease" | "delta_gt" | "delta_lt" | "increase_lt";
 
 type RuleDraft = {
   id: string;
@@ -141,7 +141,7 @@ function buildRulePredicate(r: RuleDraft): PredicateNode {
     case "object_entered_zone":
       return { kind: "change", path: ["zones", r.zoneId, "occupancy"], op: "increase", window_frames: Math.max(1, r.windowFrames) };
     case "value_changed":
-      if (r.changeOp === "delta_gt" || r.changeOp === "delta_lt") {
+      if (r.changeOp === "delta_gt" || r.changeOp === "delta_lt" || r.changeOp === "increase_lt") {
         return { kind: "change", path: ["ocr", "by_label", r.ocrLabel, 0, "text"], op: r.changeOp, threshold: r.changeThreshold, window_frames: Math.max(1, r.changeWindow) };
       }
       return { kind: "change", path: ["ocr", "by_label", r.ocrLabel, 0, "text"], op: r.changeOp, window_frames: Math.max(1, r.changeWindow) };
@@ -441,6 +441,7 @@ function RuleCard({ rule, index, total, cfg, knownOcrLabels, onChange, onRemove 
                 <option value="decrease">decreased</option>
                 <option value="delta_gt">increased by more than…</option>
                 <option value="delta_lt">decreased by more than…</option>
+                <option value="increase_lt">increased by less than…</option>
               </select>
             </label>
           </div>
@@ -450,7 +451,7 @@ function RuleCard({ rule, index, total, cfg, knownOcrLabels, onChange, onRemove 
               <input type="number" min={1} style={{ width: 64 }} value={rule.changeWindow} onChange={(e) => onChange({ changeWindow: Number(e.target.value) })} />
               {" "}frames ago
             </label>
-            {(rule.changeOp === "delta_gt" || rule.changeOp === "delta_lt") ? (
+            {(rule.changeOp === "delta_gt" || rule.changeOp === "delta_lt" || rule.changeOp === "increase_lt") ? (
               <label style={{ fontSize: 13 }}>
                 Threshold{" "}
                 <input type="number" style={{ width: 80 }} value={rule.changeThreshold} onChange={(e) => onChange({ changeThreshold: Number(e.target.value) })} />

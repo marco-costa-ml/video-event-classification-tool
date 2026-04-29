@@ -62,7 +62,10 @@ function numericValue(v: unknown): number | null {
   if (typeof v === "number" && Number.isFinite(v)) return v;
   if (typeof v === "string") {
     const n = Number(v);
-    return Number.isFinite(n) ? n : null;
+    if (Number.isFinite(n)) return n;
+    // Extract the first integer from strings like "$5" or "10/15"
+    const match = v.match(/\d+/);
+    if (match) return parseInt(match[0], 10);
   }
   return null;
 }
@@ -117,6 +120,10 @@ export function evaluatePredicate(node: PredicateNode, st: FrameState, frame: nu
         case "delta_lt": {
           const th = node.threshold ?? 0;
           return cn !== null && pn !== null && cn - pn < th;
+        }
+        case "increase_lt": {
+          const th = node.threshold ?? 0;
+          return cn !== null && pn !== null && cn > pn && cn - pn < th;
         }
         default:
           return false;

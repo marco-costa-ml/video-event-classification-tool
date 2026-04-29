@@ -21,6 +21,7 @@ export const changeOpSchema = z.enum([
   "decrease",
   "delta_gt",
   "delta_lt",
+  "increase_lt",
 ]);
 
 export const transitionKindSchema = z.enum([

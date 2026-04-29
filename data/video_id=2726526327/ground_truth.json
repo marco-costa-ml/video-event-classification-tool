@@ -44,7 +44,7 @@
   {
     "id": "gt_1776980962276",
     "kind": "point",
-    "event_name": "BuyAndOpenPack",
+    "event_name": "BuyShopItem",
     "start_frame": 1492,
     "source": "manual"
   },
@@ -268,14 +268,14 @@
   {
     "id": "gt_1776981625917",
     "kind": "point",
-    "event_name": "RedeemVoucher",
+    "event_name": "BuyShopItem",
     "start_frame": 6453,
     "source": "manual"
   },
   {
     "id": "gt_1776981684103",
     "kind": "point",
-    "event_name": "BuyAndOpenPack",
+    "event_name": "BuyShopItem",
     "start_frame": 6787,
     "source": "manual"
   },
@@ -352,7 +352,7 @@
   {
     "id": "gt_1776981929181",
     "kind": "point",
-    "event_name": "BuyAndOpenPack",
+    "event_name": "BuyShopItem",
     "start_frame": 8382,
     "source": "manual"
   },
@@ -415,7 +415,7 @@
   {
     "id": "gt_1776982101334",
     "kind": "point",
-    "event_name": "BuyAndOpenPack",
+    "event_name": "BuyShopItem",
     "start_frame": 9636,
     "source": "manual"
   },
@@ -478,7 +478,7 @@
   {
     "id": "gt_1776982255701",
     "kind": "point",
-    "event_name": "BuyAndOpenPack",
+    "event_name": "BuyShopItem",
     "start_frame": 11206,
     "source": "manual"
   },
@@ -499,7 +499,7 @@
   {
     "id": "gt_1776982317524",
     "kind": "point",
-    "event_name": "BuyItem",
+    "event_name": "BuyShopItem",
     "start_frame": 11839,
     "source": "manual"
   },
@@ -527,7 +527,7 @@
   {
     "id": "gt_1776982405316",
     "kind": "point",
-    "event_name": "BuyAndOpenPack",
+    "event_name": "BuyShopItem",
     "start_frame": 12712,
     "source": "manual"
   },
@@ -541,7 +541,7 @@
   {
     "id": "gt_1776982509200",
     "kind": "point",
-    "event_name": "BuyAndOpenPack",
+    "event_name": "BuyShopItem",
     "start_frame": 12882,
     "source": "manual"
   },
@@ -632,7 +632,7 @@
   {
     "id": "gt_1776982809270",
     "kind": "point",
-    "event_name": "BuyAndOpenPack",
+    "event_name": "BuyShopItem",
     "start_frame": 14641,
     "source": "manual"
   },
@@ -646,7 +646,7 @@
   {
     "id": "gt_1776982866947",
     "kind": "point",
-    "event_name": "BuyAndOpenPack",
+    "event_name": "BuyShopItem",
     "start_frame": 14788,
     "source": "manual"
   },
@@ -723,7 +723,7 @@
   {
     "id": "gt_1776983107299",
     "kind": "point",
-    "event_name": "BuyAndOpenPack",
+    "event_name": "BuyShopItem",
     "start_frame": 16025,
     "source": "manual"
   },
@@ -744,7 +744,7 @@
   {
     "id": "gt_1776983141488",
     "kind": "point",
-    "event_name": "BuyAndOpenPack",
+    "event_name": "BuyShopItem",
     "start_frame": 16176,
     "source": "manual"
   },
@@ -800,14 +800,14 @@
   {
     "id": "gt_1776983287912",
     "kind": "point",
-    "event_name": "RedeemVoucher",
+    "event_name": "BuyShopItem",
     "start_frame": 17679,
     "source": "manual"
   },
   {
     "id": "gt_1776983307214",
     "kind": "point",
-    "event_name": "BuyAndOpenPack",
+    "event_name": "BuyShopItem",
     "start_frame": 17802,
     "source": "manual"
   },
@@ -823,6 +823,13 @@
     "kind": "point",
     "event_name": "UsePackConsumable",
     "start_frame": 17976,
+    "source": "manual"
+  },
+  {
+    "id": "gt_1777340847563",
+    "kind": "point",
+    "event_name": "CashOut",
+    "start_frame": 12492,
     "source": "manual"
   }
 ]
