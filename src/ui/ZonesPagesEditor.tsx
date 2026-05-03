@@ -42,7 +42,8 @@ type PageCondKind =
   | "ocr_equals"
   | "ocr_not_empty"
   | "class_count"
-  | "zone_occupancy";
+  | "zone_occupancy"
+  | "zone_physical_occupancy";
 
 type CountOp = ">=" | ">" | "==" | "!=";
 
@@ -116,10 +117,11 @@ function condToPredicate(c: PageCond): PredicateNode {
       right: { kind: "literal", value: c.countValue },
     };
   }
-  // zone_occupancy
+  // zone occupancy
+  const zonePathRoot = c.kind === "zone_physical_occupancy" ? "zone_membership" : "zones";
   return {
     kind: "comparison",
-    left: { kind: "field", path: ["zones", c.zoneId, "occupancy"] },
+    left: { kind: "field", path: [zonePathRoot, c.zoneId, "occupancy"] },
     op: c.zoneOp,
     right: { kind: "literal", value: c.zoneValue },
   };
@@ -169,6 +171,12 @@ function tryParseCondition(node: PredicateNode, cfg: ClassificationConfig): Page
         return { ...base, id: newId("cond"), kind: "zone_occupancy", zoneId: zid, zoneOp: op, zoneValue: Number(val) };
       }
     }
+    if (path[0] === "zone_membership" && path.length === 3 && path[2] === "occupancy") {
+      const zid = String(path[1] ?? "");
+      if (op === ">=" || op === ">" || op === "==" || op === "!=") {
+        return { ...base, id: newId("cond"), kind: "zone_physical_occupancy", zoneId: zid, zoneOp: op, zoneValue: Number(val) };
+      }
+    }
   }
   return null;
 }
@@ -210,20 +218,13 @@ type CondCardProps = {
 };
 
 function CondCard({ cond, index, cfg, knownOcrLabels, onChange, onRemove }: CondCardProps) {
-  const kindLabel: Record<PageCondKind, string> = {
-    ocr_contains:  "OCR text contains",
-    ocr_equals:    "OCR text equals",
-    ocr_not_empty: "OCR label exists",
-    class_count:   "Object class count",
-    zone_occupancy:"Zone occupancy",
-  };
-
   const kindColor: Record<PageCondKind, string> = {
     ocr_contains:  "#4c8dff",
     ocr_equals:    "#4c8dff",
     ocr_not_empty: "#4c8dff",
     class_count:   "#12b76a",
     zone_occupancy:"#f59e0b",
+    zone_physical_occupancy:"#f59e0b",
   };
 
   return (
@@ -254,7 +255,8 @@ function CondCard({ cond, index, cfg, knownOcrLabels, onChange, onRemove }: Cond
             <option value="ocr_equals">OCR text exactly equals</option>
             <option value="ocr_not_empty">OCR label is present (not empty)</option>
             <option value="class_count">Object class count</option>
-            <option value="zone_occupancy">Zone occupancy</option>
+            <option value="zone_occupancy">Zone occupancy (exclusive)</option>
+            <option value="zone_physical_occupancy">Zone occupancy (physical)</option>
           </select>
         </label>
       </div>
@@ -336,7 +338,7 @@ function CondCard({ cond, index, cfg, knownOcrLabels, onChange, onRemove }: Cond
       ) : null}
 
       {/* Zone occupancy */}
-      {cond.kind === "zone_occupancy" ? (
+      {(cond.kind === "zone_occupancy" || cond.kind === "zone_physical_occupancy") ? (
         <div className="row" style={{ alignItems: "center", gap: 8 }}>
           <label style={{ fontSize: 13 }}>
             Zone{" "}
@@ -365,7 +367,9 @@ function CondCard({ cond, index, cfg, knownOcrLabels, onChange, onRemove }: Cond
             min={0}
             onChange={(e) => onChange({ zoneValue: Number(e.target.value) })}
           />
-          <span className="muted" style={{ fontSize: 12 }}>objects fully inside zone</span>
+          <span className="muted" style={{ fontSize: 12 }}>
+            {cond.kind === "zone_physical_occupancy" ? "objects physically inside zone, ignoring priority" : "objects assigned to this zone after priority rules"}
+          </span>
         </div>
       ) : null}
     </div>
@@ -615,7 +619,15 @@ function PageEditor({ page, cfg, currentFrame, frameOcrLabels, isMatch, onSave, 
                 op: ">",
                 right: { kind: "literal", value: 0 },
               }, null, 2));
-            }}>Template: zone occupancy</button>
+            }}>Template: exclusive zone occupancy</button>
+            <button type="button" onClick={() => {
+              setJsonText(JSON.stringify({
+                kind: "comparison",
+                left: { kind: "field", path: ["zone_membership", cfg.zones[0]?.id ?? "zone_id", "occupancy"] },
+                op: ">",
+                right: { kind: "literal", value: 0 },
+              }, null, 2));
+            }}>Template: physical zone occupancy</button>
           </div>
           <textarea
             style={{

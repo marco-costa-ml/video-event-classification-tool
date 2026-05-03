@@ -219,7 +219,7 @@
   {
     "id": "gt_1776981501046",
     "kind": "point",
-    "event_name": "BuyAndUseConsumable",
+    "event_name": "BuyAndUseShopConsumableConsumable",
     "start_frame": 5508,
     "source": "manual"
   },
@@ -534,7 +534,7 @@
   {
     "id": "gt_1776982486812",
     "kind": "point",
-    "event_name": "UsePackPlanetCard",
+    "event_name": "SelectPackItem",
     "start_frame": 12808,
     "source": "manual"
   },
@@ -548,14 +548,14 @@
   {
     "id": "gt_1776982534901",
     "kind": "point",
-    "event_name": "UsePackPlanetCard",
+    "event_name": "SelectPackItem",
     "start_frame": 13009,
     "source": "manual"
   },
   {
     "id": "gt_1776982542324",
     "kind": "point",
-    "event_name": "UsePackPlanetCard",
+    "event_name": "SelectPackItem",
     "start_frame": 13084,
     "source": "manual"
   },
@@ -660,7 +660,7 @@
   {
     "id": "gt_1776982905713",
     "kind": "point",
-    "event_name": "BuyAndUseConsumable",
+    "event_name": "BuyAndUseShopConsumableConsumable",
     "start_frame": 15046,
     "source": "manual"
   },
@@ -751,7 +751,7 @@
   {
     "id": "gt_1776983163386",
     "kind": "point",
-    "event_name": "UsePackPlanetCard",
+    "event_name": "SelectPackItem",
     "start_frame": 16266,
     "source": "manual"
   },

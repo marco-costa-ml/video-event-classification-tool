@@ -49,7 +49,8 @@ export function InfoPanel() {
       <ul style={{ paddingLeft: 16 }}>
         {Object.entries(frameState.zone_summary).map(([id, z]) => (
           <li key={id}>
-            {z.name}: occupancy {z.occupancy}
+            {z.name}: exclusive {z.occupancy}, physical{" "}
+            {frameState.zone_membership_summary[id]?.occupancy ?? 0}
           </li>
         ))}
       </ul>

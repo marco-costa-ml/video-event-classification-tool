@@ -48,21 +48,24 @@ function assignObjectsToZones(
   zones: ZoneDefinition[],
 ): {
   zone_summary: FrameState["zone_summary"];
+  zone_membership_summary: FrameState["zone_membership_summary"];
   object_primary_zone: FrameState["object_primary_zone"];
 } {
   const sortedZones = [...zones].sort((a, b) => b.priority - a.priority);
   const object_primary_zone: FrameState["object_primary_zone"] = {};
   const zoneBuckets: Record<string, string[]> = {};
+  const membershipBuckets: Record<string, string[]> = {};
   for (const z of sortedZones) {
     zoneBuckets[z.id] = [];
+    membershipBuckets[z.id] = [];
   }
   for (const o of objects) {
     let chosen: ZoneDefinition | null = null;
     for (const z of sortedZones) {
       if (!classMatchesZoneEligibility(z, o)) continue;
       if (allCornersInZone(o, z)) {
-        chosen = z;
-        break;
+        membershipBuckets[z.id]!.push(o.id);
+        if (!chosen) chosen = z;
       }
     }
     if (chosen) {
@@ -77,6 +80,7 @@ function assignObjectsToZones(
     }
   }
   const zone_summary: FrameState["zone_summary"] = {};
+  const zone_membership_summary: FrameState["zone_membership_summary"] = {};
   for (const z of sortedZones) {
     const ids = zoneBuckets[z.id] ?? [];
     zone_summary[z.id] = {
@@ -85,8 +89,15 @@ function assignObjectsToZones(
       occupancy: ids.length,
       object_ids: ids,
     };
+    const membershipIds = membershipBuckets[z.id] ?? [];
+    zone_membership_summary[z.id] = {
+      name: z.name,
+      priority: z.priority,
+      occupancy: membershipIds.length,
+      object_ids: membershipIds,
+    };
   }
-  return { zone_summary, object_primary_zone };
+  return { zone_summary, zone_membership_summary, object_primary_zone };
 }
 
 function rightmostLte(frames: readonly number[], f: number): number {
@@ -112,6 +123,7 @@ function buildValueRoot(st: FrameState, extras: Record<string, unknown>) {
     timestamp_ms: st.timestamp_ms,
     page: st.active_page,
     zones: st.zone_summary,
+    zone_membership: st.zone_membership_summary,
     object_primary_zone: st.object_primary_zone,
     ocr: {
       by_label: st.ocr_by_label,
@@ -149,7 +161,7 @@ export function reconstructFrameState(
   for (const o of objects) {
     class_counts[o.className] = (class_counts[o.className] ?? 0) + 1;
   }
-  const { zone_summary, object_primary_zone } = assignObjectsToZones(objects, config.zones);
+  const { zone_summary, zone_membership_summary, object_primary_zone } = assignObjectsToZones(objects, config.zones);
   const timestamp_ms = (frame / config.video.fps) * 1000;
   const oI = ocrSlice ? rightmostLte(ocrSlice.frames, frame) : -1;
   const pI = objSlice ? rightmostLte(objSlice.frames, frame) : -1;
@@ -164,6 +176,7 @@ export function reconstructFrameState(
     },
     active_page: activePageOverride,
     zone_summary,
+    zone_membership_summary,
     object_primary_zone,
     ocr_boxes,
     ocr_by_label,

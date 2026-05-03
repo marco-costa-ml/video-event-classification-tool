@@ -18,8 +18,10 @@ type RuleKind =
   | "ocr_not_empty"
   | "ocr_number_op"
   | "zone_occupancy"
+  | "zone_physical_occupancy"
   | "class_count"
   | "object_entered_zone"
+  | "object_physically_entered_zone"
   | "value_changed"
   | "page_active"
   | "page_transition";
@@ -136,10 +138,14 @@ function buildRulePredicate(r: RuleDraft): PredicateNode {
       return { kind: "comparison", left: { kind: "field", path: ["ocr", "by_label", r.ocrLabel, 0, "text"] }, op: r.numOp, right: { kind: "literal", value: r.numValue } };
     case "zone_occupancy":
       return { kind: "comparison", left: { kind: "field", path: ["zones", r.zoneId, "occupancy"] }, op: r.occupancyOp, right: { kind: "literal", value: r.threshold } };
+    case "zone_physical_occupancy":
+      return { kind: "comparison", left: { kind: "field", path: ["zone_membership", r.zoneId, "occupancy"] }, op: r.occupancyOp, right: { kind: "literal", value: r.threshold } };
     case "class_count":
       return { kind: "comparison", left: { kind: "field", path: ["class_counts", r.className] }, op: r.countOp, right: { kind: "literal", value: r.countValue } };
     case "object_entered_zone":
       return { kind: "change", path: ["zones", r.zoneId, "occupancy"], op: "increase", window_frames: Math.max(1, r.windowFrames) };
+    case "object_physically_entered_zone":
+      return { kind: "change", path: ["zone_membership", r.zoneId, "occupancy"], op: "increase", window_frames: Math.max(1, r.windowFrames) };
     case "value_changed":
       if (r.changeOp === "delta_gt" || r.changeOp === "delta_lt" || r.changeOp === "increase_lt") {
         return { kind: "change", path: ["ocr", "by_label", r.ocrLabel, 0, "text"], op: r.changeOp, threshold: r.changeThreshold, window_frames: Math.max(1, r.changeWindow) };
@@ -200,7 +206,7 @@ function tryParseRule(node: PredicateNode, cfg: ClassificationConfig): RuleDraft
       if (op === "not_contains") return { ...base, id: newId("rule"), kind: "ocr_not_contains", ocrLabel: label, searchText: text };
       if (op === "==")           return { ...base, id: newId("rule"), kind: "ocr_equals",       ocrLabel: label, searchText: text };
       if (op === "!=")           return { ...base, id: newId("rule"), kind: "ocr_not_equals",   ocrLabel: label, searchText: text };
-      if (op === ">" || op === ">=" || op === "<" || op === "<=" || op === "==")
+      if (op === ">" || op === ">=" || op === "<" || op === "<=")
         return { ...base, id: newId("rule"), kind: "ocr_number_op", ocrLabel: label, numOp: op as CompOp, numValue: Number(val) };
     }
     // Zone occupancy
@@ -208,6 +214,11 @@ function tryParseRule(node: PredicateNode, cfg: ClassificationConfig): RuleDraft
       const zoneId = String(path[1] ?? "");
       if (op === ">" || op === ">=" || op === "<" || op === "<=" || op === "==" || op === "!=")
         return { ...base, id: newId("rule"), kind: "zone_occupancy", zoneId, occupancyOp: op as CompOp, threshold: Number(val) };
+    }
+    if (path[0] === "zone_membership" && path.length === 3 && path[2] === "occupancy") {
+      const zoneId = String(path[1] ?? "");
+      if (op === ">" || op === ">=" || op === "<" || op === "<=" || op === "==" || op === "!=")
+        return { ...base, id: newId("rule"), kind: "zone_physical_occupancy", zoneId, occupancyOp: op as CompOp, threshold: Number(val) };
     }
     // Class count
     if (path[0] === "class_counts" && path.length === 2) {
@@ -225,6 +236,8 @@ function tryParseRule(node: PredicateNode, cfg: ClassificationConfig): RuleDraft
       return { ...base, id: newId("rule"), kind: "value_changed", ocrLabel: String(path[2] ?? ""), changeOp: node.op as ChangeOpDraft, changeWindow: node.window_frames, changeThreshold: node.threshold ?? 0 };
     if (path[0] === "zones" && path.length === 3 && path[2] === "occupancy" && node.op === "increase")
       return { ...base, id: newId("rule"), kind: "object_entered_zone", zoneId: String(path[1] ?? ""), windowFrames: node.window_frames };
+    if (path[0] === "zone_membership" && path.length === 3 && path[2] === "occupancy" && node.op === "increase")
+      return { ...base, id: newId("rule"), kind: "object_physically_entered_zone", zoneId: String(path[1] ?? ""), windowFrames: node.window_frames };
   }
   if (node.kind === "transition" && node.transition === "page") {
     return { ...base, id: newId("rule"), kind: "page_transition", fromPageId: node.from?.kind === "literal" ? String(node.from.value) : "", toPageId: node.to?.kind === "literal" ? String(node.to.value) : "", windowFrames: node.window_frames };
@@ -266,9 +279,11 @@ const KIND_META: Record<RuleKind, { label: string; color: string; group: string 
   ocr_not_equals:     { label: "OCR text does NOT equal",     color: "#4c8dff", group: "OCR" },
   ocr_not_empty:      { label: "OCR label is present",        color: "#4c8dff", group: "OCR" },
   ocr_number_op:      { label: "OCR value (numeric)",         color: "#4c8dff", group: "OCR" },
-  zone_occupancy:     { label: "Zone occupancy",              color: "#f59e0b", group: "Zone / Objects" },
+  zone_occupancy:     { label: "Zone occupancy (exclusive)",  color: "#f59e0b", group: "Zone / Objects" },
+  zone_physical_occupancy: { label: "Zone occupancy (physical)", color: "#f59e0b", group: "Zone / Objects" },
   class_count:        { label: "Object class count",          color: "#f59e0b", group: "Zone / Objects" },
-  object_entered_zone:{ label: "Objects entered zone",        color: "#f59e0b", group: "Zone / Objects" },
+  object_entered_zone:{ label: "Objects entered zone (exclusive)", color: "#f59e0b", group: "Zone / Objects" },
+  object_physically_entered_zone: { label: "Objects entered zone (physical)", color: "#f59e0b", group: "Zone / Objects" },
   value_changed:      { label: "OCR value changed",           color: "#a78bfa", group: "Changes" },
   page_active:        { label: "Page is active",              color: "#12b76a", group: "Pages" },
   page_transition:    { label: "Page changed",                color: "#12b76a", group: "Pages" },
@@ -303,7 +318,7 @@ function RuleCard({ rule, index, total, cfg, knownOcrLabels, onChange, onRemove 
   // Group options for the select
   const kindGroups: { group: string; kinds: RuleKind[] }[] = [
     { group: "OCR", kinds: ["ocr_contains", "ocr_not_contains", "ocr_equals", "ocr_not_equals", "ocr_not_empty", "ocr_number_op"] },
-    { group: "Zone / Objects", kinds: ["zone_occupancy", "class_count", "object_entered_zone"] },
+    { group: "Zone / Objects", kinds: ["zone_occupancy", "zone_physical_occupancy", "class_count", "object_entered_zone", "object_physically_entered_zone"] },
     { group: "Changes", kinds: ["value_changed"] },
     { group: "Pages", kinds: ["page_active", "page_transition"] },
   ];
@@ -377,7 +392,7 @@ function RuleCard({ rule, index, total, cfg, knownOcrLabels, onChange, onRemove 
       ) : null}
 
       {/* ── Zone rules ── */}
-      {rule.kind === "zone_occupancy" ? (
+      {(rule.kind === "zone_occupancy" || rule.kind === "zone_physical_occupancy") ? (
         <div className="row" style={{ alignItems: "center", gap: 8 }}>
           <label style={{ fontSize: 13 }}>
             Zone{" "}
@@ -392,7 +407,9 @@ function RuleCard({ rule, index, total, cfg, knownOcrLabels, onChange, onRemove 
             </select>
           </label>
           <input type="number" style={{ width: 64 }} min={0} value={rule.threshold} onChange={(e) => onChange({ threshold: Number(e.target.value) })} />
-          <span className="muted" style={{ fontSize: 12 }}>objects fully inside zone</span>
+          <span className="muted" style={{ fontSize: 12 }}>
+            {rule.kind === "zone_physical_occupancy" ? "objects physically inside zone, ignoring priority" : "objects assigned to this zone after priority rules"}
+          </span>
         </div>
       ) : null}
 
@@ -410,7 +427,7 @@ function RuleCard({ rule, index, total, cfg, knownOcrLabels, onChange, onRemove 
         </div>
       ) : null}
 
-      {rule.kind === "object_entered_zone" ? (
+      {(rule.kind === "object_entered_zone" || rule.kind === "object_physically_entered_zone") ? (
         <div className="row" style={{ alignItems: "center", gap: 8 }}>
           <label style={{ fontSize: 13 }}>
             Zone{" "}
@@ -423,7 +440,9 @@ function RuleCard({ rule, index, total, cfg, knownOcrLabels, onChange, onRemove 
             <input type="number" min={1} style={{ width: 64 }} value={rule.windowFrames} onChange={(e) => onChange({ windowFrames: Number(e.target.value) })} />
             {" "}frames
           </label>
-          <span className="muted" style={{ fontSize: 12 }}>Fires when zone occupancy increased in the last N frames</span>
+          <span className="muted" style={{ fontSize: 12 }}>
+            {rule.kind === "object_physically_entered_zone" ? "Fires when physical zone occupancy increased, ignoring priority" : "Fires when exclusive zone occupancy increased in the last N frames"}
+          </span>
         </div>
       ) : null}
 

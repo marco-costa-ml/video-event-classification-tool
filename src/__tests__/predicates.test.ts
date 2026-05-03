@@ -10,6 +10,7 @@ function buildValueRoot(
     | "timestamp_ms"
     | "active_page"
     | "zone_summary"
+    | "zone_membership_summary"
     | "object_primary_zone"
     | "ocr_boxes"
     | "ocr_by_label"
@@ -24,6 +25,7 @@ function buildValueRoot(
     timestamp_ms: st.timestamp_ms,
     page: st.active_page,
     zones: st.zone_summary,
+    zone_membership: st.zone_membership_summary,
     object_primary_zone: st.object_primary_zone,
     ocr: { by_label: st.ocr_by_label, boxes: st.ocr_boxes },
     objects: st.objects,
@@ -40,6 +42,9 @@ function baseState(overrides: Partial<FrameState> = {}): FrameState {
     missing: { ocr: false, objects: false },
     active_page: { id: "p1", name: "Page" },
     zone_summary: {
+      z1: { name: "Z1", priority: 1, occupancy: 2, object_ids: ["a", "b"] },
+    },
+    zone_membership_summary: {
       z1: { name: "Z1", priority: 1, occupancy: 2, object_ids: ["a", "b"] },
     },
     object_primary_zone: {},

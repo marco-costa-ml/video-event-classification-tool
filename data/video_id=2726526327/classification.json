@@ -69,7 +69,7 @@
     },
     {
       "id": "zone_mobvt1b4_w5ket",
-      "name": "CurrentHand",
+      "name": "CurrentHandOrPackOfferings",
       "priority": 100,
       "geometry": {
         "type": "rectangle",
@@ -92,13 +92,29 @@
         {
           "min": 231,
           "max": 231
+        },
+        {
+          "min": 80,
+          "max": 229
+        },
+        {
+          "min": 236,
+          "max": 247
+        },
+        {
+          "min": 248,
+          "max": 265
+        },
+        {
+          "min": 298,
+          "max": 319
         }
       ]
     },
     {
       "id": "zone_mobvumat_nifm1",
-      "name": "CurrentHandSelected",
-      "priority": 0,
+      "name": "CurrentHandOrPackOfferingsSelected",
+      "priority": 99,
       "geometry": {
         "type": "rectangle",
         "x": 163,
@@ -120,6 +136,22 @@
         {
           "min": 231,
           "max": 231
+        },
+        {
+          "min": 80,
+          "max": 229
+        },
+        {
+          "min": 236,
+          "max": 247
+        },
+        {
+          "min": 248,
+          "max": 265
+        },
+        {
+          "min": 298,
+          "max": 319
         }
       ]
     },
@@ -398,40 +430,16 @@
           "max": 351
         },
         {
+          "min": 236,
+          "max": 247
+        },
+        {
           "min": 248,
-          "max": 248
-        },
-        {
-          "min": 256,
-          "max": 256
-        },
-        {
-          "min": 265,
           "max": 265
         },
         {
-          "min": 301,
-          "max": 301
-        },
-        {
-          "min": 303,
-          "max": 303
-        },
-        {
-          "min": 306,
-          "max": 308
-        },
-        {
-          "min": 316,
-          "max": 316
-        },
-        {
-          "min": 318,
-          "max": 318
-        },
-        {
-          "min": 236,
-          "max": 247
+          "min": 298,
+          "max": 319
         }
       ]
     },
@@ -501,6 +509,86 @@
           "min": 80,
           "max": 229
         },
+        {
+          "min": 236,
+          "max": 247
+        },
+        {
+          "min": 248,
+          "max": 265
+        },
+        {
+          "min": 298,
+          "max": 319
+        }
+      ]
+    },
+    {
+      "id": "zone_mokf3s0u_5474o",
+      "name": "TarotSpectralHand",
+      "priority": 31,
+      "geometry": {
+        "type": "rectangle",
+        "x": 165,
+        "y": 121,
+        "width": 355,
+        "height": 90
+      },
+      "parent_classes": [
+        "obj"
+      ],
+      "object_classes": [
+        "obj"
+      ],
+      "object_class_ranges": [
+        {
+          "min": 0,
+          "max": 51
+        }
+      ]
+    },
+    {
+      "id": "zone_mokf3xal_f0l4f",
+      "name": "TarotSpectralHandSelected",
+      "priority": 30,
+      "geometry": {
+        "type": "rectangle",
+        "x": 164,
+        "y": 105,
+        "width": 359,
+        "height": 88
+      },
+      "parent_classes": [
+        "obj"
+      ],
+      "object_classes": [
+        "obj"
+      ],
+      "object_class_ranges": [
+        {
+          "min": 0,
+          "max": 51
+        }
+      ]
+    },
+    {
+      "id": "zone_mokfcf74_a7jhx",
+      "name": "PackConsumableUse",
+      "priority": 50,
+      "geometry": {
+        "type": "rectangle",
+        "x": 314,
+        "y": 250,
+        "width": 69,
+        "height": 86
+      },
+      "parent_classes": [
+        "obj"
+      ],
+      "object_classes": [
+        "obj"
+      ],
+      "object_class_ranges": [
         {
           "min": 236,
           "max": 247
@@ -1036,7 +1124,7 @@
             "op": "contains",
             "right": {
               "kind": "literal",
-              "value": "planetpack"
+              "value": "celestialpack"
             }
           }
         ]
@@ -1758,7 +1846,7 @@
             "left": {
               "kind": "field",
               "path": [
-                "zones",
+                "zone_membership",
                 "zone_moj1bzp6_ro0vu",
                 "occupancy"
               ]
@@ -1822,7 +1910,7 @@
               "left": {
                 "kind": "field",
                 "path": [
-                  "zones",
+                  "zone_membership",
                   "zone_moj1bzp6_ro0vu",
                   "occupancy"
                 ]
@@ -1929,7 +2017,7 @@
               "left": {
                 "kind": "field",
                 "path": [
-                  "zones",
+                  "zone_membership",
                   "zone_moj0jsj8_47txr",
                   "occupancy"
                 ]
@@ -2001,8 +2089,94 @@
       }
     },
     {
+      "id": "selectpackitemplanet",
+      "name": "SelectPackItem",
+      "priority": 10,
+      "predicate": {
+        "kind": "logical",
+        "op": "and",
+        "children": [
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "page",
+                "id"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": "page_moj0prl4_fqj4n"
+            }
+          },
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "zone_membership",
+                "zone_mobvumat_nifm1",
+                "occupancy"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": 1
+            }
+          },
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "zones",
+                "zone_mobvt1b4_w5ket",
+                "occupancy"
+              ]
+            },
+            "op": ">",
+            "right": {
+              "kind": "literal",
+              "value": 0
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 6,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "comparison",
+              "left": {
+                "kind": "field",
+                "path": [
+                  "zone_membership",
+                  "zone_mokfcf74_a7jhx",
+                  "occupancy"
+                ]
+              },
+              "op": "==",
+              "right": {
+                "kind": "literal",
+                "value": 1
+              }
+            }
+          }
+        ]
+      },
+      "cooldown_frames": 30,
+      "dedupe": {
+        "merge_adjacent_frames": 30,
+        "strategy": "leading_edge"
+      }
+    },
+    {
       "id": "buytopshelfconsumable",
-      "name": "BuyItem",
+      "name": "BuyShopItem",
       "priority": 10,
       "predicate": {
         "kind": "logical",
@@ -2021,22 +2195,6 @@
             "right": {
               "kind": "literal",
               "value": "page_mohycd8i_lmiem"
-            }
-          },
-          {
-            "kind": "comparison",
-            "left": {
-              "kind": "field",
-              "path": [
-                "zones",
-                "zone_moj1bzp6_ro0vu",
-                "occupancy"
-              ]
-            },
-            "op": "==",
-            "right": {
-              "kind": "literal",
-              "value": 1
             }
           },
           {
@@ -2060,6 +2218,22 @@
             }
           },
           {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "zone_membership",
+                "zone_moj1bzp6_ro0vu",
+                "occupancy"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": 1
+            }
+          },
+          {
             "kind": "temporal",
             "anchor": "eval_frame",
             "offset_frames": 10,
@@ -2070,7 +2244,7 @@
               "left": {
                 "kind": "field",
                 "path": [
-                  "zones",
+                  "zone_membership",
                   "zone_moj1bzp6_ro0vu",
                   "occupancy"
                 ]
@@ -2084,15 +2258,15 @@
           }
         ]
       },
-      "cooldown_frames": 15,
+      "cooldown_frames": 30,
       "dedupe": {
-        "merge_adjacent_frames": 15,
+        "merge_adjacent_frames": 30,
         "strategy": "leading_edge"
       }
     },
     {
-      "id": "buytopshelfcard",
-      "name": "BuyItem",
+      "id": "selectpackitemcard",
+      "name": "SelectPackItem",
       "priority": 10,
       "predicate": {
         "kind": "logical",
@@ -2110,23 +2284,7 @@
             "op": "==",
             "right": {
               "kind": "literal",
-              "value": "page_mohycd8i_lmiem"
-            }
-          },
-          {
-            "kind": "comparison",
-            "left": {
-              "kind": "field",
-              "path": [
-                "zones",
-                "zone_mohz2d5v_kohvc",
-                "occupancy"
-              ]
-            },
-            "op": "==",
-            "right": {
-              "kind": "literal",
-              "value": 1
+              "value": "page_moj0prl4_fqj4n"
             }
           },
           {
@@ -2150,9 +2308,41 @@
             }
           },
           {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "zone_membership",
+                "zone_mobvumat_nifm1",
+                "occupancy"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": 1
+            }
+          },
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "zone_membership",
+                "zone_mobvumat_nifm1",
+                "occupancy"
+              ]
+            },
+            "op": ">",
+            "right": {
+              "kind": "literal",
+              "value": 0
+            }
+          },
+          {
             "kind": "temporal",
             "anchor": "eval_frame",
-            "offset_frames": 10,
+            "offset_frames": 3,
             "window_before": 0,
             "window_after": 0,
             "child": {
@@ -2160,8 +2350,8 @@
               "left": {
                 "kind": "field",
                 "path": [
-                  "zones",
-                  "zone_mohz2d5v_kohvc",
+                  "zone_membership",
+                  "zone_mobvumat_nifm1",
                   "occupancy"
                 ]
               },
@@ -2174,9 +2364,224 @@
           }
         ]
       },
-      "cooldown_frames": 15,
+      "cooldown_frames": 30,
       "dedupe": {
-        "merge_adjacent_frames": 15,
+        "merge_adjacent_frames": 30,
+        "strategy": "leading_edge"
+      }
+    },
+    {
+      "id": "selectpackitemjoker",
+      "name": "SelectPackItem",
+      "priority": 10,
+      "predicate": {
+        "kind": "logical",
+        "op": "and",
+        "children": [
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "page",
+                "id"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": "page_moj0prl4_fqj4n"
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 5,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "change",
+              "path": [
+                "ocr",
+                "by_label",
+                "joker_values",
+                0,
+                "text"
+              ],
+              "op": "increase_lt",
+              "threshold": 2,
+              "window_frames": 5
+            }
+          },
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "zone_membership",
+                "zone_mobvumat_nifm1",
+                "occupancy"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": 1
+            }
+          },
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "zone_membership",
+                "zone_mobvt1b4_w5ket",
+                "occupancy"
+              ]
+            },
+            "op": ">",
+            "right": {
+              "kind": "literal",
+              "value": 0
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 5,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "comparison",
+              "left": {
+                "kind": "field",
+                "path": [
+                  "zone_membership",
+                  "zone_mobvumat_nifm1",
+                  "occupancy"
+                ]
+              },
+              "op": "==",
+              "right": {
+                "kind": "literal",
+                "value": 0
+              }
+            }
+          }
+        ]
+      },
+      "cooldown_frames": 30,
+      "dedupe": {
+        "merge_adjacent_frames": 3,
+        "strategy": "leading_edge"
+      }
+    },
+    {
+      "id": "selectpackitemplanet",
+      "name": "SelectPackItem",
+      "priority": 10,
+      "predicate": {
+        "kind": "logical",
+        "op": "and",
+        "children": [
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "page",
+                "id"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": "page_moj1lxic_h13j3"
+            }
+          },
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "zone_membership",
+                "zone_mobvumat_nifm1",
+                "occupancy"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": 1
+            }
+          },
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "zone_membership",
+                "zone_mobvt1b4_w5ket",
+                "occupancy"
+              ]
+            },
+            "op": ">",
+            "right": {
+              "kind": "literal",
+              "value": 0
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 3,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "comparison",
+              "left": {
+                "kind": "field",
+                "path": [
+                  "zone_membership",
+                  "zone_mokfcf74_a7jhx",
+                  "occupancy"
+                ]
+              },
+              "op": "==",
+              "right": {
+                "kind": "literal",
+                "value": 1
+              }
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 10,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "comparison",
+              "left": {
+                "kind": "field",
+                "path": [
+                  "zone_membership",
+                  "zone_mobvumat_nifm1",
+                  "occupancy"
+                ]
+              },
+              "op": "==",
+              "right": {
+                "kind": "literal",
+                "value": 0
+              }
+            }
+          }
+        ]
+      },
+      "cooldown_frames": 30,
+      "dedupe": {
+        "merge_adjacent_frames": 30,
         "strategy": "leading_edge"
       }
     }

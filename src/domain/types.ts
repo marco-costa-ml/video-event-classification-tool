@@ -45,8 +45,18 @@ export type FrameState = {
   /** True when this exact frame is a key in the loaded sparse OCR / objects parquets */
   sparse_observation: { ocr: boolean; objects: boolean };
   active_page: { id: string; name: string } | null;
-  /** Per zone id: objects whose center falls in zone; deterministic highest-priority zone per object */
+  /** Per zone id: objects assigned to their deterministic highest-priority zone */
   zone_summary: Record<
+    string,
+    {
+      name: string;
+      priority: number;
+      occupancy: number;
+      object_ids: string[];
+    }
+  >;
+  /** Per zone id: all objects physically inside the zone, ignoring priority overlap rules */
+  zone_membership_summary: Record<
     string,
     {
       name: string;
