@@ -1,6 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useProject } from "@/context/ProjectContext";
 import type { ZoneDefinition } from "@/schemas";
+import { matchEventsOneToOne } from "@/evaluation/matching";
 
 function drawZone(
   ctx: CanvasRenderingContext2D,
@@ -48,12 +49,13 @@ export function Visualizer() {
   useEffect(() => {
     const v = videoRef.current;
     if (!v || !state.videoUrl) return;
-    const t = frameState.frame / state.config.video.fps;
+    const startOffset = state.config.video.video_start_time_seconds ?? 0;
+    const t = frameState.frame / state.config.video.fps + startOffset;
     if (Number.isFinite(t)) {
       const delta = Math.abs(v.currentTime - t);
       if (delta > 0.001) v.currentTime = t;
     }
-  }, [frameState.frame, state.config.video.fps, state.videoUrl]);
+  }, [frameState.frame, state.config.video.fps, state.config.video.video_start_time_seconds, state.videoUrl]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -154,6 +156,16 @@ export function Visualizer() {
 
   const maxF = Math.max(0, state.config.video.frame_count - 1);
 
+  const missedFrames = useMemo(() => {
+    if (!state.manualLabels.length) return [];
+    const { unmatchedManual } = matchEventsOneToOne(
+      state.manualLabels,
+      state.predicted,
+      { tolerance: state.evalTolerance },
+    );
+    return unmatchedManual.map((e) => e.start_frame).sort((a, b) => a - b);
+  }, [state.manualLabels, state.predicted, state.evalTolerance]);
+
   const onVideoMetadata = (e: React.SyntheticEvent<HTMLVideoElement>) => {
     const v = e.currentTarget;
     if (!v.videoWidth || !v.videoHeight) return;
@@ -223,6 +235,18 @@ export function Visualizer() {
           }}
         >
           Prev firing
+        </button>
+        <button
+          type="button"
+          disabled={missedFrames.length === 0}
+          title={missedFrames.length === 0 ? "No missed ground truth events" : `${missedFrames.length} missed GT event(s)`}
+          onClick={() => {
+            const next = missedFrames.find((f) => f > state.currentFrame)
+              ?? missedFrames[0];
+            if (next !== undefined) dispatch({ type: "set_frame", frame: next });
+          }}
+        >
+          Next miss
         </button>
         <label className="row">
           <span className="muted">Scrub</span>

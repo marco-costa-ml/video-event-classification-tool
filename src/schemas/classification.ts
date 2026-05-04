@@ -10,6 +10,8 @@ export const videoMetadataSchema = z.object({
   width: z.number().positive().int(),
   height: z.number().positive().int(),
   duration_seconds: z.number().nonnegative().optional(),
+  /** Seconds into the source video file that frame 0 of this window corresponds to. */
+  video_start_time_seconds: z.number().nonnegative().optional(),
 });
 
 export type VideoMetadata = z.infer<typeof videoMetadataSchema>;

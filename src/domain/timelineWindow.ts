@@ -1,6 +1,6 @@
 import type { LoadedParquetSlice } from "./types";
 
-export const MAX_UPLOAD_WINDOW_SECONDS = 10 * 60;
+export const MAX_UPLOAD_WINDOW_SECONDS = 20 * 60;
 
 export function maxFramesForWindow(fps: number): number {
   if (!Number.isFinite(fps) || fps <= 0) return 1;
