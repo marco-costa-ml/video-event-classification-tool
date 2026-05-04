@@ -22,13 +22,8 @@
                             },
                     "objects":  {
                                     "frame":  "frame",
-                                    "object_id":  "object_id",
-                                    "object_class":  "class",
-                                    "object_score":  "score",
-                                    "bbox_x":  "x",
-                                    "bbox_y":  "y",
-                                    "bbox_w":  "w",
-                                    "bbox_h":  "h"
+                                    "object_class":  "class_id",
+                                    "object_score":  "confidence"
                                 }
                 },
     "ocr_label_placements":  [

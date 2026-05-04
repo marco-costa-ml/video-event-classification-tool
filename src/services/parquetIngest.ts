@@ -1,4 +1,4 @@
-import { parquetReadObjects } from "hyparquet";
+import { parquetMetadataAsync, parquetReadObjects, type ParquetQueryFilter } from "hyparquet";
 import type { ClassificationConfig, ParquetColumnMap } from "@/schemas";
 import type { LoadedParquetSlice, ObjectBox, OcrBox } from "@/domain/types";
 import { maxFramesForWindow } from "@/domain/timelineWindow";
@@ -67,18 +67,43 @@ function collectProjectedColumns(map: ParquetColumnMap, sampleRows: Record<strin
 /**
  * Parquet may store `frame` as INT64 → bigint. hyparquet filters compare with JS `<=`; mixed bigint/number throws.
  */
-function frameUpperBoundForFilter(
-  maxFrameInclusive: number,
+function frameBoundForFilter(
+  frameInclusive: number,
   sampleRows: Record<string, unknown>[],
   frameCol: string,
 ): number | bigint {
+  const v = Math.round(frameInclusive);
   for (const r of sampleRows) {
-    const v = r[frameCol];
-    if (v === undefined || v === null) continue;
-    if (typeof v === "bigint") return BigInt(maxFrameInclusive);
-    return maxFrameInclusive;
+    const raw = r[frameCol];
+    if (raw === undefined || raw === null) continue;
+    if (typeof raw === "bigint") return BigInt(v);
+    return v;
   }
-  return maxFrameInclusive;
+  return v;
+}
+
+/** Largest frame index seen in the sampled rows (for detecting absolute timelines). */
+function maxFrameInSample(sampleRows: Record<string, unknown>[], frameCol: string): number {
+  let m = -Infinity;
+  for (const r of sampleRows) {
+    const f = num(r[frameCol]);
+    if (f !== null && f > m) m = f;
+  }
+  return Number.isFinite(m) ? m : -1;
+}
+
+/**
+ * When parquet uses absolute indices (whole-stream frame_idx) but the clip starts later,
+ * align reads with `video.video_start_time_seconds` so rows match local frame 0 of the loaded video.
+ */
+function parquetAbsoluteFrameShift(config: ClassificationConfig, sampleRows: Record<string, unknown>[], frameCol: string): number {
+  const fps = config.video.fps;
+  const windowMax = maxFramesForWindow(fps) - 1;
+  if (fps <= 0 || windowMax < 0) return 0;
+  const sampleMax = maxFrameInSample(sampleRows, frameCol);
+  const startSec = config.video.video_start_time_seconds ?? 0;
+  if (sampleMax <= windowMax || startSec <= 0) return 0;
+  return Math.round(startSec * fps);
 }
 
 /**
@@ -90,13 +115,30 @@ async function readParquetRowsForConfig(
   config: ClassificationConfig,
   mapBase: ParquetColumnMap,
   resolveMap: (rows: Record<string, unknown>[], user: ParquetColumnMap) => ParquetColumnMap,
-): Promise<{ rows: Record<string, unknown>[]; map: ParquetColumnMap }> {
-  const sample = (await parquetReadObjects({
+): Promise<{ rows: Record<string, unknown>[]; map: ParquetColumnMap; frameShift: number }> {
+  const metadata = await parquetMetadataAsync(buffer);
+  const numRows = Number(metadata.num_rows);
+
+  const headSample = (await parquetReadObjects({
     file: buffer,
     rowStart: 0,
     rowEnd: PARQUET_SAMPLE_ROW_END,
     useOffsetIndex: true,
   })) as Record<string, unknown>[];
+
+  let tailSample: Record<string, unknown>[] = [];
+  if (numRows > PARQUET_SAMPLE_ROW_END) {
+    const tailStart = Math.max(0, numRows - PARQUET_SAMPLE_ROW_END);
+    tailSample = (await parquetReadObjects({
+      file: buffer,
+      rowStart: tailStart,
+      rowEnd: tailStart + PARQUET_SAMPLE_ROW_END,
+      useOffsetIndex: true,
+    })) as Record<string, unknown>[];
+  }
+
+  /** Head + tail so sorted-by-frame files still expose large frame indices in the sample. */
+  const sample = tailSample.length ? [...headSample, ...tailSample] : headSample;
 
   const map = resolveMap(sample, mapBase);
   const frameCol = map.frame;
@@ -104,9 +146,21 @@ async function readParquetRowsForConfig(
     throw new Error("Parquet: could not resolve a frame column (check config.parquet column map).");
   }
 
-  const maxFrameInclusive = maxFramesForWindow(config.video.fps) - 1;
-  const bound = frameUpperBoundForFilter(maxFrameInclusive, sample, frameCol);
-  const filter = { [frameCol]: { $lte: bound } } as const;
+  const windowMaxInclusive = maxFramesForWindow(config.video.fps) - 1;
+  const frameShift = parquetAbsoluteFrameShift(config, sample, frameCol);
+  const maxRawInclusive = frameShift > 0 ? frameShift + windowMaxInclusive : windowMaxInclusive;
+
+  let filter: ParquetQueryFilter;
+  if (frameShift > 0) {
+    filter = {
+      $and: [
+        { [frameCol]: { $gte: frameBoundForFilter(frameShift, sample, frameCol) } },
+        { [frameCol]: { $lte: frameBoundForFilter(maxRawInclusive, sample, frameCol) } },
+      ],
+    };
+  } else {
+    filter = { [frameCol]: { $lte: frameBoundForFilter(maxRawInclusive, sample, frameCol) } };
+  }
   const columns = collectProjectedColumns(map, sample);
 
   const baseOpts = { file: buffer, filter, useOffsetIndex: true as const };
@@ -116,11 +170,11 @@ async function readParquetRowsForConfig(
       ...baseOpts,
       columns,
     })) as Record<string, unknown>[];
-    return { rows, map };
+    return { rows, map, frameShift };
   } catch {
     // Wider projection if a needed field was missing from the sample rows.
     const rows = (await parquetReadObjects(baseOpts)) as Record<string, unknown>[];
-    return { rows, map };
+    return { rows, map, frameShift };
   }
 }
 
@@ -140,6 +194,7 @@ function readBBox(row: Record<string, unknown>, map: ParquetColumnMap): { x: num
 function parseOcrRows(
   rows: Record<string, unknown>[],
   map: ParquetColumnMap,
+  frameShift: number,
 ): { frames: number[]; data: OcrBox[] } {
   const frames: number[] = [];
   const data: OcrBox[] = [];
@@ -148,7 +203,8 @@ function parseOcrRows(
     let f = num(getCol(row, map.frame));
     if (f === null && fallbackFrame) f = num(row[fallbackFrame]);
     if (f === null) continue;
-    const frame = Math.round(f);
+    let frame = Math.round(f);
+    if (frameShift) frame -= frameShift;
     let x = map.ocr_x ? (num(getCol(row, map.ocr_x)) ?? 0) : 0;
     let y = map.ocr_y ? (num(getCol(row, map.ocr_y)) ?? 0) : 0;
     let w = map.ocr_w ? (num(getCol(row, map.ocr_w)) ?? 0) : 0;
@@ -177,6 +233,7 @@ function parseOcrRows(
 function parseObjectRows(
   rows: Record<string, unknown>[],
   map: ParquetColumnMap,
+  frameShift: number,
 ): { frames: number[]; data: ObjectBox[] } {
   const frames: number[] = [];
   const data: ObjectBox[] = [];
@@ -190,7 +247,8 @@ function parseObjectRows(
     let f = num(getCol(row, map.frame));
     if (f === null && fallbackFrame) f = num(row[fallbackFrame]);
     if (f === null) continue;
-    const frame = Math.round(f);
+    let frame = Math.round(f);
+    if (frameShift) frame -= frameShift;
     const bbox = readBBox(row, map);
     const x = bbox?.x ?? 0;
     const y = bbox?.y ?? 0;
@@ -247,8 +305,8 @@ export async function loadParquetOcr(
 ): Promise<LoadedParquetSlice | null> {
   const mapBase = config.parquet.ocr;
   if (!mapBase) return null;
-  const { rows, map } = await readParquetRowsForConfig(buffer, config, mapBase, resolveOcrColumnMap);
-  const parsed = parseOcrRows(rows, map);
+  const { rows, map, frameShift } = await readParquetRowsForConfig(buffer, config, mapBase, resolveOcrColumnMap);
+  const parsed = parseOcrRows(rows, map, frameShift);
   const sorted = sortAndMergeFrames(parsed.frames, parsed.data);
   return {
     role: "ocr",
@@ -263,8 +321,8 @@ export async function loadParquetObjects(
 ): Promise<LoadedParquetSlice | null> {
   const mapBase = config.parquet.objects;
   if (!mapBase) return null;
-  const { rows, map } = await readParquetRowsForConfig(buffer, config, mapBase, resolveObjectsColumnMap);
-  const parsed = parseObjectRows(rows, map);
+  const { rows, map, frameShift } = await readParquetRowsForConfig(buffer, config, mapBase, resolveObjectsColumnMap);
+  const parsed = parseObjectRows(rows, map, frameShift);
   const sorted = sortAndMergeFrames(parsed.frames, parsed.data);
   return {
     role: "objects",

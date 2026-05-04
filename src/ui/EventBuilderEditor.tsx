@@ -36,6 +36,8 @@ type RuleDraft = {
   // OCR fields
   ocrLabel: string;
   searchText: string;
+  /** For "OCR contains": look back this many frames (>=1). */
+  containsWithinFrames: number;
   numOp: CompOp;
   numValue: number;
   // Zone fields
@@ -80,6 +82,7 @@ function defaultRuleDraft(cfg: ClassificationConfig): RuleDraft {
     kind: "zone_occupancy",
     ocrLabel: "",
     searchText: "",
+    containsWithinFrames: 1,
     numOp: ">=",
     numValue: 0,
     zoneId: cfg.zones[0]?.id ?? "",
@@ -113,8 +116,33 @@ function defaultEventDraft(cfg: ClassificationConfig): EventDraft {
 
 function buildRulePredicate(r: RuleDraft): PredicateNode {
   switch (r.kind) {
-    case "ocr_contains":
-      return { kind: "comparison", left: { kind: "field", path: ["ocr", "by_label", r.ocrLabel, 0, "text"] }, op: "contains", right: { kind: "literal", value: r.searchText } };
+    case "ocr_contains": {
+      const path = ["ocr", "by_label", r.ocrLabel, 0, "text"] as (string | number)[];
+      const within = Math.max(1, Math.floor(r.containsWithinFrames || 1));
+      if (within === 1) {
+        return {
+          kind: "comparison",
+          left: { kind: "field", path },
+          op: "contains",
+          right: { kind: "literal", value: r.searchText },
+        };
+      }
+      const children: PredicateNode[] = [];
+      for (let i = 0; i < within; i++) {
+        // Lookahead: true if it matches at least once within the *next* N frames (including current).
+        const left =
+          i === 0
+            ? ({ kind: "field", path } as const)
+            : ({ kind: "window_field", path, offset_frames: i } as const);
+        children.push({
+          kind: "comparison",
+          left,
+          op: "contains",
+          right: { kind: "literal", value: r.searchText },
+        });
+      }
+      return { kind: "logical", op: "or", children };
+    }
     case "ocr_not_contains":
       return { kind: "comparison", left: { kind: "field", path: ["ocr", "by_label", r.ocrLabel, 0, "text"] }, op: "not_contains", right: { kind: "literal", value: r.searchText } };
     case "ocr_equals": {
@@ -178,6 +206,71 @@ function buildEventPredicate(draft: EventDraft): PredicateNode {
 
 function tryParseRule(node: PredicateNode, cfg: ClassificationConfig): RuleDraft | null {
   const base = defaultRuleDraft(cfg);
+  // OCR contains within N frames: OR of "contains" checks over window_field offsets.
+  if (node.kind === "logical" && node.op === "or" && node.children.length >= 2) {
+    const comparisons = node.children.filter(
+      (c): c is Extract<PredicateNode, { kind: "comparison" }> => c.kind === "comparison",
+    );
+    if (comparisons.length === node.children.length) {
+      const offsets: number[] = [];
+      let label: string | null = null;
+      let text: string | null = null;
+      let ok = true;
+      for (const c of comparisons) {
+        if (c.op !== "contains") {
+          ok = false;
+          break;
+        }
+        if (c.right.kind !== "literal") {
+          ok = false;
+          break;
+        }
+        const v = String(c.right.value ?? "");
+        if (text === null) text = v;
+        else if (text !== v) {
+          ok = false;
+          break;
+        }
+        // left must be OCR text field, either current or window_field.
+        const left = c.left;
+        const isField =
+          (left.kind === "field" || left.kind === "window_field") &&
+          left.path[0] === "ocr" &&
+          left.path[1] === "by_label" &&
+          left.path[3] === 0 &&
+          left.path[4] === "text";
+        if (!isField) {
+          ok = false;
+          break;
+        }
+        const lb = String(left.path[2] ?? "");
+        if (label === null) label = lb;
+        else if (label !== lb) {
+          ok = false;
+          break;
+        }
+        const off = left.kind === "window_field" ? left.offset_frames : 0;
+        // Lookahead only: offsets must be >= 0
+        if (!Number.isFinite(off) || off < 0) {
+          ok = false;
+          break;
+        }
+        offsets.push(Math.trunc(off));
+      }
+      if (ok && label !== null && text !== null) {
+        const maxOff = Math.max(...offsets);
+        const within = Math.max(1, 1 + Math.abs(maxOff));
+        return {
+          ...base,
+          id: newId("rule"),
+          kind: "ocr_contains",
+          ocrLabel: label,
+          searchText: text,
+          containsWithinFrames: within,
+        };
+      }
+    }
+  }
   if (node.kind === "exists") {
     const p = node.path;
     if (p[0] === "ocr" && p[1] === "by_label" && p.length >= 3)
@@ -202,7 +295,7 @@ function tryParseRule(node: PredicateNode, cfg: ClassificationConfig): RuleDraft
     // OCR text
     if (path[0] === "ocr" && path[1] === "by_label" && path[3] === 0 && path[4] === "text") {
       const label = String(path[2] ?? ""); const text = String(val ?? "");
-      if (op === "contains")     return { ...base, id: newId("rule"), kind: "ocr_contains",     ocrLabel: label, searchText: text };
+      if (op === "contains")     return { ...base, id: newId("rule"), kind: "ocr_contains",     ocrLabel: label, searchText: text, containsWithinFrames: 1 };
       if (op === "not_contains") return { ...base, id: newId("rule"), kind: "ocr_not_contains", ocrLabel: label, searchText: text };
       if (op === "==")           return { ...base, id: newId("rule"), kind: "ocr_equals",       ocrLabel: label, searchText: text };
       if (op === "!=")           return { ...base, id: newId("rule"), kind: "ocr_not_equals",   ocrLabel: label, searchText: text };
@@ -362,6 +455,20 @@ function RuleCard({ rule, index, total, cfg, knownOcrLabels, onChange, onRemove 
             {rule.kind === "ocr_contains" ? "Contains" : rule.kind === "ocr_not_contains" ? "Does not contain" : rule.kind === "ocr_equals" ? "Exactly equals" : "Does not equal"}
             {" "}<input value={rule.searchText} placeholder={rule.kind === "ocr_equals" ? "leave blank to check absent/null" : "text to match"} onChange={(e) => onChange({ searchText: e.target.value })} />
           </label>
+          {rule.kind === "ocr_contains" ? (
+            <label style={{ fontSize: 13, display: "flex", alignItems: "center", gap: 6 }}>
+              Within
+              <input
+                type="number"
+                min={1}
+                step={1}
+                style={{ width: 64 }}
+                value={Math.max(1, Math.floor(rule.containsWithinFrames || 1))}
+                onChange={(e) => onChange({ containsWithinFrames: Math.max(1, Math.floor(Number(e.target.value) || 1)) })}
+              />
+              frames
+            </label>
+          ) : null}
           {rule.kind === "ocr_equals" && rule.searchText === "" ? (
             <span style={{ fontSize: 11, color: "#f59e0b", background: "rgba(245,158,11,0.1)", padding: "2px 8px", borderRadius: 4 }}>
               null check — passes when label is absent or has no value
