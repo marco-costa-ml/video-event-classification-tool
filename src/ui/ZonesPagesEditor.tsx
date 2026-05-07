@@ -384,13 +384,24 @@ type PageEditorProps = {
   currentFrame: number;
   frameOcrLabels: string[];
   isMatch: boolean | null;
-  onSave: (match: PredicateNode, name: string, priority: number) => void;
+  onSave: (
+    match: PredicateNode,
+    name: string,
+    priority: number,
+    exportZoneIds: string[],
+    exportOcrLabels: string[],
+  ) => void;
   onDelete: () => void;
 };
 
 function PageEditor({ page, cfg, currentFrame, frameOcrLabels, isMatch, onSave, onDelete }: PageEditorProps) {
   const [name, setName] = useState(page.name);
   const [priority, setPriority] = useState(page.priority);
+  const [exportZoneIds, setExportZoneIds] = useState<string[]>(page.export_include_zone_ids ?? cfg.zones.map((z) => z.id));
+  const [exportOcrLabels, setExportOcrLabels] = useState<string[]>(
+    page.export_include_ocr_labels ??
+      Array.from(new Set([...cfg.ocr_label_placements.map((p) => p.label), ...frameOcrLabels])).sort(),
+  );
   const [showAdvanced, setShowAdvanced] = useState(false);
   const [jsonText, setJsonText] = useState(() => JSON.stringify(page.match, null, 2));
   const [jsonError, setJsonError] = useState<string | null>(null);
@@ -403,12 +414,43 @@ function PageEditor({ page, cfg, currentFrame, frameOcrLabels, isMatch, onSave, 
   useEffect(() => {
     setName(page.name);
     setPriority(page.priority);
+    setExportZoneIds(page.export_include_zone_ids ?? cfg.zones.map((z) => z.id));
+    setExportOcrLabels(
+      page.export_include_ocr_labels ??
+        Array.from(new Set([...cfg.ocr_label_placements.map((p) => p.label), ...frameOcrLabels])).sort(),
+    );
     setJsonText(JSON.stringify(page.match, null, 2));
     setJsonError(null);
     const p = tryParsePredicate(page.match, cfg);
     setBuilder(p ?? defaultBuilder());
     if (p === null) setShowAdvanced(true);
   }, [page.id]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const availableOcrLabels = useMemo(
+    () =>
+      Array.from(
+        new Set([
+          ...cfg.ocr_label_placements.map((p) => p.label),
+          ...frameOcrLabels,
+          ...(page.export_include_ocr_labels ?? []),
+        ]),
+      ).sort(),
+    [cfg.ocr_label_placements, frameOcrLabels, page.export_include_ocr_labels],
+  );
+
+  const toggleZoneExport = (zoneId: string, checked: boolean) => {
+    setExportZoneIds((prev) => {
+      if (checked) return prev.includes(zoneId) ? prev : [...prev, zoneId];
+      return prev.filter((id) => id !== zoneId);
+    });
+  };
+
+  const toggleOcrExport = (label: string, checked: boolean) => {
+    setExportOcrLabels((prev) => {
+      if (checked) return prev.includes(label) ? prev : [...prev, label];
+      return prev.filter((l) => l !== label);
+    });
+  };
 
   const updateCond = (i: number, patch: Partial<PageCond>) => {
     setBuilder((b) => ({
@@ -427,14 +469,14 @@ function PageEditor({ page, cfg, currentFrame, frameOcrLabels, isMatch, onSave, 
 
   const handleSaveBuilder = () => {
     const match = builderToPredicate(builder);
-    onSave(match, name.trim() || page.name, priority);
+    onSave(match, name.trim() || page.name, priority, exportZoneIds, exportOcrLabels);
   };
 
   const handleSaveJson = () => {
     try {
       const parsed2 = predicateNodeSchema.parse(JSON.parse(jsonText) as unknown);
       setJsonError(null);
-      onSave(parsed2, name.trim() || page.name, priority);
+      onSave(parsed2, name.trim() || page.name, priority, exportZoneIds, exportOcrLabels);
     } catch (e) {
       setJsonError(e instanceof Error ? e.message : String(e));
     }
@@ -507,6 +549,61 @@ function PageEditor({ page, cfg, currentFrame, frameOcrLabels, isMatch, onSave, 
         <span className="muted" style={{ fontSize: 11 }}>
           ID: <code>{page.id}</code>
         </span>
+      </div>
+
+      {/* Export filters */}
+      <div
+        style={{
+          border: "1px solid #2a2f3a",
+          borderRadius: 6,
+          padding: "10px 12px",
+          background: "#0f1318",
+          display: "flex",
+          flexDirection: "column",
+          gap: 10,
+        }}
+      >
+        <div style={{ fontSize: 13, fontWeight: 600 }}>Enriched Export Filters (when this page is active)</div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+            <div style={{ fontSize: 12, color: "#9aa3b2" }}>
+              Zones (physical occupancy objects will be exported only for checked zones)
+            </div>
+            {cfg.zones.length === 0 ? (
+              <div className="muted" style={{ fontSize: 12 }}>No zones configured.</div>
+            ) : (
+              cfg.zones.map((z) => (
+                <label key={z.id} style={{ fontSize: 13, display: "flex", alignItems: "center", gap: 8 }}>
+                  <input
+                    type="checkbox"
+                    checked={exportZoneIds.includes(z.id)}
+                    onChange={(e) => toggleZoneExport(z.id, e.target.checked)}
+                  />
+                  {z.name} <span className="muted" style={{ fontSize: 11 }}>(<code>{z.id}</code>)</span>
+                </label>
+              ))
+            )}
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+            <div style={{ fontSize: 12, color: "#9aa3b2" }}>
+              OCR labels (only checked labels exported)
+            </div>
+            {availableOcrLabels.length === 0 ? (
+              <div className="muted" style={{ fontSize: 12 }}>No OCR labels discovered yet.</div>
+            ) : (
+              availableOcrLabels.map((label) => (
+                <label key={label} style={{ fontSize: 13, display: "flex", alignItems: "center", gap: 8 }}>
+                  <input
+                    type="checkbox"
+                    checked={exportOcrLabels.includes(label)}
+                    onChange={(e) => toggleOcrExport(label, e.target.checked)}
+                  />
+                  {label}
+                </label>
+              ))
+            )}
+          </div>
+        </div>
       </div>
 
       {/* ── Visual builder ── */}
@@ -740,15 +837,35 @@ export function ZonesPagesEditor() {
       name: "New page",
       priority: 0,
       match,
+      export_include_zone_ids: cfg.zones.map((z) => z.id),
+      export_include_ocr_labels: Array.from(new Set([...cfg.ocr_label_placements.map((o) => o.label), ...knownOcrLabels])).sort(),
     };
     applyConfig({ ...cfg, pages: [...cfg.pages, p] });
     setSelectedPageId(p.id);
   };
 
-  const savePage = (id: string, match: PredicateNode, name: string, priority: number) => {
+  const savePage = (
+    id: string,
+    match: PredicateNode,
+    name: string,
+    priority: number,
+    exportZoneIds: string[],
+    exportOcrLabels: string[],
+  ) => {
     applyConfig({
       ...cfg,
-      pages: cfg.pages.map((p) => (p.id === id ? { ...p, name, priority, match } : p)),
+      pages: cfg.pages.map((p) =>
+        p.id === id
+          ? {
+              ...p,
+              name,
+              priority,
+              match,
+              export_include_zone_ids: [...new Set(exportZoneIds)],
+              export_include_ocr_labels: [...new Set(exportOcrLabels)],
+            }
+          : p,
+      ),
     });
     dispatch({ type: "set_error", message: null });
   };
@@ -962,7 +1079,9 @@ export function ZonesPagesEditor() {
                   currentFrame={state.currentFrame}
                   frameOcrLabels={knownOcrLabels}
                   isMatch={pageMatchResult}
-                  onSave={(match, name, priority) => savePage(selectedPage.id, match, name, priority)}
+                  onSave={(match, name, priority, exportZoneIds, exportOcrLabels) =>
+                    savePage(selectedPage.id, match, name, priority, exportZoneIds, exportOcrLabels)
+                  }
                   onDelete={() => deletePage(selectedPage.id)}
                 />
               )}
