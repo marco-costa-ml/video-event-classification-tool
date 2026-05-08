@@ -7,6 +7,24 @@ import { inferBBox, inferFrameColumn, resolveObjectsColumnMap, resolveOcrColumnM
 /** Rows read only to infer columns + frame type (not full dataset). */
 const PARQUET_SAMPLE_ROW_END = 25_000;
 
+export type LoadParquetOptions = {
+  /**
+   * Reads all parquet frames instead of constraining to the browser upload window.
+   * Keep false for UI interactivity, true for offline/batch classification.
+   */
+  fullScan?: boolean;
+  /**
+   * Optional local frame range [start, end] to read.
+   * When provided, this bypasses the UI window cap and reads exactly the requested range.
+   */
+  frameRange?: {
+    startInclusive: number;
+    endInclusive: number;
+  };
+};
+
+const FULL_SCAN_CHUNK_ROWS = 100_000;
+
 function num(v: unknown): number | null {
   if (v === null || v === undefined) return null;
   if (typeof v === "bigint") return Number(v);
@@ -115,6 +133,7 @@ async function readParquetRowsForConfig(
   config: ClassificationConfig,
   mapBase: ParquetColumnMap,
   resolveMap: (rows: Record<string, unknown>[], user: ParquetColumnMap) => ParquetColumnMap,
+  options: LoadParquetOptions = {},
 ): Promise<{ rows: Record<string, unknown>[]; map: ParquetColumnMap; frameShift: number }> {
   const metadata = await parquetMetadataAsync(buffer);
   const numRows = Number(metadata.num_rows);
@@ -147,20 +166,34 @@ async function readParquetRowsForConfig(
   }
 
   const windowMaxInclusive = maxFramesForWindow(config.video.fps) - 1;
+  const fullScan = options.fullScan === true;
   const frameShift = parquetAbsoluteFrameShift(config, sample, frameCol);
   const maxRawInclusive = frameShift > 0 ? frameShift + windowMaxInclusive : windowMaxInclusive;
-
-  let filter: ParquetQueryFilter;
-  if (frameShift > 0) {
-    filter = {
-      $and: [
-        { [frameCol]: { $gte: frameBoundForFilter(frameShift, sample, frameCol) } },
-        { [frameCol]: { $lte: frameBoundForFilter(maxRawInclusive, sample, frameCol) } },
-      ],
-    };
-  } else {
-    filter = { [frameCol]: { $lte: frameBoundForFilter(maxRawInclusive, sample, frameCol) } };
-  }
+  const explicitRange = options.frameRange;
+  const filter: ParquetQueryFilter | undefined =
+    explicitRange
+      ? (() => {
+          const startLocal = Math.min(explicitRange.startInclusive, explicitRange.endInclusive);
+          const endLocal = Math.max(explicitRange.startInclusive, explicitRange.endInclusive);
+          const rawStart = frameShift > 0 ? startLocal + frameShift : startLocal;
+          const rawEnd = frameShift > 0 ? endLocal + frameShift : endLocal;
+          return {
+            $and: [
+              { [frameCol]: { $gte: frameBoundForFilter(rawStart, sample, frameCol) } },
+              { [frameCol]: { $lte: frameBoundForFilter(rawEnd, sample, frameCol) } },
+            ],
+          };
+        })()
+      : fullScan
+        ? undefined
+        : frameShift > 0
+          ? {
+              $and: [
+                { [frameCol]: { $gte: frameBoundForFilter(frameShift, sample, frameCol) } },
+                { [frameCol]: { $lte: frameBoundForFilter(maxRawInclusive, sample, frameCol) } },
+              ],
+            }
+          : { [frameCol]: { $lte: frameBoundForFilter(maxRawInclusive, sample, frameCol) } };
   const columns = collectProjectedColumns(map, sample);
 
   const baseOpts = { file: buffer, filter, useOffsetIndex: true as const };
@@ -176,6 +209,50 @@ async function readParquetRowsForConfig(
     const rows = (await parquetReadObjects(baseOpts)) as Record<string, unknown>[];
     return { rows, map, frameShift };
   }
+}
+
+async function resolveReadContext(
+  buffer: ArrayBuffer,
+  config: ClassificationConfig,
+  mapBase: ParquetColumnMap,
+  resolveMap: (rows: Record<string, unknown>[], user: ParquetColumnMap) => ParquetColumnMap,
+): Promise<{
+  numRows: number;
+  map: ParquetColumnMap;
+  frameShift: number;
+  columns: string[];
+}> {
+  const metadata = await parquetMetadataAsync(buffer);
+  const numRows = Number(metadata.num_rows);
+
+  const headSample = (await parquetReadObjects({
+    file: buffer,
+    rowStart: 0,
+    rowEnd: PARQUET_SAMPLE_ROW_END,
+    useOffsetIndex: true,
+  })) as Record<string, unknown>[];
+
+  let tailSample: Record<string, unknown>[] = [];
+  if (numRows > PARQUET_SAMPLE_ROW_END) {
+    const tailStart = Math.max(0, numRows - PARQUET_SAMPLE_ROW_END);
+    tailSample = (await parquetReadObjects({
+      file: buffer,
+      rowStart: tailStart,
+      rowEnd: tailStart + PARQUET_SAMPLE_ROW_END,
+      useOffsetIndex: true,
+    })) as Record<string, unknown>[];
+  }
+
+  const sample = tailSample.length ? [...headSample, ...tailSample] : headSample;
+  const map = resolveMap(sample, mapBase);
+  const frameCol = map.frame;
+  if (!frameCol) {
+    throw new Error("Parquet: could not resolve a frame column (check config.parquet column map).");
+  }
+  const frameShift = parquetAbsoluteFrameShift(config, sample, frameCol);
+  const columns = collectProjectedColumns(map, sample);
+
+  return { numRows, map, frameShift, columns };
 }
 
 function readBBox(row: Record<string, unknown>, map: ParquetColumnMap): { x: number; y: number; w: number; h: number } | null {
@@ -302,10 +379,41 @@ function sortAndMergeFrames<T>(frames: number[], data: T[]): { frames: number[];
 export async function loadParquetOcr(
   buffer: ArrayBuffer,
   config: ClassificationConfig,
+  options: LoadParquetOptions = {},
 ): Promise<LoadedParquetSlice | null> {
   const mapBase = config.parquet.ocr;
   if (!mapBase) return null;
-  const { rows, map, frameShift } = await readParquetRowsForConfig(buffer, config, mapBase, resolveOcrColumnMap);
+  if (options.fullScan) {
+    const ctx = await resolveReadContext(buffer, config, mapBase, resolveOcrColumnMap);
+    const frames: number[] = [];
+    const data: OcrBox[] = [];
+    for (let rowStart = 0; rowStart < ctx.numRows; rowStart += FULL_SCAN_CHUNK_ROWS) {
+      const rowEnd = Math.min(ctx.numRows, rowStart + FULL_SCAN_CHUNK_ROWS);
+      const rows = (await parquetReadObjects({
+        file: buffer,
+        rowStart,
+        rowEnd,
+        columns: ctx.columns,
+        useOffsetIndex: true,
+      })) as Record<string, unknown>[];
+      const parsed = parseOcrRows(rows, ctx.map, ctx.frameShift);
+      frames.push(...parsed.frames);
+      data.push(...parsed.data);
+    }
+    const sorted = sortAndMergeFrames(frames, data);
+    return {
+      role: "ocr",
+      frames: sorted.frames,
+      rows: sorted.rows,
+    };
+  }
+  const { rows, map, frameShift } = await readParquetRowsForConfig(
+    buffer,
+    config,
+    mapBase,
+    resolveOcrColumnMap,
+    options,
+  );
   const parsed = parseOcrRows(rows, map, frameShift);
   const sorted = sortAndMergeFrames(parsed.frames, parsed.data);
   return {
@@ -318,10 +426,41 @@ export async function loadParquetOcr(
 export async function loadParquetObjects(
   buffer: ArrayBuffer,
   config: ClassificationConfig,
+  options: LoadParquetOptions = {},
 ): Promise<LoadedParquetSlice | null> {
   const mapBase = config.parquet.objects;
   if (!mapBase) return null;
-  const { rows, map, frameShift } = await readParquetRowsForConfig(buffer, config, mapBase, resolveObjectsColumnMap);
+  if (options.fullScan) {
+    const ctx = await resolveReadContext(buffer, config, mapBase, resolveObjectsColumnMap);
+    const frames: number[] = [];
+    const data: ObjectBox[] = [];
+    for (let rowStart = 0; rowStart < ctx.numRows; rowStart += FULL_SCAN_CHUNK_ROWS) {
+      const rowEnd = Math.min(ctx.numRows, rowStart + FULL_SCAN_CHUNK_ROWS);
+      const rows = (await parquetReadObjects({
+        file: buffer,
+        rowStart,
+        rowEnd,
+        columns: ctx.columns,
+        useOffsetIndex: true,
+      })) as Record<string, unknown>[];
+      const parsed = parseObjectRows(rows, ctx.map, ctx.frameShift);
+      frames.push(...parsed.frames);
+      data.push(...parsed.data);
+    }
+    const sorted = sortAndMergeFrames(frames, data);
+    return {
+      role: "objects",
+      frames: sorted.frames,
+      rows: sorted.rows,
+    };
+  }
+  const { rows, map, frameShift } = await readParquetRowsForConfig(
+    buffer,
+    config,
+    mapBase,
+    resolveObjectsColumnMap,
+    options,
+  );
   const parsed = parseObjectRows(rows, map, frameShift);
   const sorted = sortAndMergeFrames(parsed.frames, parsed.data);
   return {

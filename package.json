@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
-    "wasm:build": "emcmake cmake -B wasm/build -S wasm -DCMAKE_BUILD_TYPE=Release && cmake --build wasm/build"
+    "wasm:build": "emcmake cmake -B wasm/build -S wasm -DCMAKE_BUILD_TYPE=Release && cmake --build wasm/build",
+    "classify:mass": "node --max-old-space-size=12288 ./node_modules/tsx/dist/cli.mjs scripts/mass_classify.ts"
   },
   "dependencies": {
     "hyparquet": "^1.8.0",
@@ -22,6 +23,7 @@
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react": "^4.3.4",
     "jsdom": "^25.0.1",
+    "tsx": "^4.21.0",
     "typescript": "~5.7.3",
     "vite": "^6.0.7",
     "vitest": "^3.0.5"

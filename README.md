@@ -20,6 +20,24 @@ npm run dev
 npm test
 ```
 
+### Offline mass classification (full parquet scan)
+
+Run event detection + enriched export across all `video_id=*` parquet pairs under `data/derived/`:
+
+```bash
+npm run classify:mass
+```
+
+Optional flags (pass after `--`) include:
+
+- `--config data/classification.json`
+- `--derived_root data/derived`
+- `--output_root data/derived/enriched_events`
+- `--video_ids 2426724416,2430185303` (restrict to specific IDs)
+- `--workers 10` (parallel video processing across OS processes)
+
+This mode intentionally bypasses the browser upload-window crop and scans the full OCR/object parquet files.
+
 ### WebAssembly engine (optional, recommended for portfolio demos)
 
 The UI runs fully without WASM (TypeScript engine). To build the Emscripten module into `public/wasm/`:
