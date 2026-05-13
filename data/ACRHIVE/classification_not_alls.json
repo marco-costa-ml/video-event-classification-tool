@@ -1,0 +1,4109 @@
+{
+  "version": 1,
+  "video": {
+    "video_id": "sample_001",
+    "fps": 30,
+    "frame_count": 36000,
+    "width": 640,
+    "height": 360,
+    "duration_seconds": 14908.867,
+    "video_start_time_seconds": 7200
+  },
+  "parquet": {
+    "ocr": {
+      "frame": "frame",
+      "ocr_label": "label",
+      "ocr_text": "text",
+      "ocr_x": "x",
+      "ocr_y": "y",
+      "ocr_w": "w",
+      "ocr_h": "h",
+      "ocr_confidence": "confidence"
+    },
+    "objects": {
+      "frame": "frame",
+      "object_id": "object_id",
+      "object_class": "class",
+      "object_score": "score",
+      "bbox_x": "x",
+      "bbox_y": "y",
+      "bbox_w": "w",
+      "bbox_h": "h"
+    }
+  },
+  "ocr_label_placements": [
+    {
+      "label": "title",
+      "anchor": "top_left",
+      "offset_x": 0,
+      "offset_y": 0
+    }
+  ],
+  "reconstruction": {
+    "object_ttl_frames": 1,
+    "ocr_ttl_frames": 4
+  },
+  "zones": [
+    {
+      "id": "z_roi",
+      "name": "BlindToken",
+      "priority": 10,
+      "geometry": {
+        "type": "rectangle",
+        "x": 24,
+        "y": 67,
+        "width": 60,
+        "height": 65
+      },
+      "parent_classes": [
+        "obj"
+      ],
+      "object_classes": [
+        "obj"
+      ],
+      "object_class_ranges": [
+        {
+          "min": 370,
+          "max": 399
+        }
+      ]
+    },
+    {
+      "id": "zone_mobvt1b4_w5ket",
+      "name": "CurrentHand",
+      "priority": 100,
+      "geometry": {
+        "type": "rectangle",
+        "x": 163,
+        "y": 211,
+        "width": 368,
+        "height": 88
+      },
+      "parent_classes": [
+        "obj"
+      ],
+      "object_classes": [
+        "obj"
+      ],
+      "object_class_ranges": [
+        {
+          "min": 0,
+          "max": 51
+        },
+        {
+          "min": 231,
+          "max": 231
+        },
+        {
+          "min": 78,
+          "max": 78
+        }
+      ]
+    },
+    {
+      "id": "zone_mobvumat_nifm1",
+      "name": "CurrentHandSelected",
+      "priority": 99,
+      "geometry": {
+        "type": "rectangle",
+        "x": 163,
+        "y": 192,
+        "width": 368,
+        "height": 88
+      },
+      "parent_classes": [
+        "obj"
+      ],
+      "object_classes": [
+        "obj"
+      ],
+      "object_class_ranges": [
+        {
+          "min": 0,
+          "max": 51
+        },
+        {
+          "min": 231,
+          "max": 231
+        },
+        {
+          "min": 78,
+          "max": 78
+        }
+      ]
+    },
+    {
+      "id": "zone_aobvt1b4_w5ket",
+      "name": "PackOfferings",
+      "priority": 100,
+      "geometry": {
+        "type": "rectangle",
+        "x": 163,
+        "y": 211,
+        "width": 368,
+        "height": 88
+      },
+      "parent_classes": [
+        "obj"
+      ],
+      "object_classes": [
+        "obj"
+      ],
+      "object_class_ranges": [
+        {
+          "min": 0,
+          "max": 51
+        },
+        {
+          "min": 231,
+          "max": 231
+        },
+        {
+          "min": 80,
+          "max": 229
+        },
+        {
+          "min": 236,
+          "max": 247
+        },
+        {
+          "min": 248,
+          "max": 265
+        },
+        {
+          "min": 298,
+          "max": 319
+        },
+        {
+          "min": 78,
+          "max": 78
+        }
+      ]
+    },
+    {
+      "id": "zone_aobvumat_nifm1",
+      "name": "PackOfferingsSelected",
+      "priority": 99,
+      "geometry": {
+        "type": "rectangle",
+        "x": 163,
+        "y": 192,
+        "width": 368,
+        "height": 88
+      },
+      "parent_classes": [
+        "obj"
+      ],
+      "object_classes": [
+        "obj"
+      ],
+      "object_class_ranges": [
+        {
+          "min": 0,
+          "max": 51
+        },
+        {
+          "min": 231,
+          "max": 231
+        },
+        {
+          "min": 80,
+          "max": 229
+        },
+        {
+          "min": 236,
+          "max": 247
+        },
+        {
+          "min": 248,
+          "max": 265
+        },
+        {
+          "min": 298,
+          "max": 319
+        },
+        {
+          "min": 78,
+          "max": 78
+        }
+      ]
+    },
+    {
+      "id": "zone_mobwidyi_8u1ar",
+      "name": "CurrentStake",
+      "priority": 0,
+      "geometry": {
+        "type": "rectangle",
+        "x": 55,
+        "y": 47,
+        "width": 105,
+        "height": 120
+      },
+      "parent_classes": [
+        "obj"
+      ],
+      "object_classes": [
+        "obj"
+      ],
+      "object_class_ranges": [
+        {
+          "min": 266,
+          "max": 266
+        },
+        {
+          "min": 273,
+          "max": 273
+        },
+        {
+          "min": 268,
+          "max": 268
+        }
+      ]
+    },
+    {
+      "id": "zone_mobwyfys_0clua",
+      "name": "CurrentDeck",
+      "priority": 0,
+      "geometry": {
+        "type": "rectangle",
+        "x": 519,
+        "y": 249,
+        "width": 93,
+        "height": 98
+      },
+      "parent_classes": [
+        "obj"
+      ],
+      "object_classes": [
+        "obj"
+      ],
+      "object_class_ranges": [
+        {
+          "min": 52,
+          "max": 67
+        }
+      ]
+    },
+    {
+      "id": "zone_moby77zz_6g6oe",
+      "name": "CurrentConsumables",
+      "priority": 0,
+      "geometry": {
+        "type": "rectangle",
+        "x": 443,
+        "y": 16,
+        "width": 174,
+        "height": 81
+      },
+      "parent_classes": [
+        "obj"
+      ],
+      "object_classes": [
+        "obj"
+      ],
+      "object_class_ranges": [
+        {
+          "min": 298,
+          "max": 319
+        },
+        {
+          "min": 236,
+          "max": 265
+        }
+      ]
+    },
+    {
+      "id": "zone_moq9w01e_fq1iw",
+      "name": "CurrentConsumablesSelected",
+      "priority": -99,
+      "geometry": {
+        "type": "rectangle",
+        "x": 443,
+        "y": 6,
+        "width": 174,
+        "height": 82
+      },
+      "parent_classes": [
+        "obj"
+      ],
+      "object_classes": [
+        "obj"
+      ],
+      "object_class_ranges": [
+        {
+          "min": 236,
+          "max": 247
+        },
+        {
+          "min": 248,
+          "max": 265
+        },
+        {
+          "min": 298,
+          "max": 319
+        }
+      ]
+    },
+    {
+      "id": "zone_modf8rtv_lyxhs",
+      "name": "BlindOffering",
+      "priority": 10,
+      "geometry": {
+        "type": "rectangle",
+        "x": 203,
+        "y": 175,
+        "width": 291,
+        "height": 58
+      },
+      "parent_classes": [
+        "obj"
+      ],
+      "object_classes": [
+        "obj"
+      ],
+      "object_class_ranges": [
+        {
+          "min": 370,
+          "max": 399
+        }
+      ]
+    },
+    {
+      "id": "zone_modfbks3_rbtu7",
+      "name": "BlindOfferingsNext",
+      "priority": 9,
+      "geometry": {
+        "type": "rectangle",
+        "x": 203,
+        "y": 139,
+        "width": 291,
+        "height": 71
+      },
+      "parent_classes": [
+        "obj"
+      ],
+      "object_classes": [
+        "obj"
+      ],
+      "object_class_ranges": [
+        {
+          "min": 370,
+          "max": 399
+        }
+      ]
+    },
+    {
+      "id": "zone_modfqk2d_xujvr",
+      "name": "BigBlindTag",
+      "priority": 1,
+      "geometry": {
+        "type": "rectangle",
+        "x": 303,
+        "y": 288,
+        "width": 91,
+        "height": 31
+      },
+      "parent_classes": [
+        "obj"
+      ],
+      "object_classes": [
+        "obj"
+      ],
+      "object_class_ranges": [
+        {
+          "min": 274,
+          "max": 297
+        }
+      ]
+    },
+    {
+      "id": "zone_modfu74l_yd8fc",
+      "name": "OfferedTag",
+      "priority": 2,
+      "geometry": {
+        "type": "rectangle",
+        "x": 181,
+        "y": 256,
+        "width": 215,
+        "height": 38
+      },
+      "parent_classes": [
+        "obj"
+      ],
+      "object_classes": [
+        "obj"
+      ],
+      "object_class_ranges": [
+        {
+          "min": 274,
+          "max": 297
+        }
+      ]
+    },
+    {
+      "id": "zone_morl3bxf_sdqpv",
+      "name": "CurrentTags",
+      "priority": 0,
+      "geometry": {
+        "type": "rectangle",
+        "x": 586,
+        "y": 2,
+        "width": 51,
+        "height": 346
+      },
+      "parent_classes": [
+        "obj"
+      ],
+      "object_classes": [
+        "obj"
+      ],
+      "object_class_ranges": [
+        {
+          "min": 274,
+          "max": 297
+        }
+      ]
+    },
+    {
+      "id": "zone_mohz11ej_wy4c2",
+      "name": "VoucherShopOfferings",
+      "priority": 0,
+      "geometry": {
+        "type": "rectangle",
+        "x": 194,
+        "y": 248,
+        "width": 157,
+        "height": 87
+      },
+      "parent_classes": [
+        "obj"
+      ],
+      "object_classes": [
+        "obj"
+      ],
+      "object_class_ranges": [
+        {
+          "min": 320,
+          "max": 351
+        }
+      ]
+    },
+    {
+      "id": "zone_mohz2d5v_kohvc",
+      "name": "VoucherShopOfferingsSelected",
+      "priority": 0,
+      "geometry": {
+        "type": "rectangle",
+        "x": 194,
+        "y": 233,
+        "width": 157,
+        "height": 87
+      },
+      "parent_classes": [
+        "obj"
+      ],
+      "object_classes": [
+        "obj"
+      ],
+      "object_class_ranges": [
+        {
+          "min": 320,
+          "max": 351
+        }
+      ]
+    },
+    {
+      "id": "zone_moj0jsj8_47txr",
+      "name": "VoucherConsumableRedeemUse",
+      "priority": 20,
+      "geometry": {
+        "type": "rectangle",
+        "x": 319,
+        "y": 151,
+        "width": 67,
+        "height": 98
+      },
+      "parent_classes": [
+        "obj"
+      ],
+      "object_classes": [
+        "obj"
+      ],
+      "object_class_ranges": [
+        {
+          "min": 320,
+          "max": 351
+        },
+        {
+          "min": 236,
+          "max": 247
+        },
+        {
+          "min": 248,
+          "max": 265
+        },
+        {
+          "min": 298,
+          "max": 319
+        }
+      ]
+    },
+    {
+      "id": "zone_moj18gsr_x9csk",
+      "name": "TopShelfShopOfferings",
+      "priority": -5,
+      "geometry": {
+        "type": "rectangle",
+        "x": 273,
+        "y": 132,
+        "width": 234,
+        "height": 94
+      },
+      "parent_classes": [
+        "obj"
+      ],
+      "object_classes": [
+        "obj"
+      ],
+      "object_class_ranges": [
+        {
+          "min": 0,
+          "max": 51
+        },
+        {
+          "min": 80,
+          "max": 229
+        },
+        {
+          "min": 236,
+          "max": 247
+        },
+        {
+          "min": 248,
+          "max": 265
+        },
+        {
+          "min": 298,
+          "max": 319
+        },
+        {
+          "min": 78,
+          "max": 78
+        }
+      ]
+    },
+    {
+      "id": "zone_moj1bzp6_ro0vu",
+      "name": "TopShelfShopOfferingsSelected",
+      "priority": -5,
+      "geometry": {
+        "type": "rectangle",
+        "x": 272,
+        "y": 114,
+        "width": 240,
+        "height": 91
+      },
+      "parent_classes": [
+        "obj"
+      ],
+      "object_classes": [
+        "obj"
+      ],
+      "object_class_ranges": [
+        {
+          "min": 0,
+          "max": 51
+        },
+        {
+          "min": 80,
+          "max": 229
+        },
+        {
+          "min": 236,
+          "max": 247
+        },
+        {
+          "min": 248,
+          "max": 265
+        },
+        {
+          "min": 298,
+          "max": 319
+        },
+        {
+          "min": 78,
+          "max": 78
+        }
+      ]
+    },
+    {
+      "id": "zone_mokf3s0u_5474o",
+      "name": "TarotSpectralHand",
+      "priority": 31,
+      "geometry": {
+        "type": "rectangle",
+        "x": 165,
+        "y": 121,
+        "width": 355,
+        "height": 90
+      },
+      "parent_classes": [
+        "obj"
+      ],
+      "object_classes": [
+        "obj"
+      ],
+      "object_class_ranges": [
+        {
+          "min": 0,
+          "max": 51
+        },
+        {
+          "min": 78,
+          "max": 78
+        }
+      ]
+    },
+    {
+      "id": "zone_mokf3xal_f0l4f",
+      "name": "TarotSpectralHandSelected",
+      "priority": 30,
+      "geometry": {
+        "type": "rectangle",
+        "x": 164,
+        "y": 105,
+        "width": 359,
+        "height": 88
+      },
+      "parent_classes": [
+        "obj"
+      ],
+      "object_classes": [
+        "obj"
+      ],
+      "object_class_ranges": [
+        {
+          "min": 0,
+          "max": 51
+        },
+        {
+          "min": 78,
+          "max": 78
+        }
+      ]
+    },
+    {
+      "id": "zone_mokfcf74_a7jhx",
+      "name": "PackConsumableUse",
+      "priority": 50,
+      "geometry": {
+        "type": "rectangle",
+        "x": 314,
+        "y": 250,
+        "width": 69,
+        "height": 86
+      },
+      "parent_classes": [
+        "obj"
+      ],
+      "object_classes": [
+        "obj"
+      ],
+      "object_class_ranges": [
+        {
+          "min": 236,
+          "max": 247
+        },
+        {
+          "min": 248,
+          "max": 265
+        },
+        {
+          "min": 298,
+          "max": 319
+        }
+      ]
+    },
+    {
+      "id": "zone_mouc35xw_684ab",
+      "name": "CurrentJokersAll",
+      "priority": 0,
+      "geometry": {
+        "type": "rectangle",
+        "x": 157,
+        "y": 1,
+        "width": 310,
+        "height": 96
+      },
+      "parent_classes": [
+        "obj"
+      ],
+      "object_classes": [
+        "obj"
+      ],
+      "object_class_ranges": [
+        {
+          "min": 80,
+          "max": 229
+        }
+      ]
+    },
+    {
+      "id": "zone_moqaqgvl_y3eec",
+      "name": "CurrentJokersSelected",
+      "priority": 0,
+      "geometry": {
+        "type": "rectangle",
+        "x": 157,
+        "y": 1,
+        "width": 310,
+        "height": 84
+      },
+      "parent_classes": [
+        "obj"
+      ],
+      "object_classes": [
+        "obj"
+      ],
+      "object_class_ranges": [
+        {
+          "min": 80,
+          "max": 229
+        }
+      ]
+    },
+    {
+      "id": "zone_mow4kqrg_jeqtb",
+      "name": "PackShopOfferings",
+      "priority": 0,
+      "geometry": {
+        "type": "rectangle",
+        "x": 354,
+        "y": 239,
+        "width": 147,
+        "height": 107
+      },
+      "parent_classes": [
+        "obj"
+      ],
+      "object_classes": [
+        "obj"
+      ],
+      "object_class_ranges": [
+        {
+          "min": 352,
+          "max": 366
+        }
+      ]
+    },
+    {
+      "id": "zone_mow4kubk_yyt1x",
+      "name": "PackShopOfferingsSelected",
+      "priority": 0,
+      "geometry": {
+        "type": "rectangle",
+        "x": 354,
+        "y": 220,
+        "width": 147,
+        "height": 109
+      },
+      "parent_classes": [
+        "obj"
+      ],
+      "object_classes": [
+        "obj"
+      ],
+      "object_class_ranges": [
+        {
+          "min": 352,
+          "max": 366
+        }
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "id": "p_home",
+      "name": "In_Blind",
+      "priority": 10,
+      "match": {
+        "kind": "logical",
+        "op": "and",
+        "children": [
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "zones",
+                "z_roi",
+                "occupancy"
+              ]
+            },
+            "op": ">",
+            "right": {
+              "kind": "literal",
+              "value": 0
+            }
+          },
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "zones",
+                "zone_mobwyfys_0clua",
+                "occupancy"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": 1
+            }
+          }
+        ]
+      },
+      "export_include_zone_ids": [
+        "z_roi",
+        "zone_mobwidyi_8u1ar",
+        "zone_mobwyfys_0clua",
+        "zone_moby77zz_6g6oe",
+        "zone_moq9w01e_fq1iw",
+        "zone_mouc35xw_684ab",
+        "zone_moqaqgvl_y3eec",
+        "zone_morl3bxf_sdqpv",
+        "zone_mobvt1b4_w5ket",
+        "zone_mobvumat_nifm1"
+      ],
+      "export_include_ocr_labels": [
+        "ante",
+        "consumable_values",
+        "deck_values",
+        "discards_left",
+        "dollars",
+        "hand_and_level",
+        "hand_values",
+        "hands_left",
+        "joker_values",
+        "round",
+        "round_score"
+      ]
+    },
+    {
+      "id": "page_modfczqe_hmqtn",
+      "name": "Blind_Select",
+      "priority": 9,
+      "match": {
+        "kind": "logical",
+        "op": "and",
+        "children": [
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "zone_membership",
+                "zone_modf8rtv_lyxhs",
+                "occupancy"
+              ]
+            },
+            "op": ">=",
+            "right": {
+              "kind": "literal",
+              "value": 1
+            }
+          },
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "zone_membership",
+                "zone_modfbks3_rbtu7",
+                "occupancy"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": 1
+            }
+          },
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "zone_membership",
+                "zone_mobwyfys_0clua",
+                "occupancy"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": 1
+            }
+          }
+        ]
+      },
+      "export_include_zone_ids": [
+        "zone_mobwidyi_8u1ar",
+        "zone_mobwyfys_0clua",
+        "zone_moby77zz_6g6oe",
+        "zone_moq9w01e_fq1iw",
+        "zone_modf8rtv_lyxhs",
+        "zone_modfbks3_rbtu7",
+        "zone_modfqk2d_xujvr",
+        "zone_modfu74l_yd8fc",
+        "zone_moqaqgvl_y3eec",
+        "zone_morl3bxf_sdqpv",
+        "zone_mouc35xw_684ab"
+      ],
+      "export_include_ocr_labels": [
+        "ante",
+        "consumable_values",
+        "deck_values",
+        "discards_left",
+        "dollars",
+        "hands_left",
+        "joker_values",
+        "round",
+        "round_score"
+      ]
+    },
+    {
+      "id": "page_modg0vao_egu4b",
+      "name": "Dummy_Page",
+      "priority": -999,
+      "match": {
+        "kind": "logical",
+        "op": "and",
+        "children": []
+      },
+      "export_include_zone_ids": [
+        "zone_moby77zz_6g6oe",
+        "zone_moq9w01e_fq1iw",
+        "zone_mobwyfys_0clua",
+        "zone_moqaqgvl_y3eec",
+        "zone_mouc35xw_684ab"
+      ],
+      "export_include_ocr_labels": [
+        "ante",
+        "consumable_values",
+        "deck_values",
+        "discards_left",
+        "dollars",
+        "hands_left",
+        "joker_values",
+        "round"
+      ]
+    },
+    {
+      "id": "page_mohy9cxj_c5tho",
+      "name": "Cash_Out",
+      "priority": 5,
+      "match": {
+        "kind": "comparison",
+        "left": {
+          "kind": "field",
+          "path": [
+            "ocr",
+            "by_label",
+            "cash_out",
+            0,
+            "text"
+          ]
+        },
+        "op": "contains",
+        "right": {
+          "kind": "literal",
+          "value": "cashout$"
+        }
+      },
+      "export_include_zone_ids": [
+        "zone_mobwidyi_8u1ar",
+        "zone_mobwyfys_0clua",
+        "zone_moby77zz_6g6oe",
+        "zone_moq9w01e_fq1iw",
+        "zone_moqaqgvl_y3eec",
+        "zone_morl3bxf_sdqpv",
+        "zone_mouc35xw_684ab"
+      ],
+      "export_include_ocr_labels": [
+        "ante",
+        "cash_out",
+        "consumable_values",
+        "deck_values",
+        "discards_left",
+        "dollars",
+        "hand_values",
+        "hands_left",
+        "joker_values",
+        "round"
+      ]
+    },
+    {
+      "id": "page_mohycd8i_lmiem",
+      "name": "In_Shop",
+      "priority": 4,
+      "match": {
+        "kind": "logical",
+        "op": "or",
+        "children": [
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "ocr",
+                "by_label",
+                "reroll_price",
+                0,
+                "text"
+              ]
+            },
+            "op": "contains",
+            "right": {
+              "kind": "literal",
+              "value": "$"
+            }
+          },
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "zone_membership",
+                "zone_mohz11ej_wy4c2",
+                "occupancy"
+              ]
+            },
+            "op": ">",
+            "right": {
+              "kind": "literal",
+              "value": 0
+            }
+          },
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "zone_membership",
+                "zone_mohz2d5v_kohvc",
+                "occupancy"
+              ]
+            },
+            "op": ">",
+            "right": {
+              "kind": "literal",
+              "value": 0
+            }
+          }
+        ]
+      },
+      "export_include_zone_ids": [
+        "zone_mobwidyi_8u1ar",
+        "zone_mobwyfys_0clua",
+        "zone_moby77zz_6g6oe",
+        "zone_moq9w01e_fq1iw",
+        "zone_mohz11ej_wy4c2",
+        "zone_mohz2d5v_kohvc",
+        "zone_moj18gsr_x9csk",
+        "zone_moj1bzp6_ro0vu",
+        "zone_moqaqgvl_y3eec",
+        "zone_morl3bxf_sdqpv",
+        "zone_mouc35xw_684ab",
+        "zone_mow4kqrg_jeqtb",
+        "zone_mow4kubk_yyt1x"
+      ],
+      "export_include_ocr_labels": [
+        "ante",
+        "consumable_values",
+        "deck_values",
+        "discards_left",
+        "dollars",
+        "hand_values",
+        "hands_left",
+        "joker_values",
+        "reroll_price",
+        "round"
+      ]
+    },
+    {
+      "id": "page_moj0prl4_fqj4n",
+      "name": "In_JokerStandardPlanet_Pack",
+      "priority": 20,
+      "match": {
+        "kind": "logical",
+        "op": "or",
+        "children": [
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "ocr",
+                "by_label",
+                "pack_type",
+                0,
+                "text"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": "standardpack"
+            }
+          },
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "ocr",
+                "by_label",
+                "pack_type",
+                0,
+                "text"
+              ]
+            },
+            "op": "contains",
+            "right": {
+              "kind": "literal",
+              "value": "buffoonpack"
+            }
+          },
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "ocr",
+                "by_label",
+                "pack_type",
+                0,
+                "text"
+              ]
+            },
+            "op": "contains",
+            "right": {
+              "kind": "literal",
+              "value": "celestialpack"
+            }
+          }
+        ]
+      },
+      "export_include_zone_ids": [
+        "zone_mobwidyi_8u1ar",
+        "zone_mobwyfys_0clua",
+        "zone_moby77zz_6g6oe",
+        "zone_moq9w01e_fq1iw",
+        "zone_moqaqgvl_y3eec",
+        "zone_morl3bxf_sdqpv",
+        "zone_mouc35xw_684ab",
+        "zone_aobvt1b4_w5ket",
+        "zone_aobvumat_nifm1"
+      ],
+      "export_include_ocr_labels": [
+        "ante",
+        "consumable_values",
+        "deck_values",
+        "discards_left",
+        "dollars",
+        "hand_and_level",
+        "hand_values",
+        "hands_left",
+        "joker_values",
+        "round"
+      ]
+    },
+    {
+      "id": "page_moj1lxic_h13j3",
+      "name": "In_TarotSpectral_Pack",
+      "priority": 20,
+      "match": {
+        "kind": "logical",
+        "op": "or",
+        "children": [
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "ocr",
+                "by_label",
+                "pack_type",
+                0,
+                "text"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": "arcanapack"
+            }
+          },
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "ocr",
+                "by_label",
+                "pack_type",
+                0,
+                "text"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": "spectralpack"
+            }
+          }
+        ]
+      },
+      "export_include_zone_ids": [
+        "zone_mobwyfys_0clua",
+        "zone_moby77zz_6g6oe",
+        "zone_moq9w01e_fq1iw",
+        "zone_mokf3s0u_5474o",
+        "zone_mokf3xal_f0l4f",
+        "zone_moqaqgvl_y3eec",
+        "zone_morl3bxf_sdqpv",
+        "zone_mouc35xw_684ab",
+        "zone_mobwidyi_8u1ar",
+        "zone_aobvt1b4_w5ket",
+        "zone_aobvumat_nifm1"
+      ],
+      "export_include_ocr_labels": [
+        "ante",
+        "cash_out",
+        "consumable_values",
+        "deck_values",
+        "discards_left",
+        "dollars",
+        "hands_left",
+        "joker_values",
+        "round"
+      ]
+    }
+  ],
+  "events": [
+    {
+      "id": "ev_mobxfekt_nhx6",
+      "name": "PlayHand",
+      "priority": 10,
+      "predicate": {
+        "kind": "logical",
+        "op": "and",
+        "children": [
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "page",
+                "id"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": "p_home"
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 6,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "comparison",
+              "left": {
+                "kind": "field",
+                "path": [
+                  "ocr",
+                  "by_label",
+                  "hands_left",
+                  0,
+                  "text"
+                ]
+              },
+              "op": "contains",
+              "right": {
+                "kind": "literal",
+                "value": "-1"
+              }
+            }
+          },
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "zone_membership",
+                "zone_mobvumat_nifm1",
+                "occupancy"
+              ]
+            },
+            "op": ">",
+            "right": {
+              "kind": "literal",
+              "value": 0
+            }
+          }
+        ]
+      },
+      "cooldown_frames": 10,
+      "dedupe": {
+        "merge_adjacent_frames": 10,
+        "strategy": "leading_edge"
+      }
+    },
+    {
+      "id": "ev_moc2556m_0ga0",
+      "name": "DiscardHand",
+      "priority": 10,
+      "predicate": {
+        "kind": "logical",
+        "op": "and",
+        "children": [
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "page",
+                "id"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": "p_home"
+            }
+          },
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "zone_membership",
+                "zone_mobvumat_nifm1",
+                "occupancy"
+              ]
+            },
+            "op": ">",
+            "right": {
+              "kind": "literal",
+              "value": 0
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 25,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "change",
+              "path": [
+                "ocr",
+                "by_label",
+                "discards_left",
+                0,
+                "text"
+              ],
+              "op": "decrease",
+              "window_frames": 25
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 5,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "logical",
+              "op": "or",
+              "children": [
+                {
+                  "kind": "not_exists",
+                  "path": [
+                    "ocr",
+                    "by_label",
+                    "hand_and_level",
+                    0,
+                    "text"
+                  ]
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "field",
+                    "path": [
+                      "ocr",
+                      "by_label",
+                      "hand_and_level",
+                      0,
+                      "text"
+                    ]
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": ""
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "field",
+                    "path": [
+                      "ocr",
+                      "by_label",
+                      "hand_and_level",
+                      0,
+                      "text"
+                    ]
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": "NaN"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": -8,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "comparison",
+              "left": {
+                "kind": "field",
+                "path": [
+                  "ocr",
+                  "by_label",
+                  "hand_and_level",
+                  0,
+                  "text"
+                ]
+              },
+              "op": "contains",
+              "right": {
+                "kind": "literal",
+                "value": "l"
+              }
+            }
+          }
+        ]
+      },
+      "cooldown_frames": 10,
+      "dedupe": {
+        "merge_adjacent_frames": 10,
+        "strategy": "leading_edge"
+      }
+    },
+    {
+      "id": "ev_modeyizb_fqf7",
+      "name": "StartNewRun",
+      "priority": 10,
+      "predicate": {
+        "kind": "logical",
+        "op": "and",
+        "children": [
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "ocr",
+                "by_label",
+                "round",
+                0,
+                "text"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": "0"
+            }
+          },
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "ocr",
+                "by_label",
+                "ante",
+                0,
+                "text"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": "1/8"
+            }
+          },
+          {
+            "kind": "transition",
+            "transition": "page",
+            "from": {
+              "kind": "literal",
+              "value": "page_modg0vao_egu4b"
+            },
+            "to": {
+              "kind": "literal",
+              "value": "page_modfczqe_hmqtn"
+            },
+            "window_frames": 20
+          }
+        ]
+      },
+      "cooldown_frames": 10,
+      "dedupe": {
+        "merge_adjacent_frames": 500,
+        "strategy": "leading_edge"
+      }
+    },
+    {
+      "id": "ev_mohxh9yc_jb42",
+      "name": "SelectBlind",
+      "priority": 5,
+      "predicate": {
+        "kind": "logical",
+        "op": "and",
+        "children": [
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "page",
+                "id"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": "page_modfczqe_hmqtn"
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 25,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "comparison",
+              "left": {
+                "kind": "field",
+                "path": [
+                  "page",
+                  "id"
+                ]
+              },
+              "op": "==",
+              "right": {
+                "kind": "literal",
+                "value": "p_home"
+              }
+            }
+          }
+        ]
+      },
+      "cooldown_frames": 50,
+      "dedupe": {
+        "merge_adjacent_frames": 50,
+        "strategy": "leading_edge"
+      }
+    },
+    {
+      "id": "ev_mohyfy7m_wn71",
+      "name": "CashOut",
+      "priority": 10,
+      "predicate": {
+        "kind": "logical",
+        "op": "and",
+        "children": [
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "page",
+                "id"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": "page_mohy9cxj_c5tho"
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 25,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "comparison",
+              "left": {
+                "kind": "field",
+                "path": [
+                  "page",
+                  "id"
+                ]
+              },
+              "op": "==",
+              "right": {
+                "kind": "literal",
+                "value": "page_mohycd8i_lmiem"
+              }
+            }
+          }
+        ]
+      },
+      "cooldown_frames": 10,
+      "dedupe": {
+        "merge_adjacent_frames": 10,
+        "strategy": "leading_edge"
+      }
+    },
+    {
+      "id": "ev_moj0a9dl_qowj",
+      "name": "LeaveShop",
+      "priority": 10,
+      "predicate": {
+        "kind": "logical",
+        "op": "and",
+        "children": [
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "page",
+                "id"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": "page_mohycd8i_lmiem"
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 25,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "comparison",
+              "left": {
+                "kind": "field",
+                "path": [
+                  "page",
+                  "id"
+                ]
+              },
+              "op": "==",
+              "right": {
+                "kind": "literal",
+                "value": "page_modfczqe_hmqtn"
+              }
+            }
+          }
+        ]
+      },
+      "cooldown_frames": 10,
+      "dedupe": {
+        "merge_adjacent_frames": 10,
+        "strategy": "leading_edge"
+      }
+    },
+    {
+      "id": "buyvoucher",
+      "name": "BuyShopItem",
+      "priority": 10,
+      "predicate": {
+        "kind": "logical",
+        "op": "and",
+        "children": [
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 13,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "comparison",
+              "left": {
+                "kind": "field",
+                "path": [
+                  "zones",
+                  "zone_moj0jsj8_47txr",
+                  "occupancy"
+                ]
+              },
+              "op": "==",
+              "right": {
+                "kind": "literal",
+                "value": 1
+              }
+            }
+          },
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "page",
+                "id"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": "page_mohycd8i_lmiem"
+            }
+          },
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "zone_membership",
+                "zone_mohz2d5v_kohvc",
+                "occupancy"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": 1
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 66,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "comparison",
+              "left": {
+                "kind": "field",
+                "path": [
+                  "zone_membership",
+                  "zone_moj1bzp6_ro0vu",
+                  "occupancy"
+                ]
+              },
+              "op": "==",
+              "right": {
+                "kind": "literal",
+                "value": 0
+              }
+            }
+          }
+        ]
+      },
+      "cooldown_frames": 10,
+      "dedupe": {
+        "merge_adjacent_frames": 10,
+        "strategy": "leading_edge"
+      }
+    },
+    {
+      "id": "buyandopenplanetstandardbuffoonpack",
+      "name": "BuyShopItem",
+      "priority": 15,
+      "predicate": {
+        "kind": "logical",
+        "op": "and",
+        "children": [
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "page",
+                "id"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": "page_mohycd8i_lmiem"
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 40,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "comparison",
+              "left": {
+                "kind": "field",
+                "path": [
+                  "page",
+                  "id"
+                ]
+              },
+              "op": "==",
+              "right": {
+                "kind": "literal",
+                "value": "page_moj0prl4_fqj4n"
+              }
+            }
+          },
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "zone_membership",
+                "zone_mow4kubk_yyt1x",
+                "occupancy"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": 1
+            }
+          }
+        ]
+      },
+      "cooldown_frames": 10,
+      "dedupe": {
+        "merge_adjacent_frames": 10,
+        "strategy": "leading_edge"
+      }
+    },
+    {
+      "id": "buytopshelfjoker",
+      "name": "BuyShopItem",
+      "priority": 10,
+      "predicate": {
+        "kind": "logical",
+        "op": "and",
+        "children": [
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "page",
+                "id"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": "page_mohycd8i_lmiem"
+            }
+          },
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "zone_membership",
+                "zone_moj1bzp6_ro0vu",
+                "occupancy"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": 1
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 12,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "comparison",
+              "left": {
+                "kind": "field",
+                "path": [
+                  "page",
+                  "id"
+                ]
+              },
+              "op": "==",
+              "right": {
+                "kind": "literal",
+                "value": "page_mohycd8i_lmiem"
+              }
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 5,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "change",
+              "path": [
+                "ocr",
+                "by_label",
+                "joker_values",
+                0,
+                "text"
+              ],
+              "op": "increase_lt",
+              "threshold": 2,
+              "window_frames": 5
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 10,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "comparison",
+              "left": {
+                "kind": "field",
+                "path": [
+                  "zone_membership",
+                  "zone_moj1bzp6_ro0vu",
+                  "occupancy"
+                ]
+              },
+              "op": "==",
+              "right": {
+                "kind": "literal",
+                "value": 0
+              }
+            }
+          }
+        ]
+      },
+      "cooldown_frames": 10,
+      "dedupe": {
+        "merge_adjacent_frames": 10,
+        "strategy": "leading_edge"
+      }
+    },
+    {
+      "id": "buyandopentarotspectralpack",
+      "name": "BuyShopItem",
+      "priority": 10,
+      "predicate": {
+        "kind": "logical",
+        "op": "and",
+        "children": [
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "page",
+                "id"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": "page_mohycd8i_lmiem"
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 40,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "comparison",
+              "left": {
+                "kind": "field",
+                "path": [
+                  "page",
+                  "id"
+                ]
+              },
+              "op": "==",
+              "right": {
+                "kind": "literal",
+                "value": "page_moj1lxic_h13j3"
+              }
+            }
+          },
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "zone_membership",
+                "zone_mow4kubk_yyt1x",
+                "occupancy"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": 1
+            }
+          }
+        ]
+      },
+      "cooldown_frames": 10,
+      "dedupe": {
+        "merge_adjacent_frames": 10,
+        "strategy": "leading_edge"
+      }
+    },
+    {
+      "id": "buyanduseconsumable",
+      "name": "BuyAndUseShopConsumable",
+      "priority": 30,
+      "predicate": {
+        "kind": "logical",
+        "op": "and",
+        "children": [
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "page",
+                "id"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": "page_mohycd8i_lmiem"
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 9,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "comparison",
+              "left": {
+                "kind": "field",
+                "path": [
+                  "zone_membership",
+                  "zone_moj0jsj8_47txr",
+                  "occupancy"
+                ]
+              },
+              "op": "==",
+              "right": {
+                "kind": "literal",
+                "value": 1
+              }
+            }
+          },
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "zone_membership",
+                "zone_moj1bzp6_ro0vu",
+                "occupancy"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": 1
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 44,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "comparison",
+              "left": {
+                "kind": "field",
+                "path": [
+                  "zone_membership",
+                  "zone_moj1bzp6_ro0vu",
+                  "occupancy"
+                ]
+              },
+              "op": "==",
+              "right": {
+                "kind": "literal",
+                "value": 0
+              }
+            }
+          }
+        ]
+      },
+      "cooldown_frames": 10,
+      "dedupe": {
+        "merge_adjacent_frames": 10,
+        "strategy": "leading_edge"
+      }
+    },
+    {
+      "id": "ev_moj29aal_xjdz",
+      "name": "RerollShop",
+      "priority": 10,
+      "predicate": {
+        "kind": "logical",
+        "op": "and",
+        "children": [
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 5,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "change",
+              "path": [
+                "ocr",
+                "by_label",
+                "reroll_price",
+                0,
+                "text"
+              ],
+              "op": "increase_lt",
+              "threshold": 2,
+              "window_frames": 10
+            }
+          },
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "page",
+                "id"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": "page_mohycd8i_lmiem"
+            }
+          }
+        ]
+      },
+      "cooldown_frames": 10,
+      "dedupe": {
+        "merge_adjacent_frames": 10,
+        "strategy": "leading_edge"
+      }
+    },
+    {
+      "id": "selectpackitemtarot",
+      "name": "SelectPackItem",
+      "priority": 10,
+      "predicate": {
+        "kind": "logical",
+        "op": "and",
+        "children": [
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "page",
+                "id"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": "page_moj1lxic_h13j3"
+            }
+          },
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "zone_membership",
+                "zone_aobvumat_nifm1",
+                "occupancy"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": 1
+            }
+          },
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "zone_membership",
+                "zone_aobvt1b4_w5ket",
+                "occupancy"
+              ]
+            },
+            "op": ">",
+            "right": {
+              "kind": "literal",
+              "value": 0
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 5,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "comparison",
+              "left": {
+                "kind": "field",
+                "path": [
+                  "zone_membership",
+                  "zone_mokfcf74_a7jhx",
+                  "occupancy"
+                ]
+              },
+              "op": "==",
+              "right": {
+                "kind": "literal",
+                "value": 1
+              }
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 10,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "comparison",
+              "left": {
+                "kind": "field",
+                "path": [
+                  "zone_membership",
+                  "zone_aobvumat_nifm1",
+                  "occupancy"
+                ]
+              },
+              "op": "==",
+              "right": {
+                "kind": "literal",
+                "value": 0
+              }
+            }
+          }
+        ]
+      },
+      "cooldown_frames": 10,
+      "dedupe": {
+        "merge_adjacent_frames": 10,
+        "strategy": "leading_edge"
+      }
+    },
+    {
+      "id": "buytopshelfconsumable",
+      "name": "BuyShopItem",
+      "priority": 10,
+      "predicate": {
+        "kind": "logical",
+        "op": "and",
+        "children": [
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "page",
+                "id"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": "page_mohycd8i_lmiem"
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 5,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "change",
+              "path": [
+                "ocr",
+                "by_label",
+                "consumable_values",
+                0,
+                "text"
+              ],
+              "op": "increase_lt",
+              "threshold": 2,
+              "window_frames": 5
+            }
+          },
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "zone_membership",
+                "zone_moj1bzp6_ro0vu",
+                "occupancy"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": 1
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 10,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "comparison",
+              "left": {
+                "kind": "field",
+                "path": [
+                  "zone_membership",
+                  "zone_moj1bzp6_ro0vu",
+                  "occupancy"
+                ]
+              },
+              "op": "==",
+              "right": {
+                "kind": "literal",
+                "value": 0
+              }
+            }
+          }
+        ]
+      },
+      "cooldown_frames": 10,
+      "dedupe": {
+        "merge_adjacent_frames": 10,
+        "strategy": "leading_edge"
+      }
+    },
+    {
+      "id": "selectpackitemcard",
+      "name": "SelectPackItem",
+      "priority": 10,
+      "predicate": {
+        "kind": "logical",
+        "op": "and",
+        "children": [
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "page",
+                "id"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": "page_moj0prl4_fqj4n"
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 5,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "change",
+              "path": [
+                "ocr",
+                "by_label",
+                "deck_values",
+                0,
+                "text"
+              ],
+              "op": "increase_lt",
+              "threshold": 2,
+              "window_frames": 5
+            }
+          },
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "zone_membership",
+                "zone_aobvumat_nifm1",
+                "occupancy"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": 1
+            }
+          },
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "zone_membership",
+                "zone_aobvt1b4_w5ket",
+                "occupancy"
+              ]
+            },
+            "op": ">",
+            "right": {
+              "kind": "literal",
+              "value": 0
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 3,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "comparison",
+              "left": {
+                "kind": "field",
+                "path": [
+                  "zone_membership",
+                  "zone_aobvumat_nifm1",
+                  "occupancy"
+                ]
+              },
+              "op": "==",
+              "right": {
+                "kind": "literal",
+                "value": 0
+              }
+            }
+          }
+        ]
+      },
+      "cooldown_frames": 10,
+      "dedupe": {
+        "merge_adjacent_frames": 10,
+        "strategy": "leading_edge"
+      }
+    },
+    {
+      "id": "selectpackitemjoker",
+      "name": "SelectPackItem",
+      "priority": 10,
+      "predicate": {
+        "kind": "logical",
+        "op": "and",
+        "children": [
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "page",
+                "id"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": "page_moj0prl4_fqj4n"
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 5,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "change",
+              "path": [
+                "ocr",
+                "by_label",
+                "joker_values",
+                0,
+                "text"
+              ],
+              "op": "increase_lt",
+              "threshold": 2,
+              "window_frames": 5
+            }
+          },
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "zone_membership",
+                "zone_aobvumat_nifm1",
+                "occupancy"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": 1
+            }
+          },
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "zone_membership",
+                "zone_aobvt1b4_w5ket",
+                "occupancy"
+              ]
+            },
+            "op": ">",
+            "right": {
+              "kind": "literal",
+              "value": 0
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 5,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "comparison",
+              "left": {
+                "kind": "field",
+                "path": [
+                  "zone_membership",
+                  "zone_aobvumat_nifm1",
+                  "occupancy"
+                ]
+              },
+              "op": "==",
+              "right": {
+                "kind": "literal",
+                "value": 0
+              }
+            }
+          }
+        ]
+      },
+      "cooldown_frames": 10,
+      "dedupe": {
+        "merge_adjacent_frames": 10,
+        "strategy": "leading_edge"
+      }
+    },
+    {
+      "id": "selectpackitemplanet",
+      "name": "SelectPackItem",
+      "priority": 10,
+      "predicate": {
+        "kind": "logical",
+        "op": "and",
+        "children": [
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "page",
+                "id"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": "page_moj0prl4_fqj4n"
+            }
+          },
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "zone_membership",
+                "zone_aobvumat_nifm1",
+                "occupancy"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": 1
+            }
+          },
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "zone_membership",
+                "zone_aobvt1b4_w5ket",
+                "occupancy"
+              ]
+            },
+            "op": ">",
+            "right": {
+              "kind": "literal",
+              "value": 0
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 5,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "comparison",
+              "left": {
+                "kind": "field",
+                "path": [
+                  "zone_membership",
+                  "zone_mokfcf74_a7jhx",
+                  "occupancy"
+                ]
+              },
+              "op": "==",
+              "right": {
+                "kind": "literal",
+                "value": 1
+              }
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 10,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "comparison",
+              "left": {
+                "kind": "field",
+                "path": [
+                  "zone_membership",
+                  "zone_aobvumat_nifm1",
+                  "occupancy"
+                ]
+              },
+              "op": "==",
+              "right": {
+                "kind": "literal",
+                "value": 0
+              }
+            }
+          }
+        ]
+      },
+      "cooldown_frames": 10,
+      "dedupe": {
+        "merge_adjacent_frames": 10,
+        "strategy": "leading_edge"
+      }
+    },
+    {
+      "id": "selljoker",
+      "name": "SellItem",
+      "priority": 10,
+      "predicate": {
+        "kind": "logical",
+        "op": "and",
+        "children": [
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 18,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "comparison",
+              "left": {
+                "kind": "field",
+                "path": [
+                  "ocr",
+                  "by_label",
+                  "dollars",
+                  0,
+                  "text"
+                ]
+              },
+              "op": "contains",
+              "right": {
+                "kind": "literal",
+                "value": "+"
+              }
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 16,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "change",
+              "path": [
+                "ocr",
+                "by_label",
+                "joker_values",
+                0,
+                "text"
+              ],
+              "op": "decrease",
+              "window_frames": 6
+            }
+          },
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "zone_membership",
+                "zone_moqaqgvl_y3eec",
+                "occupancy"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": 1
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 16,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "comparison",
+              "left": {
+                "kind": "field",
+                "path": [
+                  "zone_membership",
+                  "zone_moqaqgvl_y3eec",
+                  "occupancy"
+                ]
+              },
+              "op": "==",
+              "right": {
+                "kind": "literal",
+                "value": 0
+              }
+            }
+          }
+        ]
+      },
+      "cooldown_frames": 10,
+      "dedupe": {
+        "merge_adjacent_frames": 10,
+        "strategy": "leading_edge"
+      }
+    },
+    {
+      "id": "useconsumable",
+      "name": "UseConsumable",
+      "priority": 99,
+      "predicate": {
+        "kind": "logical",
+        "op": "and",
+        "children": [
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "zone_membership",
+                "zone_moq9w01e_fq1iw",
+                "occupancy"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": 1
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 10,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "comparison",
+              "left": {
+                "kind": "field",
+                "path": [
+                  "zone_membership",
+                  "zone_moj0jsj8_47txr",
+                  "occupancy"
+                ]
+              },
+              "op": "==",
+              "right": {
+                "kind": "literal",
+                "value": 1
+              }
+            }
+          }
+        ]
+      },
+      "cooldown_frames": 10,
+      "dedupe": {
+        "merge_adjacent_frames": 10,
+        "strategy": "leading_edge"
+      }
+    },
+    {
+      "id": "sellconsumable",
+      "name": "SellItem",
+      "priority": 10,
+      "predicate": {
+        "kind": "logical",
+        "op": "and",
+        "children": [
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "zone_membership",
+                "zone_moq9w01e_fq1iw",
+                "occupancy"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": 1
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 16,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "comparison",
+              "left": {
+                "kind": "field",
+                "path": [
+                  "zone_membership",
+                  "zone_moq9w01e_fq1iw",
+                  "occupancy"
+                ]
+              },
+              "op": "==",
+              "right": {
+                "kind": "literal",
+                "value": 0
+              }
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 5,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "logical",
+              "op": "or",
+              "children": [
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "field",
+                    "path": [
+                      "ocr",
+                      "by_label",
+                      "dollars",
+                      0,
+                      "text"
+                    ]
+                  },
+                  "op": "contains",
+                  "right": {
+                    "kind": "literal",
+                    "value": "+"
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "ocr",
+                      "by_label",
+                      "dollars",
+                      0,
+                      "text"
+                    ],
+                    "offset_frames": 1
+                  },
+                  "op": "contains",
+                  "right": {
+                    "kind": "literal",
+                    "value": "+"
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "ocr",
+                      "by_label",
+                      "dollars",
+                      0,
+                      "text"
+                    ],
+                    "offset_frames": 2
+                  },
+                  "op": "contains",
+                  "right": {
+                    "kind": "literal",
+                    "value": "+"
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "ocr",
+                      "by_label",
+                      "dollars",
+                      0,
+                      "text"
+                    ],
+                    "offset_frames": 3
+                  },
+                  "op": "contains",
+                  "right": {
+                    "kind": "literal",
+                    "value": "+"
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "ocr",
+                      "by_label",
+                      "dollars",
+                      0,
+                      "text"
+                    ],
+                    "offset_frames": 4
+                  },
+                  "op": "contains",
+                  "right": {
+                    "kind": "literal",
+                    "value": "+"
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "ocr",
+                      "by_label",
+                      "dollars",
+                      0,
+                      "text"
+                    ],
+                    "offset_frames": 5
+                  },
+                  "op": "contains",
+                  "right": {
+                    "kind": "literal",
+                    "value": "+"
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "ocr",
+                      "by_label",
+                      "dollars",
+                      0,
+                      "text"
+                    ],
+                    "offset_frames": 6
+                  },
+                  "op": "contains",
+                  "right": {
+                    "kind": "literal",
+                    "value": "+"
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "ocr",
+                      "by_label",
+                      "dollars",
+                      0,
+                      "text"
+                    ],
+                    "offset_frames": 7
+                  },
+                  "op": "contains",
+                  "right": {
+                    "kind": "literal",
+                    "value": "+"
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "ocr",
+                      "by_label",
+                      "dollars",
+                      0,
+                      "text"
+                    ],
+                    "offset_frames": 8
+                  },
+                  "op": "contains",
+                  "right": {
+                    "kind": "literal",
+                    "value": "+"
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "ocr",
+                      "by_label",
+                      "dollars",
+                      0,
+                      "text"
+                    ],
+                    "offset_frames": 9
+                  },
+                  "op": "contains",
+                  "right": {
+                    "kind": "literal",
+                    "value": "+"
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "ocr",
+                      "by_label",
+                      "dollars",
+                      0,
+                      "text"
+                    ],
+                    "offset_frames": 10
+                  },
+                  "op": "contains",
+                  "right": {
+                    "kind": "literal",
+                    "value": "+"
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "ocr",
+                      "by_label",
+                      "dollars",
+                      0,
+                      "text"
+                    ],
+                    "offset_frames": 11
+                  },
+                  "op": "contains",
+                  "right": {
+                    "kind": "literal",
+                    "value": "+"
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "ocr",
+                      "by_label",
+                      "dollars",
+                      0,
+                      "text"
+                    ],
+                    "offset_frames": 12
+                  },
+                  "op": "contains",
+                  "right": {
+                    "kind": "literal",
+                    "value": "+"
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "ocr",
+                      "by_label",
+                      "dollars",
+                      0,
+                      "text"
+                    ],
+                    "offset_frames": 13
+                  },
+                  "op": "contains",
+                  "right": {
+                    "kind": "literal",
+                    "value": "+"
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "ocr",
+                      "by_label",
+                      "dollars",
+                      0,
+                      "text"
+                    ],
+                    "offset_frames": 14
+                  },
+                  "op": "contains",
+                  "right": {
+                    "kind": "literal",
+                    "value": "+"
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "ocr",
+                      "by_label",
+                      "dollars",
+                      0,
+                      "text"
+                    ],
+                    "offset_frames": 15
+                  },
+                  "op": "contains",
+                  "right": {
+                    "kind": "literal",
+                    "value": "+"
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "ocr",
+                      "by_label",
+                      "dollars",
+                      0,
+                      "text"
+                    ],
+                    "offset_frames": 16
+                  },
+                  "op": "contains",
+                  "right": {
+                    "kind": "literal",
+                    "value": "+"
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "ocr",
+                      "by_label",
+                      "dollars",
+                      0,
+                      "text"
+                    ],
+                    "offset_frames": 17
+                  },
+                  "op": "contains",
+                  "right": {
+                    "kind": "literal",
+                    "value": "+"
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "ocr",
+                      "by_label",
+                      "dollars",
+                      0,
+                      "text"
+                    ],
+                    "offset_frames": 18
+                  },
+                  "op": "contains",
+                  "right": {
+                    "kind": "literal",
+                    "value": "+"
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "ocr",
+                      "by_label",
+                      "dollars",
+                      0,
+                      "text"
+                    ],
+                    "offset_frames": 19
+                  },
+                  "op": "contains",
+                  "right": {
+                    "kind": "literal",
+                    "value": "+"
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "ocr",
+                      "by_label",
+                      "dollars",
+                      0,
+                      "text"
+                    ],
+                    "offset_frames": 20
+                  },
+                  "op": "contains",
+                  "right": {
+                    "kind": "literal",
+                    "value": "+"
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "ocr",
+                      "by_label",
+                      "dollars",
+                      0,
+                      "text"
+                    ],
+                    "offset_frames": 21
+                  },
+                  "op": "contains",
+                  "right": {
+                    "kind": "literal",
+                    "value": "+"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 17,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "comparison",
+              "left": {
+                "kind": "field",
+                "path": [
+                  "zone_membership",
+                  "zone_moj0jsj8_47txr",
+                  "occupancy"
+                ]
+              },
+              "op": "==",
+              "right": {
+                "kind": "literal",
+                "value": 0
+              }
+            }
+          }
+        ]
+      },
+      "cooldown_frames": 10,
+      "dedupe": {
+        "merge_adjacent_frames": 10,
+        "strategy": "leading_edge"
+      }
+    },
+    {
+      "id": "rerollbossblind",
+      "name": "RerollBossBlind",
+      "priority": 10,
+      "predicate": {
+        "kind": "logical",
+        "op": "and",
+        "children": [
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 3,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "logical",
+              "op": "or",
+              "children": [
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "field",
+                    "path": [
+                      "ocr",
+                      "by_label",
+                      "dollars",
+                      0,
+                      "text"
+                    ]
+                  },
+                  "op": "contains",
+                  "right": {
+                    "kind": "literal",
+                    "value": "-$"
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "ocr",
+                      "by_label",
+                      "dollars",
+                      0,
+                      "text"
+                    ],
+                    "offset_frames": 1
+                  },
+                  "op": "contains",
+                  "right": {
+                    "kind": "literal",
+                    "value": "-$"
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "ocr",
+                      "by_label",
+                      "dollars",
+                      0,
+                      "text"
+                    ],
+                    "offset_frames": 2
+                  },
+                  "op": "contains",
+                  "right": {
+                    "kind": "literal",
+                    "value": "-$"
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "ocr",
+                      "by_label",
+                      "dollars",
+                      0,
+                      "text"
+                    ],
+                    "offset_frames": 3
+                  },
+                  "op": "contains",
+                  "right": {
+                    "kind": "literal",
+                    "value": "-$"
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "ocr",
+                      "by_label",
+                      "dollars",
+                      0,
+                      "text"
+                    ],
+                    "offset_frames": 4
+                  },
+                  "op": "contains",
+                  "right": {
+                    "kind": "literal",
+                    "value": "-$"
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "ocr",
+                      "by_label",
+                      "dollars",
+                      0,
+                      "text"
+                    ],
+                    "offset_frames": 5
+                  },
+                  "op": "contains",
+                  "right": {
+                    "kind": "literal",
+                    "value": "-$"
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "ocr",
+                      "by_label",
+                      "dollars",
+                      0,
+                      "text"
+                    ],
+                    "offset_frames": 6
+                  },
+                  "op": "contains",
+                  "right": {
+                    "kind": "literal",
+                    "value": "-$"
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "ocr",
+                      "by_label",
+                      "dollars",
+                      0,
+                      "text"
+                    ],
+                    "offset_frames": 7
+                  },
+                  "op": "contains",
+                  "right": {
+                    "kind": "literal",
+                    "value": "-$"
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "ocr",
+                      "by_label",
+                      "dollars",
+                      0,
+                      "text"
+                    ],
+                    "offset_frames": 8
+                  },
+                  "op": "contains",
+                  "right": {
+                    "kind": "literal",
+                    "value": "-$"
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "ocr",
+                      "by_label",
+                      "dollars",
+                      0,
+                      "text"
+                    ],
+                    "offset_frames": 9
+                  },
+                  "op": "contains",
+                  "right": {
+                    "kind": "literal",
+                    "value": "-$"
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "ocr",
+                      "by_label",
+                      "dollars",
+                      0,
+                      "text"
+                    ],
+                    "offset_frames": 10
+                  },
+                  "op": "contains",
+                  "right": {
+                    "kind": "literal",
+                    "value": "-$"
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "ocr",
+                      "by_label",
+                      "dollars",
+                      0,
+                      "text"
+                    ],
+                    "offset_frames": 11
+                  },
+                  "op": "contains",
+                  "right": {
+                    "kind": "literal",
+                    "value": "-$"
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "ocr",
+                      "by_label",
+                      "dollars",
+                      0,
+                      "text"
+                    ],
+                    "offset_frames": 12
+                  },
+                  "op": "contains",
+                  "right": {
+                    "kind": "literal",
+                    "value": "-$"
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "ocr",
+                      "by_label",
+                      "dollars",
+                      0,
+                      "text"
+                    ],
+                    "offset_frames": 13
+                  },
+                  "op": "contains",
+                  "right": {
+                    "kind": "literal",
+                    "value": "-$"
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "ocr",
+                      "by_label",
+                      "dollars",
+                      0,
+                      "text"
+                    ],
+                    "offset_frames": 14
+                  },
+                  "op": "contains",
+                  "right": {
+                    "kind": "literal",
+                    "value": "-$"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "page",
+                "id"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": "page_modfczqe_hmqtn"
+            }
+          }
+        ]
+      },
+      "cooldown_frames": 10,
+      "dedupe": {
+        "merge_adjacent_frames": 10,
+        "strategy": "leading_edge"
+      }
+    },
+    {
+      "id": "skipbigblind",
+      "name": "SkipBlind",
+      "priority": 10,
+      "predicate": {
+        "kind": "logical",
+        "op": "and",
+        "children": [
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "page",
+                "id"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": "page_modfczqe_hmqtn"
+            }
+          },
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "zone_membership",
+                "zone_modfu74l_yd8fc",
+                "occupancy"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": 1
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 6,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "comparison",
+              "left": {
+                "kind": "field",
+                "path": [
+                  "zone_membership",
+                  "zone_modfu74l_yd8fc",
+                  "occupancy"
+                ]
+              },
+              "op": "==",
+              "right": {
+                "kind": "literal",
+                "value": 0
+              }
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 6,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "comparison",
+              "left": {
+                "kind": "field",
+                "path": [
+                  "zone_membership",
+                  "zone_morl3bxf_sdqpv",
+                  "occupancy"
+                ]
+              },
+              "op": ">",
+              "right": {
+                "kind": "literal",
+                "value": 0
+              }
+            }
+          }
+        ]
+      },
+      "cooldown_frames": 10,
+      "dedupe": {
+        "merge_adjacent_frames": 10,
+        "strategy": "leading_edge"
+      }
+    },
+    {
+      "id": "skipplanetstandardbuffoonpack",
+      "name": "SkipPack",
+      "priority": 0,
+      "predicate": {
+        "kind": "logical",
+        "op": "and",
+        "children": [
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "page",
+                "id"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": "page_moj0prl4_fqj4n"
+            }
+          },
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "zone_membership",
+                "zone_mobvumat_nifm1",
+                "occupancy"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": 0
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 30,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "comparison",
+              "left": {
+                "kind": "field",
+                "path": [
+                  "page",
+                  "id"
+                ]
+              },
+              "op": "==",
+              "right": {
+                "kind": "literal",
+                "value": "page_mohycd8i_lmiem"
+              }
+            }
+          }
+        ]
+      },
+      "cooldown_frames": 10,
+      "dedupe": {
+        "merge_adjacent_frames": 10,
+        "strategy": "leading_edge"
+      }
+    },
+    {
+      "id": "skiptarotspectralpack",
+      "name": "SkipPack",
+      "priority": 0,
+      "predicate": {
+        "kind": "logical",
+        "op": "and",
+        "children": [
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "page",
+                "id"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": "page_moj1lxic_h13j3"
+            }
+          },
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "zone_membership",
+                "zone_mobvumat_nifm1",
+                "occupancy"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": 0
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 30,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "comparison",
+              "left": {
+                "kind": "field",
+                "path": [
+                  "page",
+                  "id"
+                ]
+              },
+              "op": "==",
+              "right": {
+                "kind": "literal",
+                "value": "page_mohycd8i_lmiem"
+              }
+            }
+          }
+        ]
+      },
+      "cooldown_frames": 10,
+      "dedupe": {
+        "merge_adjacent_frames": 10,
+        "strategy": "leading_edge"
+      }
+    },
+    {
+      "id": "skipplanetstandardbuffoonpackblind",
+      "name": "SkipPack",
+      "priority": 0,
+      "predicate": {
+        "kind": "logical",
+        "op": "and",
+        "children": [
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "page",
+                "id"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": "page_moj0prl4_fqj4n"
+            }
+          },
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "zone_membership",
+                "zone_mobvumat_nifm1",
+                "occupancy"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": 0
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 30,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "comparison",
+              "left": {
+                "kind": "field",
+                "path": [
+                  "page",
+                  "id"
+                ]
+              },
+              "op": "==",
+              "right": {
+                "kind": "literal",
+                "value": "page_modfczqe_hmqtn"
+              }
+            }
+          }
+        ]
+      },
+      "cooldown_frames": 10,
+      "dedupe": {
+        "merge_adjacent_frames": 10,
+        "strategy": "leading_edge"
+      }
+    },
+    {
+      "id": "skiptarotspectralpackblind",
+      "name": "SkipPack",
+      "priority": 0,
+      "predicate": {
+        "kind": "logical",
+        "op": "and",
+        "children": [
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "page",
+                "id"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": "page_moj1lxic_h13j3"
+            }
+          },
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "zone_membership",
+                "zone_mobvumat_nifm1",
+                "occupancy"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": 0
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 30,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "comparison",
+              "left": {
+                "kind": "field",
+                "path": [
+                  "page",
+                  "id"
+                ]
+              },
+              "op": "==",
+              "right": {
+                "kind": "literal",
+                "value": "page_modfczqe_hmqtn"
+              }
+            }
+          }
+        ]
+      },
+      "cooldown_frames": 10,
+      "dedupe": {
+        "merge_adjacent_frames": 10,
+        "strategy": "leading_edge"
+      }
+    }
+  ]
+}

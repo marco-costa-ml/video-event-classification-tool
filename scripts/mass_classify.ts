@@ -7,6 +7,7 @@ import { classificationConfigSchema, type ClassificationConfig } from "../src/sc
 import type { PredicateNode, ValueExpr } from "../src/schemas/predicates.ts";
 import type { TimelineEvent } from "../src/schemas/labels.ts";
 import { loadParquetObjects, loadParquetOcr } from "../src/services/parquetIngest.ts";
+import { inferFrameColumn } from "../src/services/parquetColumnInfer.ts";
 import { createFrameStateCache } from "../src/domain/frameReconstruction.ts";
 import { evaluateEventsAtFrame } from "../src/domain/eventEngine.ts";
 import { collapsePredictedEvents } from "../src/domain/eventDedupe.ts";
@@ -69,6 +70,7 @@ const DEFAULTS: Omit<CliOptions, "onlyVideoIds"> = {
 };
 
 const FRAME_SCAN_CHUNK_ROWS = 250_000;
+const FRAME_INFER_SAMPLE_ROWS = 25_000;
 const CHILD_MAX_OLD_SPACE_MB = 6144;
 
 function parseArgs(argv: string[]): CliOptions {
@@ -153,14 +155,10 @@ function validateShardArgs(opts: CliOptions): void {
   }
 }
 
-function frameShift(config: ClassificationConfig, maxRawFrame: number): number {
-  const startSec = config.video.video_start_time_seconds ?? 0;
-  const fps = config.video.fps;
-  if (startSec <= 0 || fps <= 0) return 0;
-  const browserWindowMax = Math.max(1, Math.floor(20 * 60 * fps)) - 1;
-  if (maxRawFrame <= browserWindowMax) return 0;
-  return Math.round(startSec * fps);
-}
+type FrameBounds = {
+  min: number;
+  max: number;
+};
 
 function depsFromValueExpr(expr: ValueExpr): { past: number; future: number } {
   if (expr.kind !== "window_field") return { past: 0, future: 0 };
@@ -241,9 +239,31 @@ function applyShard(videoIds: string[], shardIndex: number | null, shardCount: n
   return out;
 }
 
-async function scanMaxFrame(buffer: ArrayBuffer, frameColumn: string): Promise<number> {
+async function scanFrameBounds(buffer: ArrayBuffer, frameColumn: string): Promise<FrameBounds | null> {
   const metadata = await parquetMetadataAsync(buffer);
   const totalRows = Number(metadata.num_rows);
+  if (totalRows <= 0) return null;
+
+  const headSample = (await parquetReadObjects({
+    file: buffer,
+    rowStart: 0,
+    rowEnd: Math.min(totalRows, FRAME_INFER_SAMPLE_ROWS),
+    useOffsetIndex: true,
+  })) as Record<string, unknown>[];
+  let tailSample: Record<string, unknown>[] = [];
+  if (totalRows > FRAME_INFER_SAMPLE_ROWS) {
+    const tailStart = Math.max(0, totalRows - FRAME_INFER_SAMPLE_ROWS);
+    tailSample = (await parquetReadObjects({
+      file: buffer,
+      rowStart: tailStart,
+      rowEnd: totalRows,
+      useOffsetIndex: true,
+    })) as Record<string, unknown>[];
+  }
+  const sample = tailSample.length ? [...headSample, ...tailSample] : headSample;
+  const frameCol = inferFrameColumn(sample) ?? frameColumn;
+
+  let minFrame = Number.POSITIVE_INFINITY;
   let maxFrame = -1;
   for (let rowStart = 0; rowStart < totalRows; rowStart += FRAME_SCAN_CHUNK_ROWS) {
     const rowEnd = Math.min(totalRows, rowStart + FRAME_SCAN_CHUNK_ROWS);
@@ -251,15 +271,18 @@ async function scanMaxFrame(buffer: ArrayBuffer, frameColumn: string): Promise<n
       file: buffer,
       rowStart,
       rowEnd,
-      columns: [frameColumn],
+      columns: [frameCol],
       useOffsetIndex: true,
     })) as Record<string, unknown>[];
     for (const row of rows) {
-      const v = num(row[frameColumn]);
-      if (v !== null && v > maxFrame) maxFrame = v;
+      const v = num(row[frameCol]);
+      if (v === null) continue;
+      if (v < minFrame) minFrame = v;
+      if (v > maxFrame) maxFrame = v;
     }
   }
-  return Math.floor(maxFrame);
+  if (!Number.isFinite(minFrame) || maxFrame < 0) return null;
+  return { min: Math.floor(minFrame), max: Math.floor(maxFrame) };
 }
 
 function createConfigForVideo(base: ClassificationConfig, videoId: string): ClassificationConfig {
@@ -293,6 +316,7 @@ async function detectTimelineChunked(
   config: ClassificationConfig,
   ocrBuffer: ArrayBuffer,
   objectsBuffer: ArrayBuffer,
+  globalMinFrame: number,
   globalMaxFrame: number,
   chunkFrames: number,
 ): Promise<TimelineEvent[]> {
@@ -301,7 +325,7 @@ async function detectTimelineChunked(
   const rawPoints: TimelineEvent[] = [];
   let seq = 0;
 
-  for (let start = 0; start <= globalMaxFrame; start += chunkFrames) {
+  for (let start = globalMinFrame; start <= globalMaxFrame; start += chunkFrames) {
     const end = Math.min(globalMaxFrame, start + chunkFrames - 1);
     const readStart = Math.max(0, start - overlap.past);
     const readEnd = Math.min(globalMaxFrame, end + overlap.future);
@@ -386,19 +410,25 @@ async function classifyVideo(baseConfig: ClassificationConfig, opts: CliOptions,
   const [ocrBufNode, objBufNode] = await Promise.all([readFile(ocrPath), readFile(objPath)]);
   const ocrBuffer = toArrayBuffer(ocrBufNode);
   const objBuffer = toArrayBuffer(objBufNode);
-  const config = createConfigForVideo(baseConfig, videoId);
+  const configWithVideoId = createConfigForVideo(baseConfig, videoId);
+  // Batch classification should cover the entire parquet timeline, so do not apply UI clip offsets.
+  const config: ClassificationConfig = {
+    ...configWithVideoId,
+    video: {
+      ...configWithVideoId.video,
+      video_start_time_seconds: 0,
+    },
+  };
 
-  const ocrMaxRaw = await scanMaxFrame(ocrBuffer, config.parquet.ocr?.frame ?? "frame");
-  const objMaxRaw = await scanMaxFrame(objBuffer, config.parquet.objects?.frame ?? "frame");
-  const shift = frameShift(config, Math.max(ocrMaxRaw, objMaxRaw));
-  const globalMax = Math.max(
-    config.video.frame_count - 1,
-    ocrMaxRaw >= 0 ? ocrMaxRaw - shift : -1,
-    objMaxRaw >= 0 ? objMaxRaw - shift : -1,
+  const ocrBounds = await scanFrameBounds(ocrBuffer, config.parquet.ocr?.frame ?? "frame");
+  const objBounds = await scanFrameBounds(objBuffer, config.parquet.objects?.frame ?? "frame");
+  const globalMin = Math.max(
     0,
+    Math.min(ocrBounds?.min ?? Number.POSITIVE_INFINITY, objBounds?.min ?? Number.POSITIVE_INFINITY),
   );
+  const globalMax = Math.max(ocrBounds?.max ?? -1, objBounds?.max ?? -1, config.video.frame_count - 1);
 
-  const timeline = await detectTimelineChunked(config, ocrBuffer, objBuffer, globalMax, opts.chunkFrames);
+  const timeline = await detectTimelineChunked(config, ocrBuffer, objBuffer, globalMin, globalMax, opts.chunkFrames);
   const enriched = await buildEnrichedChunked(config, ocrBuffer, objBuffer, timeline, opts.chunkFrames);
 
   const outputDir = path.join(opts.outputRoot, folder);

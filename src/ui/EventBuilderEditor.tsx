@@ -44,6 +44,8 @@ type RuleDraft = {
   zoneId: string;
   occupancyOp: CompOp;
   threshold: number;
+  /** For "Zone occupancy (physical)": require the threshold to hold for this many consecutive frames (>=1). */
+  sustainFrames: number;
   // Class / object fields
   className: string;
   countOp: CompOp;
@@ -88,6 +90,7 @@ function defaultRuleDraft(cfg: ClassificationConfig): RuleDraft {
     zoneId: cfg.zones[0]?.id ?? "",
     occupancyOp: ">",
     threshold: 0,
+    sustainFrames: 1,
     className: "",
     countOp: ">=",
     countValue: 1,
@@ -166,8 +169,23 @@ function buildRulePredicate(r: RuleDraft): PredicateNode {
       return { kind: "comparison", left: { kind: "field", path: ["ocr", "by_label", r.ocrLabel, 0, "text"] }, op: r.numOp, right: { kind: "literal", value: r.numValue } };
     case "zone_occupancy":
       return { kind: "comparison", left: { kind: "field", path: ["zones", r.zoneId, "occupancy"] }, op: r.occupancyOp, right: { kind: "literal", value: r.threshold } };
-    case "zone_physical_occupancy":
-      return { kind: "comparison", left: { kind: "field", path: ["zone_membership", r.zoneId, "occupancy"] }, op: r.occupancyOp, right: { kind: "literal", value: r.threshold } };
+    case "zone_physical_occupancy": {
+      const path = ["zone_membership", r.zoneId, "occupancy"] as (string | number)[];
+      const sustain = Math.max(1, Math.floor(r.sustainFrames || 1));
+      const cmpAt = (offset: number): PredicateNode => ({
+        kind: "comparison",
+        left: offset === 0
+          ? { kind: "field", path }
+          : { kind: "window_field", path, offset_frames: offset },
+        op: r.occupancyOp,
+        right: { kind: "literal", value: r.threshold },
+      });
+      if (sustain === 1) return cmpAt(0);
+      // Require the threshold to hold at the current frame AND every frame in the lookback window.
+      const children: PredicateNode[] = [];
+      for (let i = 0; i < sustain; i++) children.push(cmpAt(-i));
+      return { kind: "logical", op: "and", children };
+    }
     case "class_count":
       return { kind: "comparison", left: { kind: "field", path: ["class_counts", r.className] }, op: r.countOp, right: { kind: "literal", value: r.countValue } };
     case "object_entered_zone":
@@ -271,6 +289,58 @@ function tryParseRule(node: PredicateNode, cfg: ClassificationConfig): RuleDraft
       }
     }
   }
+  // Sustained zone_physical_occupancy: AND of comparisons on the same zone_membership/occupancy
+  // path with the same op and threshold, over a contiguous lookback window (offsets 0, -1, -2, …).
+  if (node.kind === "logical" && node.op === "and" && node.children.length >= 2) {
+    const comparisons = node.children.filter(
+      (c): c is Extract<PredicateNode, { kind: "comparison" }> => c.kind === "comparison",
+    );
+    if (comparisons.length === node.children.length) {
+      let zoneId: string | null = null;
+      let zoneOp: CompOp | null = null;
+      let threshold: number | null = null;
+      const offsets: number[] = [];
+      let ok = true;
+      for (const c of comparisons) {
+        if (c.right.kind !== "literal") { ok = false; break; }
+        const left = c.left;
+        const isField =
+          (left.kind === "field" || left.kind === "window_field") &&
+          left.path.length === 3 &&
+          left.path[0] === "zone_membership" &&
+          left.path[2] === "occupancy";
+        if (!isField) { ok = false; break; }
+        const z = String(left.path[1] ?? "");
+        const cop = c.op as CompOp;
+        const th = Number(c.right.value);
+        if (zoneId === null) zoneId = z; else if (zoneId !== z) { ok = false; break; }
+        if (zoneOp === null) zoneOp = cop; else if (zoneOp !== cop) { ok = false; break; }
+        if (threshold === null) threshold = th; else if (threshold !== th) { ok = false; break; }
+        const off = left.kind === "window_field" ? left.offset_frames : 0;
+        if (!Number.isFinite(off) || off > 0) { ok = false; break; }
+        offsets.push(Math.trunc(off));
+      }
+      if (ok && zoneId !== null && zoneOp !== null && threshold !== null) {
+        // Offsets must form the contiguous set { 0, -1, ..., -(N-1) }.
+        const sorted = [...offsets].sort((a, b) => b - a);
+        let contiguous = sorted[0] === 0;
+        for (let i = 0; contiguous && i < sorted.length; i++) {
+          if (sorted[i] !== -i) contiguous = false;
+        }
+        if (contiguous) {
+          return {
+            ...base,
+            id: newId("rule"),
+            kind: "zone_physical_occupancy",
+            zoneId,
+            occupancyOp: zoneOp,
+            threshold,
+            sustainFrames: offsets.length,
+          };
+        }
+      }
+    }
+  }
   if (node.kind === "exists") {
     const p = node.path;
     if (p[0] === "ocr" && p[1] === "by_label" && p.length >= 3)
@@ -311,7 +381,7 @@ function tryParseRule(node: PredicateNode, cfg: ClassificationConfig): RuleDraft
     if (path[0] === "zone_membership" && path.length === 3 && path[2] === "occupancy") {
       const zoneId = String(path[1] ?? "");
       if (op === ">" || op === ">=" || op === "<" || op === "<=" || op === "==" || op === "!=")
-        return { ...base, id: newId("rule"), kind: "zone_physical_occupancy", zoneId, occupancyOp: op as CompOp, threshold: Number(val) };
+        return { ...base, id: newId("rule"), kind: "zone_physical_occupancy", zoneId, occupancyOp: op as CompOp, threshold: Number(val), sustainFrames: 1 };
     }
     // Class count
     if (path[0] === "class_counts" && path.length === 2) {
@@ -500,7 +570,7 @@ function RuleCard({ rule, index, total, cfg, knownOcrLabels, onChange, onRemove 
 
       {/* ── Zone rules ── */}
       {(rule.kind === "zone_occupancy" || rule.kind === "zone_physical_occupancy") ? (
-        <div className="row" style={{ alignItems: "center", gap: 8 }}>
+        <div className="row" style={{ alignItems: "center", gap: 8, flexWrap: "wrap" }}>
           <label style={{ fontSize: 13 }}>
             Zone{" "}
             <select value={rule.zoneId} onChange={(e) => onChange({ zoneId: e.target.value })}>
@@ -514,8 +584,26 @@ function RuleCard({ rule, index, total, cfg, knownOcrLabels, onChange, onRemove 
             </select>
           </label>
           <input type="number" style={{ width: 64 }} min={0} value={rule.threshold} onChange={(e) => onChange({ threshold: Number(e.target.value) })} />
+          {rule.kind === "zone_physical_occupancy" ? (
+            <label style={{ fontSize: 13, display: "flex", alignItems: "center", gap: 6 }}>
+              Sustained for
+              <input
+                type="number"
+                min={1}
+                step={1}
+                style={{ width: 64 }}
+                value={Math.max(1, Math.floor(rule.sustainFrames || 1))}
+                onChange={(e) => onChange({ sustainFrames: Math.max(1, Math.floor(Number(e.target.value) || 1)) })}
+              />
+              frames
+            </label>
+          ) : null}
           <span className="muted" style={{ fontSize: 12 }}>
-            {rule.kind === "zone_physical_occupancy" ? "objects physically inside zone, ignoring priority" : "objects assigned to this zone after priority rules"}
+            {rule.kind === "zone_physical_occupancy"
+              ? rule.sustainFrames > 1
+                ? `physical occupancy must hold for ${Math.max(1, Math.floor(rule.sustainFrames))} consecutive frames`
+                : "objects physically inside zone, ignoring priority"
+              : "objects assigned to this zone after priority rules"}
           </span>
         </div>
       ) : null}

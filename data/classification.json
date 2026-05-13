@@ -6,7 +6,7 @@
     "frame_count": 36000,
     "width": 640,
     "height": 360,
-    "duration_seconds": 8394.634,
+    "duration_seconds": 14908.867,
     "video_start_time_seconds": 7200
   },
   "parquet": {
@@ -819,6 +819,234 @@
           "max": 366
         }
       ]
+    },
+    {
+      "id": "zone_current_hand_all",
+      "name": "CurrentHandAll",
+      "priority": 100,
+      "geometry": {
+        "type": "rectangle",
+        "x": 163,
+        "y": 192,
+        "width": 368,
+        "height": 107
+      },
+      "parent_classes": [
+        "obj"
+      ],
+      "object_classes": [
+        "obj"
+      ],
+      "object_class_ranges": [
+        {
+          "min": 0,
+          "max": 51
+        },
+        {
+          "min": 231,
+          "max": 231
+        },
+        {
+          "min": 78,
+          "max": 78
+        }
+      ]
+    },
+    {
+      "id": "zone_pack_offerings_all",
+      "name": "PackOfferingsAll",
+      "priority": 100,
+      "geometry": {
+        "type": "rectangle",
+        "x": 163,
+        "y": 192,
+        "width": 368,
+        "height": 107
+      },
+      "parent_classes": [
+        "obj"
+      ],
+      "object_classes": [
+        "obj"
+      ],
+      "object_class_ranges": [
+        {
+          "min": 0,
+          "max": 51
+        },
+        {
+          "min": 231,
+          "max": 231
+        },
+        {
+          "min": 80,
+          "max": 229
+        },
+        {
+          "min": 236,
+          "max": 247
+        },
+        {
+          "min": 248,
+          "max": 265
+        },
+        {
+          "min": 298,
+          "max": 319
+        },
+        {
+          "min": 78,
+          "max": 78
+        }
+      ]
+    },
+    {
+      "id": "zone_current_consumables_all",
+      "name": "CurrentConsumablesAll",
+      "priority": 0,
+      "geometry": {
+        "type": "rectangle",
+        "x": 443,
+        "y": 6,
+        "width": 174,
+        "height": 91
+      },
+      "parent_classes": [
+        "obj"
+      ],
+      "object_classes": [
+        "obj"
+      ],
+      "object_class_ranges": [
+        {
+          "min": 298,
+          "max": 319
+        },
+        {
+          "min": 236,
+          "max": 265
+        }
+      ]
+    },
+    {
+      "id": "zone_voucher_shop_offerings_all",
+      "name": "VoucherShopOfferingsAll",
+      "priority": 0,
+      "geometry": {
+        "type": "rectangle",
+        "x": 194,
+        "y": 233,
+        "width": 157,
+        "height": 102
+      },
+      "parent_classes": [
+        "obj"
+      ],
+      "object_classes": [
+        "obj"
+      ],
+      "object_class_ranges": [
+        {
+          "min": 320,
+          "max": 351
+        }
+      ]
+    },
+    {
+      "id": "zone_top_shelf_shop_offerings_all",
+      "name": "TopShelfShopOfferingsAll",
+      "priority": -5,
+      "geometry": {
+        "type": "rectangle",
+        "x": 272,
+        "y": 114,
+        "width": 240,
+        "height": 112
+      },
+      "parent_classes": [
+        "obj"
+      ],
+      "object_classes": [
+        "obj"
+      ],
+      "object_class_ranges": [
+        {
+          "min": 0,
+          "max": 51
+        },
+        {
+          "min": 80,
+          "max": 229
+        },
+        {
+          "min": 236,
+          "max": 247
+        },
+        {
+          "min": 248,
+          "max": 265
+        },
+        {
+          "min": 298,
+          "max": 319
+        },
+        {
+          "min": 78,
+          "max": 78
+        }
+      ]
+    },
+    {
+      "id": "zone_tarot_spectral_hand_all",
+      "name": "TarotSpectralHandAll",
+      "priority": 31,
+      "geometry": {
+        "type": "rectangle",
+        "x": 164,
+        "y": 105,
+        "width": 359,
+        "height": 106
+      },
+      "parent_classes": [
+        "obj"
+      ],
+      "object_classes": [
+        "obj"
+      ],
+      "object_class_ranges": [
+        {
+          "min": 0,
+          "max": 51
+        },
+        {
+          "min": 78,
+          "max": 78
+        }
+      ]
+    },
+    {
+      "id": "zone_pack_shop_offerings_all",
+      "name": "PackShopOfferingsAll",
+      "priority": 0,
+      "geometry": {
+        "type": "rectangle",
+        "x": 354,
+        "y": 220,
+        "width": 147,
+        "height": 126
+      },
+      "parent_classes": [
+        "obj"
+      ],
+      "object_classes": [
+        "obj"
+      ],
+      "object_class_ranges": [
+        {
+          "min": 352,
+          "max": 366
+        }
+      ]
     }
   ],
   "pages": [
@@ -873,8 +1101,9 @@
         "zone_mouc35xw_684ab",
         "zone_moqaqgvl_y3eec",
         "zone_morl3bxf_sdqpv",
-        "zone_mobvt1b4_w5ket",
-        "zone_mobvumat_nifm1"
+        "zone_mobvumat_nifm1",
+        "zone_current_hand_all",
+        "zone_current_consumables_all"
       ],
       "export_include_ocr_labels": [
         "ante",
@@ -951,15 +1180,15 @@
       "export_include_zone_ids": [
         "zone_mobwidyi_8u1ar",
         "zone_mobwyfys_0clua",
-        "zone_moby77zz_6g6oe",
-        "zone_moq9w01e_fq1iw",
         "zone_modf8rtv_lyxhs",
         "zone_modfbks3_rbtu7",
         "zone_modfqk2d_xujvr",
         "zone_modfu74l_yd8fc",
         "zone_moqaqgvl_y3eec",
         "zone_morl3bxf_sdqpv",
-        "zone_mouc35xw_684ab"
+        "zone_mouc35xw_684ab",
+        "zone_moq9w01e_fq1iw",
+        "zone_current_consumables_all"
       ],
       "export_include_ocr_labels": [
         "ante",
@@ -983,11 +1212,11 @@
         "children": []
       },
       "export_include_zone_ids": [
-        "zone_moby77zz_6g6oe",
         "zone_moq9w01e_fq1iw",
         "zone_mobwyfys_0clua",
         "zone_moqaqgvl_y3eec",
-        "zone_mouc35xw_684ab"
+        "zone_mouc35xw_684ab",
+        "zone_current_consumables_all"
       ],
       "export_include_ocr_labels": [
         "ante",
@@ -1025,11 +1254,11 @@
       "export_include_zone_ids": [
         "zone_mobwidyi_8u1ar",
         "zone_mobwyfys_0clua",
-        "zone_moby77zz_6g6oe",
         "zone_moq9w01e_fq1iw",
         "zone_moqaqgvl_y3eec",
         "zone_morl3bxf_sdqpv",
-        "zone_mouc35xw_684ab"
+        "zone_mouc35xw_684ab",
+        "zone_current_consumables_all"
       ],
       "export_include_ocr_labels": [
         "ante",
@@ -1038,7 +1267,6 @@
         "deck_values",
         "discards_left",
         "dollars",
-        "hand_values",
         "hands_left",
         "joker_values",
         "round"
@@ -1107,18 +1335,17 @@
       "export_include_zone_ids": [
         "zone_mobwidyi_8u1ar",
         "zone_mobwyfys_0clua",
-        "zone_moby77zz_6g6oe",
-        "zone_moq9w01e_fq1iw",
-        "zone_mohz11ej_wy4c2",
-        "zone_mohz2d5v_kohvc",
-        "zone_moj18gsr_x9csk",
-        "zone_moj1bzp6_ro0vu",
         "zone_moqaqgvl_y3eec",
         "zone_morl3bxf_sdqpv",
         "zone_mouc35xw_684ab",
-        "zone_mobvumat_nifm1",
-        "zone_mow4kqrg_jeqtb",
-        "zone_mow4kubk_yyt1x"
+        "zone_mow4kubk_yyt1x",
+        "zone_moj1bzp6_ro0vu",
+        "zone_mohz2d5v_kohvc",
+        "zone_moq9w01e_fq1iw",
+        "zone_current_consumables_all",
+        "zone_voucher_shop_offerings_all",
+        "zone_top_shelf_shop_offerings_all",
+        "zone_pack_shop_offerings_all"
       ],
       "export_include_ocr_labels": [
         "ante",
@@ -1126,7 +1353,6 @@
         "deck_values",
         "discards_left",
         "dollars",
-        "hand_values",
         "hands_left",
         "joker_values",
         "reroll_price",
@@ -1200,13 +1426,13 @@
       "export_include_zone_ids": [
         "zone_mobwidyi_8u1ar",
         "zone_mobwyfys_0clua",
-        "zone_moby77zz_6g6oe",
         "zone_moq9w01e_fq1iw",
         "zone_moqaqgvl_y3eec",
         "zone_morl3bxf_sdqpv",
         "zone_mouc35xw_684ab",
-        "zone_aobvt1b4_w5ket",
-        "zone_aobvumat_nifm1"
+        "zone_aobvumat_nifm1",
+        "zone_pack_offerings_all",
+        "zone_current_consumables_all"
       ],
       "export_include_ocr_labels": [
         "ante",
@@ -1214,8 +1440,6 @@
         "deck_values",
         "discards_left",
         "dollars",
-        "hand_and_level",
-        "hand_values",
         "hands_left",
         "joker_values",
         "round"
@@ -1269,20 +1493,19 @@
       },
       "export_include_zone_ids": [
         "zone_mobwyfys_0clua",
-        "zone_moby77zz_6g6oe",
         "zone_moq9w01e_fq1iw",
-        "zone_mokf3s0u_5474o",
         "zone_mokf3xal_f0l4f",
         "zone_moqaqgvl_y3eec",
         "zone_morl3bxf_sdqpv",
         "zone_mouc35xw_684ab",
         "zone_mobwidyi_8u1ar",
-        "zone_aobvt1b4_w5ket",
-        "zone_aobvumat_nifm1"
+        "zone_aobvumat_nifm1",
+        "zone_pack_shop_offerings_all",
+        "zone_tarot_spectral_hand_all",
+        "zone_current_consumables_all"
       ],
       "export_include_ocr_labels": [
         "ante",
-        "cash_out",
         "consumable_values",
         "deck_values",
         "discards_left",
@@ -1362,7 +1585,7 @@
       },
       "cooldown_frames": 10,
       "dedupe": {
-        "merge_adjacent_frames": 10,
+        "merge_adjacent_frames": 20,
         "strategy": "leading_edge"
       }
     },
@@ -1512,7 +1735,7 @@
       },
       "cooldown_frames": 10,
       "dedupe": {
-        "merge_adjacent_frames": 10,
+        "merge_adjacent_frames": 20,
         "strategy": "leading_edge"
       }
     },
@@ -1577,7 +1800,7 @@
       },
       "cooldown_frames": 10,
       "dedupe": {
-        "merge_adjacent_frames": 3,
+        "merge_adjacent_frames": 500,
         "strategy": "leading_edge"
       }
     },
@@ -1630,7 +1853,7 @@
       },
       "cooldown_frames": 50,
       "dedupe": {
-        "merge_adjacent_frames": 50,
+        "merge_adjacent_frames": 200,
         "strategy": "leading_edge"
       }
     },
@@ -1683,7 +1906,7 @@
       },
       "cooldown_frames": 10,
       "dedupe": {
-        "merge_adjacent_frames": 10,
+        "merge_adjacent_frames": 20,
         "strategy": "leading_edge"
       }
     },
@@ -1736,7 +1959,7 @@
       },
       "cooldown_frames": 10,
       "dedupe": {
-        "merge_adjacent_frames": 10,
+        "merge_adjacent_frames": 200,
         "strategy": "leading_edge"
       }
     },
@@ -1829,7 +2052,7 @@
       },
       "cooldown_frames": 10,
       "dedupe": {
-        "merge_adjacent_frames": 10,
+        "merge_adjacent_frames": 20,
         "strategy": "leading_edge"
       }
     },
@@ -1898,7 +2121,7 @@
       },
       "cooldown_frames": 10,
       "dedupe": {
-        "merge_adjacent_frames": 10,
+        "merge_adjacent_frames": 15,
         "strategy": "leading_edge"
       }
     },
@@ -2010,7 +2233,7 @@
       },
       "cooldown_frames": 10,
       "dedupe": {
-        "merge_adjacent_frames": 10,
+        "merge_adjacent_frames": 15,
         "strategy": "leading_edge"
       }
     },
@@ -2079,7 +2302,7 @@
       },
       "cooldown_frames": 10,
       "dedupe": {
-        "merge_adjacent_frames": 10,
+        "merge_adjacent_frames": 15,
         "strategy": "leading_edge"
       }
     },
@@ -2172,7 +2395,7 @@
       },
       "cooldown_frames": 10,
       "dedupe": {
-        "merge_adjacent_frames": 10,
+        "merge_adjacent_frames": 20,
         "strategy": "leading_edge"
       }
     },
@@ -2223,7 +2446,7 @@
       },
       "cooldown_frames": 10,
       "dedupe": {
-        "merge_adjacent_frames": 10,
+        "merge_adjacent_frames": 20,
         "strategy": "leading_edge"
       }
     },
@@ -2332,7 +2555,7 @@
       },
       "cooldown_frames": 10,
       "dedupe": {
-        "merge_adjacent_frames": 10,
+        "merge_adjacent_frames": 20,
         "strategy": "leading_edge"
       }
     },
@@ -2422,7 +2645,7 @@
       },
       "cooldown_frames": 10,
       "dedupe": {
-        "merge_adjacent_frames": 10,
+        "merge_adjacent_frames": 15,
         "strategy": "leading_edge"
       }
     },
@@ -2528,7 +2751,7 @@
       },
       "cooldown_frames": 10,
       "dedupe": {
-        "merge_adjacent_frames": 10,
+        "merge_adjacent_frames": 20,
         "strategy": "leading_edge"
       }
     },
@@ -2634,7 +2857,7 @@
       },
       "cooldown_frames": 10,
       "dedupe": {
-        "merge_adjacent_frames": 10,
+        "merge_adjacent_frames": 20,
         "strategy": "leading_edge"
       }
     },
@@ -2743,7 +2966,7 @@
       },
       "cooldown_frames": 10,
       "dedupe": {
-        "merge_adjacent_frames": 10,
+        "merge_adjacent_frames": 20,
         "strategy": "leading_edge"
       }
     },
@@ -2758,200 +2981,7 @@
           {
             "kind": "temporal",
             "anchor": "eval_frame",
-            "offset_frames": 18,
-            "window_before": 0,
-            "window_after": 0,
-            "child": {
-              "kind": "comparison",
-              "left": {
-                "kind": "field",
-                "path": [
-                  "ocr",
-                  "by_label",
-                  "dollars",
-                  0,
-                  "text"
-                ]
-              },
-              "op": "contains",
-              "right": {
-                "kind": "literal",
-                "value": "+"
-              }
-            }
-          },
-          {
-            "kind": "temporal",
-            "anchor": "eval_frame",
-            "offset_frames": 16,
-            "window_before": 0,
-            "window_after": 0,
-            "child": {
-              "kind": "change",
-              "path": [
-                "ocr",
-                "by_label",
-                "joker_values",
-                0,
-                "text"
-              ],
-              "op": "decrease",
-              "window_frames": 6
-            }
-          },
-          {
-            "kind": "comparison",
-            "left": {
-              "kind": "field",
-              "path": [
-                "zone_membership",
-                "zone_moqaqgvl_y3eec",
-                "occupancy"
-              ]
-            },
-            "op": "==",
-            "right": {
-              "kind": "literal",
-              "value": 1
-            }
-          },
-          {
-            "kind": "temporal",
-            "anchor": "eval_frame",
-            "offset_frames": 16,
-            "window_before": 0,
-            "window_after": 0,
-            "child": {
-              "kind": "comparison",
-              "left": {
-                "kind": "field",
-                "path": [
-                  "zone_membership",
-                  "zone_moqaqgvl_y3eec",
-                  "occupancy"
-                ]
-              },
-              "op": "==",
-              "right": {
-                "kind": "literal",
-                "value": 0
-              }
-            }
-          }
-        ]
-      },
-      "cooldown_frames": 10,
-      "dedupe": {
-        "merge_adjacent_frames": 10,
-        "strategy": "leading_edge"
-      }
-    },
-    {
-      "id": "useconsumable",
-      "name": "UseConsumable",
-      "priority": 99,
-      "predicate": {
-        "kind": "logical",
-        "op": "and",
-        "children": [
-          {
-            "kind": "comparison",
-            "left": {
-              "kind": "field",
-              "path": [
-                "zone_membership",
-                "zone_moq9w01e_fq1iw",
-                "occupancy"
-              ]
-            },
-            "op": "==",
-            "right": {
-              "kind": "literal",
-              "value": 1
-            }
-          },
-          {
-            "kind": "temporal",
-            "anchor": "eval_frame",
-            "offset_frames": 10,
-            "window_before": 0,
-            "window_after": 0,
-            "child": {
-              "kind": "comparison",
-              "left": {
-                "kind": "field",
-                "path": [
-                  "zone_membership",
-                  "zone_moj0jsj8_47txr",
-                  "occupancy"
-                ]
-              },
-              "op": "==",
-              "right": {
-                "kind": "literal",
-                "value": 1
-              }
-            }
-          }
-        ]
-      },
-      "cooldown_frames": 10,
-      "dedupe": {
-        "merge_adjacent_frames": 10,
-        "strategy": "leading_edge"
-      }
-    },
-    {
-      "id": "sellconsumable",
-      "name": "SellItem",
-      "priority": 10,
-      "predicate": {
-        "kind": "logical",
-        "op": "and",
-        "children": [
-          {
-            "kind": "comparison",
-            "left": {
-              "kind": "field",
-              "path": [
-                "zone_membership",
-                "zone_moq9w01e_fq1iw",
-                "occupancy"
-              ]
-            },
-            "op": "==",
-            "right": {
-              "kind": "literal",
-              "value": 1
-            }
-          },
-          {
-            "kind": "temporal",
-            "anchor": "eval_frame",
-            "offset_frames": 16,
-            "window_before": 0,
-            "window_after": 0,
-            "child": {
-              "kind": "comparison",
-              "left": {
-                "kind": "field",
-                "path": [
-                  "zone_membership",
-                  "zone_moq9w01e_fq1iw",
-                  "occupancy"
-                ]
-              },
-              "op": "==",
-              "right": {
-                "kind": "literal",
-                "value": 0
-              }
-            }
-          },
-          {
-            "kind": "temporal",
-            "anchor": "eval_frame",
-            "offset_frames": 5,
+            "offset_frames": 14,
             "window_before": 0,
             "window_after": 0,
             "child": {
@@ -3089,291 +3119,6 @@
                     "kind": "literal",
                     "value": "+"
                   }
-                },
-                {
-                  "kind": "comparison",
-                  "left": {
-                    "kind": "window_field",
-                    "path": [
-                      "ocr",
-                      "by_label",
-                      "dollars",
-                      0,
-                      "text"
-                    ],
-                    "offset_frames": 7
-                  },
-                  "op": "contains",
-                  "right": {
-                    "kind": "literal",
-                    "value": "+"
-                  }
-                },
-                {
-                  "kind": "comparison",
-                  "left": {
-                    "kind": "window_field",
-                    "path": [
-                      "ocr",
-                      "by_label",
-                      "dollars",
-                      0,
-                      "text"
-                    ],
-                    "offset_frames": 8
-                  },
-                  "op": "contains",
-                  "right": {
-                    "kind": "literal",
-                    "value": "+"
-                  }
-                },
-                {
-                  "kind": "comparison",
-                  "left": {
-                    "kind": "window_field",
-                    "path": [
-                      "ocr",
-                      "by_label",
-                      "dollars",
-                      0,
-                      "text"
-                    ],
-                    "offset_frames": 9
-                  },
-                  "op": "contains",
-                  "right": {
-                    "kind": "literal",
-                    "value": "+"
-                  }
-                },
-                {
-                  "kind": "comparison",
-                  "left": {
-                    "kind": "window_field",
-                    "path": [
-                      "ocr",
-                      "by_label",
-                      "dollars",
-                      0,
-                      "text"
-                    ],
-                    "offset_frames": 10
-                  },
-                  "op": "contains",
-                  "right": {
-                    "kind": "literal",
-                    "value": "+"
-                  }
-                },
-                {
-                  "kind": "comparison",
-                  "left": {
-                    "kind": "window_field",
-                    "path": [
-                      "ocr",
-                      "by_label",
-                      "dollars",
-                      0,
-                      "text"
-                    ],
-                    "offset_frames": 11
-                  },
-                  "op": "contains",
-                  "right": {
-                    "kind": "literal",
-                    "value": "+"
-                  }
-                },
-                {
-                  "kind": "comparison",
-                  "left": {
-                    "kind": "window_field",
-                    "path": [
-                      "ocr",
-                      "by_label",
-                      "dollars",
-                      0,
-                      "text"
-                    ],
-                    "offset_frames": 12
-                  },
-                  "op": "contains",
-                  "right": {
-                    "kind": "literal",
-                    "value": "+"
-                  }
-                },
-                {
-                  "kind": "comparison",
-                  "left": {
-                    "kind": "window_field",
-                    "path": [
-                      "ocr",
-                      "by_label",
-                      "dollars",
-                      0,
-                      "text"
-                    ],
-                    "offset_frames": 13
-                  },
-                  "op": "contains",
-                  "right": {
-                    "kind": "literal",
-                    "value": "+"
-                  }
-                },
-                {
-                  "kind": "comparison",
-                  "left": {
-                    "kind": "window_field",
-                    "path": [
-                      "ocr",
-                      "by_label",
-                      "dollars",
-                      0,
-                      "text"
-                    ],
-                    "offset_frames": 14
-                  },
-                  "op": "contains",
-                  "right": {
-                    "kind": "literal",
-                    "value": "+"
-                  }
-                },
-                {
-                  "kind": "comparison",
-                  "left": {
-                    "kind": "window_field",
-                    "path": [
-                      "ocr",
-                      "by_label",
-                      "dollars",
-                      0,
-                      "text"
-                    ],
-                    "offset_frames": 15
-                  },
-                  "op": "contains",
-                  "right": {
-                    "kind": "literal",
-                    "value": "+"
-                  }
-                },
-                {
-                  "kind": "comparison",
-                  "left": {
-                    "kind": "window_field",
-                    "path": [
-                      "ocr",
-                      "by_label",
-                      "dollars",
-                      0,
-                      "text"
-                    ],
-                    "offset_frames": 16
-                  },
-                  "op": "contains",
-                  "right": {
-                    "kind": "literal",
-                    "value": "+"
-                  }
-                },
-                {
-                  "kind": "comparison",
-                  "left": {
-                    "kind": "window_field",
-                    "path": [
-                      "ocr",
-                      "by_label",
-                      "dollars",
-                      0,
-                      "text"
-                    ],
-                    "offset_frames": 17
-                  },
-                  "op": "contains",
-                  "right": {
-                    "kind": "literal",
-                    "value": "+"
-                  }
-                },
-                {
-                  "kind": "comparison",
-                  "left": {
-                    "kind": "window_field",
-                    "path": [
-                      "ocr",
-                      "by_label",
-                      "dollars",
-                      0,
-                      "text"
-                    ],
-                    "offset_frames": 18
-                  },
-                  "op": "contains",
-                  "right": {
-                    "kind": "literal",
-                    "value": "+"
-                  }
-                },
-                {
-                  "kind": "comparison",
-                  "left": {
-                    "kind": "window_field",
-                    "path": [
-                      "ocr",
-                      "by_label",
-                      "dollars",
-                      0,
-                      "text"
-                    ],
-                    "offset_frames": 19
-                  },
-                  "op": "contains",
-                  "right": {
-                    "kind": "literal",
-                    "value": "+"
-                  }
-                },
-                {
-                  "kind": "comparison",
-                  "left": {
-                    "kind": "window_field",
-                    "path": [
-                      "ocr",
-                      "by_label",
-                      "dollars",
-                      0,
-                      "text"
-                    ],
-                    "offset_frames": 20
-                  },
-                  "op": "contains",
-                  "right": {
-                    "kind": "literal",
-                    "value": "+"
-                  }
-                },
-                {
-                  "kind": "comparison",
-                  "left": {
-                    "kind": "window_field",
-                    "path": [
-                      "ocr",
-                      "by_label",
-                      "dollars",
-                      0,
-                      "text"
-                    ],
-                    "offset_frames": 21
-                  },
-                  "op": "contains",
-                  "right": {
-                    "kind": "literal",
-                    "value": "+"
-                  }
                 }
               ]
             }
@@ -3381,7 +3126,97 @@
           {
             "kind": "temporal",
             "anchor": "eval_frame",
-            "offset_frames": 17,
+            "offset_frames": 16,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "change",
+              "path": [
+                "ocr",
+                "by_label",
+                "joker_values",
+                0,
+                "text"
+              ],
+              "op": "decrease",
+              "window_frames": 6
+            }
+          },
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "zone_membership",
+                "zone_moqaqgvl_y3eec",
+                "occupancy"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": 1
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 16,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "comparison",
+              "left": {
+                "kind": "field",
+                "path": [
+                  "zone_membership",
+                  "zone_moqaqgvl_y3eec",
+                  "occupancy"
+                ]
+              },
+              "op": "==",
+              "right": {
+                "kind": "literal",
+                "value": 0
+              }
+            }
+          }
+        ]
+      },
+      "cooldown_frames": 10,
+      "dedupe": {
+        "merge_adjacent_frames": 20,
+        "strategy": "leading_edge"
+      }
+    },
+    {
+      "id": "useconsumable",
+      "name": "UseConsumable",
+      "priority": 99,
+      "predicate": {
+        "kind": "logical",
+        "op": "and",
+        "children": [
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "zone_membership",
+                "zone_moq9w01e_fq1iw",
+                "occupancy"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": 1
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 10,
             "window_before": 0,
             "window_after": 0,
             "child": {
@@ -3397,7 +3232,7 @@
               "op": "==",
               "right": {
                 "kind": "literal",
-                "value": 0
+                "value": 1
               }
             }
           }
@@ -3405,7 +3240,474 @@
       },
       "cooldown_frames": 10,
       "dedupe": {
-        "merge_adjacent_frames": 10,
+        "merge_adjacent_frames": 20,
+        "strategy": "leading_edge"
+      }
+    },
+    {
+      "id": "sellconsumable",
+      "name": "SellItem",
+      "priority": 10,
+      "predicate": {
+        "kind": "logical",
+        "op": "and",
+        "children": [
+          {
+            "kind": "comparison",
+            "left": {
+              "kind": "field",
+              "path": [
+                "zone_membership",
+                "zone_moq9w01e_fq1iw",
+                "occupancy"
+              ]
+            },
+            "op": "==",
+            "right": {
+              "kind": "literal",
+              "value": 1
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 16,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "comparison",
+              "left": {
+                "kind": "field",
+                "path": [
+                  "zone_membership",
+                  "zone_moq9w01e_fq1iw",
+                  "occupancy"
+                ]
+              },
+              "op": "==",
+              "right": {
+                "kind": "literal",
+                "value": 0
+              }
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 14,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "logical",
+              "op": "or",
+              "children": [
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "field",
+                    "path": [
+                      "ocr",
+                      "by_label",
+                      "dollars",
+                      0,
+                      "text"
+                    ]
+                  },
+                  "op": "contains",
+                  "right": {
+                    "kind": "literal",
+                    "value": "+"
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "ocr",
+                      "by_label",
+                      "dollars",
+                      0,
+                      "text"
+                    ],
+                    "offset_frames": 1
+                  },
+                  "op": "contains",
+                  "right": {
+                    "kind": "literal",
+                    "value": "+"
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "ocr",
+                      "by_label",
+                      "dollars",
+                      0,
+                      "text"
+                    ],
+                    "offset_frames": 2
+                  },
+                  "op": "contains",
+                  "right": {
+                    "kind": "literal",
+                    "value": "+"
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "ocr",
+                      "by_label",
+                      "dollars",
+                      0,
+                      "text"
+                    ],
+                    "offset_frames": 3
+                  },
+                  "op": "contains",
+                  "right": {
+                    "kind": "literal",
+                    "value": "+"
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "ocr",
+                      "by_label",
+                      "dollars",
+                      0,
+                      "text"
+                    ],
+                    "offset_frames": 4
+                  },
+                  "op": "contains",
+                  "right": {
+                    "kind": "literal",
+                    "value": "+"
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "ocr",
+                      "by_label",
+                      "dollars",
+                      0,
+                      "text"
+                    ],
+                    "offset_frames": 5
+                  },
+                  "op": "contains",
+                  "right": {
+                    "kind": "literal",
+                    "value": "+"
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "ocr",
+                      "by_label",
+                      "dollars",
+                      0,
+                      "text"
+                    ],
+                    "offset_frames": 6
+                  },
+                  "op": "contains",
+                  "right": {
+                    "kind": "literal",
+                    "value": "+"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 15,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "logical",
+              "op": "and",
+              "children": [
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "field",
+                    "path": [
+                      "zone_membership",
+                      "zone_moj0jsj8_47txr",
+                      "occupancy"
+                    ]
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_moj0jsj8_47txr",
+                      "occupancy"
+                    ],
+                    "offset_frames": -1
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_moj0jsj8_47txr",
+                      "occupancy"
+                    ],
+                    "offset_frames": -2
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_moj0jsj8_47txr",
+                      "occupancy"
+                    ],
+                    "offset_frames": -3
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_moj0jsj8_47txr",
+                      "occupancy"
+                    ],
+                    "offset_frames": -4
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_moj0jsj8_47txr",
+                      "occupancy"
+                    ],
+                    "offset_frames": -5
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_moj0jsj8_47txr",
+                      "occupancy"
+                    ],
+                    "offset_frames": -6
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_moj0jsj8_47txr",
+                      "occupancy"
+                    ],
+                    "offset_frames": -7
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_moj0jsj8_47txr",
+                      "occupancy"
+                    ],
+                    "offset_frames": -8
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_moj0jsj8_47txr",
+                      "occupancy"
+                    ],
+                    "offset_frames": -9
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_moj0jsj8_47txr",
+                      "occupancy"
+                    ],
+                    "offset_frames": -10
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_moj0jsj8_47txr",
+                      "occupancy"
+                    ],
+                    "offset_frames": -11
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_moj0jsj8_47txr",
+                      "occupancy"
+                    ],
+                    "offset_frames": -12
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_moj0jsj8_47txr",
+                      "occupancy"
+                    ],
+                    "offset_frames": -13
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_moj0jsj8_47txr",
+                      "occupancy"
+                    ],
+                    "offset_frames": -14
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "cooldown_frames": 10,
+      "dedupe": {
+        "merge_adjacent_frames": 20,
         "strategy": "leading_edge"
       }
     },
@@ -3733,7 +4035,7 @@
       },
       "cooldown_frames": 10,
       "dedupe": {
-        "merge_adjacent_frames": 10,
+        "merge_adjacent_frames": 20,
         "strategy": "leading_edge"
       }
     },
@@ -3826,7 +4128,7 @@
       },
       "cooldown_frames": 10,
       "dedupe": {
-        "merge_adjacent_frames": 10,
+        "merge_adjacent_frames": 20,
         "strategy": "leading_edge"
       }
     },
@@ -3854,25 +4156,446 @@
             }
           },
           {
-            "kind": "comparison",
-            "left": {
-              "kind": "field",
-              "path": [
-                "zone_membership",
-                "zone_mobvumat_nifm1",
-                "occupancy"
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 20,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "logical",
+              "op": "and",
+              "children": [
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ]
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -1
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -2
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -3
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -4
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -5
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -6
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -7
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -8
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -9
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -10
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -11
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -12
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -13
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -14
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -15
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -16
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -17
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -18
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -19
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -20
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -21
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -22
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -23
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -24
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                }
               ]
-            },
-            "op": "==",
-            "right": {
-              "kind": "literal",
-              "value": 0
             }
           },
           {
             "kind": "temporal",
             "anchor": "eval_frame",
-            "offset_frames": 30,
+            "offset_frames": 20,
             "window_before": 0,
             "window_after": 0,
             "child": {
@@ -3895,7 +4618,7 @@
       },
       "cooldown_frames": 10,
       "dedupe": {
-        "merge_adjacent_frames": 10,
+        "merge_adjacent_frames": 100,
         "strategy": "leading_edge"
       }
     },
@@ -3923,25 +4646,446 @@
             }
           },
           {
-            "kind": "comparison",
-            "left": {
-              "kind": "field",
-              "path": [
-                "zone_membership",
-                "zone_mobvumat_nifm1",
-                "occupancy"
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 20,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "logical",
+              "op": "and",
+              "children": [
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ]
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -1
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -2
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -3
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -4
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -5
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -6
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -7
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -8
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -9
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -10
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -11
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -12
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -13
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -14
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -15
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -16
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -17
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -18
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -19
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -20
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -21
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -22
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -23
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -24
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                }
               ]
-            },
-            "op": "==",
-            "right": {
-              "kind": "literal",
-              "value": 0
             }
           },
           {
             "kind": "temporal",
             "anchor": "eval_frame",
-            "offset_frames": 30,
+            "offset_frames": 20,
             "window_before": 0,
             "window_after": 0,
             "child": {
@@ -3964,7 +5108,7 @@
       },
       "cooldown_frames": 10,
       "dedupe": {
-        "merge_adjacent_frames": 10,
+        "merge_adjacent_frames": 100,
         "strategy": "leading_edge"
       }
     },
@@ -3992,25 +5136,446 @@
             }
           },
           {
-            "kind": "comparison",
-            "left": {
-              "kind": "field",
-              "path": [
-                "zone_membership",
-                "zone_mobvumat_nifm1",
-                "occupancy"
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 20,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "logical",
+              "op": "and",
+              "children": [
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ]
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -1
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -2
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -3
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -4
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -5
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -6
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -7
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -8
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -9
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -10
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -11
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -12
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -13
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -14
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -15
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -16
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -17
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -18
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -19
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -20
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -21
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -22
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -23
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -24
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                }
               ]
-            },
-            "op": "==",
-            "right": {
-              "kind": "literal",
-              "value": 0
             }
           },
           {
             "kind": "temporal",
             "anchor": "eval_frame",
-            "offset_frames": 30,
+            "offset_frames": 20,
             "window_before": 0,
             "window_after": 0,
             "child": {
@@ -4033,7 +5598,7 @@
       },
       "cooldown_frames": 10,
       "dedupe": {
-        "merge_adjacent_frames": 10,
+        "merge_adjacent_frames": 100,
         "strategy": "leading_edge"
       }
     },
@@ -4061,25 +5626,446 @@
             }
           },
           {
-            "kind": "comparison",
-            "left": {
-              "kind": "field",
-              "path": [
-                "zone_membership",
-                "zone_mobvumat_nifm1",
-                "occupancy"
+            "kind": "temporal",
+            "anchor": "eval_frame",
+            "offset_frames": 20,
+            "window_before": 0,
+            "window_after": 0,
+            "child": {
+              "kind": "logical",
+              "op": "and",
+              "children": [
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ]
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -1
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -2
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -3
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -4
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -5
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -6
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -7
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -8
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -9
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -10
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -11
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -12
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -13
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -14
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -15
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -16
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -17
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -18
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -19
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -20
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -21
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -22
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -23
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                },
+                {
+                  "kind": "comparison",
+                  "left": {
+                    "kind": "window_field",
+                    "path": [
+                      "zone_membership",
+                      "zone_aobvumat_nifm1",
+                      "occupancy"
+                    ],
+                    "offset_frames": -24
+                  },
+                  "op": "==",
+                  "right": {
+                    "kind": "literal",
+                    "value": 0
+                  }
+                }
               ]
-            },
-            "op": "==",
-            "right": {
-              "kind": "literal",
-              "value": 0
             }
           },
           {
             "kind": "temporal",
             "anchor": "eval_frame",
-            "offset_frames": 30,
+            "offset_frames": 20,
             "window_before": 0,
             "window_after": 0,
             "child": {
@@ -4102,7 +6088,7 @@
       },
       "cooldown_frames": 10,
       "dedupe": {
-        "merge_adjacent_frames": 10,
+        "merge_adjacent_frames": 100,
         "strategy": "leading_edge"
       }
     }
